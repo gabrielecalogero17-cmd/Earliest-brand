@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+
+<html lang="it"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>M4 Medical Clinic - Brand Identity Board</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&amp;family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#ffb692",
+                        "surface-tint": "#4f5c8e",
+                        "inverse-primary": "#b8c4fd",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#ffdbcb",
+                        "surface-container-highest": "#dfe3e6",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#767680",
+                        "on-primary-fixed": "#081747",
+                        "on-secondary-fixed-variant": "#004e5c",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#65DFFC",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "surface": "#f6fafd",
+                        "primary-fixed": "#dce1ff",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#341000",
+                        "inverse-surface": "#2c3134",
+                        "primary-container": "#000E3F",
+                        "primary-fixed-dim": "#b8c4fd",
+                        "vivid-red": "#FF0000",
+                        "secondary": "#00687a",
+                        "on-tertiary-fixed-variant": "#7a3000",
+                        "secondary-fixed-dim": "#5ad6f3",
+                        "surface-bright": "#f6fafd",
+                        "surface-container-low": "#f0f4f7",
+                        "surface-container": "#eaeef1",
+                        "surface-variant": "#dfe3e6",
+                        "tertiary-container": "#341000",
+                        "on-tertiary-container": "#dc5d00",
+                        "on-background": "#171c1f",
+                        "surface-container-high": "#e5e9ec",
+                        "secondary-fixed": "#abedff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#001f26",
+                        "on-primary-container": "#7581b6",
+                        "primary": "#000000",
+                        "outline-variant": "#c6c5d0",
+                        "surface-dim": "#d6dbdd",
+                        "on-secondary-fixed": "#001f26",
+                        "background": "#F5F9FC",
+                        "on-primary-fixed-variant": "#374475",
+                        "tertiary": "#EF6602",
+                        "obsidian-black": "#050505",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#edf1f4",
+                        "on-surface": "#171c1f",
+                        "on-surface-variant": "#45464f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "80px",
+                        "stack-lg": "32px",
+                        "margin-desktop": "64px",
+                        "stack-md": "16px",
+                        "margin-mobile": "20px",
+                        "container-max": "1280px",
+                        "stack-sm": "8px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Outfit"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["Outfit"],
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "label-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Outfit"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Outfit"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.15em", "fontWeight": "800"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col antialiased selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopAppBar -->
+<header class="bg-surface/70 backdrop-blur-md text-primary font-headline-md docked full-width top-0 sticky z-50 shadow-[0px_4px_20px_rgba(0,14,63,0.04)] flex justify-between items-center w-full px-margin-mobile h-16">
+<button aria-label="Menu" class="text-on-surface-variant hover:bg-surface-container-low transition-colors p-2 rounded-full">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="font-headline-md text-primary-container tracking-tight font-bold">M4 Medical Clinic</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden shadow-sm border border-outline-variant/30 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">person</span>
+</div>
+</header>
+<main class="flex-grow flex flex-col px-margin-mobile py-stack-lg gap-section-gap pb-32">
+<!-- Header Hero -->
+<section class="flex flex-col items-center text-center gap-stack-md pt-8">
+<div class="w-full max-w-xs relative mb-4">
+<img alt="M4 Medical Clinic Logo" class="w-full h-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBj-CrQvNeMwlgJNdjoHRK1HWY9dOwCHu-rT3gi9Hn7RL_FSjCyG6Jd54mJ1iS65vPA2NVSHJN-8vlZ1rkDzP7UfGM0xC4dDE5eIQvFEewzZC3RRE4n0ihxBq_XUeWp-dNYxHPLgIwgffnJpKIkzOz2vB8vvuLH-iOtaDBE_fOzL2d5ONVkVz7146UlHTboCbkSwdkhxEk_0T7eZpBmzxtS7menN12gWU0CMxCJSfpfJFSKT9JiNCSUkvhTu9xXF8qDD3o64_HyZps"/>
+</div>
+<h1 class="font-headline-xl text-primary-container">Brand Identity</h1>
+<p class="font-label-lg text-tertiary tracking-widest uppercase bg-tertiary-fixed/30 px-4 py-2 rounded-full border border-tertiary-fixed">CLINICAL PRECISION &amp; VITAL GLOW</p>
+</section>
+<!-- Vision & Mission -->
+<section class="flex flex-col gap-stack-md">
+<h2 class="font-headline-md text-primary-container border-b border-outline-variant/20 pb-2">Vision &amp; Mission</h2>
+<div class="grid grid-cols-1 gap-6">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/10">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-tertiary">visibility</span>
+<h3 class="font-headline-md">Vision</h3>
+</div>
+<blockquote class="font-body-lg italic text-on-surface-variant">
+                    "Ridefinire l'esperienza della cura medica privata, trasformando la seduta clinica da momento di tensione a percorso sereno di rigenerazione, salute e armonia personale."
+                </blockquote>
+</div>
+<div class="bg-primary-container p-6 rounded-xl shadow-sm text-on-primary">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-secondary-container">rocket_launch</span>
+<h3 class="font-headline-md">Mission</h3>
+</div>
+<p class="font-body-md opacity-90">
+                    "Offrire trattamenti odontoiatrici guidati, prevenzione ginecologica empatica e percorsi di medicina estetica non invasiva utilizzando le tecnologie digitali più avanzate e protocolli a minima invasività, garantendo trasparenza terapeutica ed un'accoglienza a cinque stelle incentrata sulla persona."
+                </p>
+</div>
+</div>
+</section>
+<!-- Pillars of Command -->
+<section class="flex flex-col gap-stack-md">
+<h2 class="font-headline-md text-primary-container border-b border-outline-variant/20 pb-2">Pilastri del Comando</h2>
+<div class="grid grid-cols-1 gap-4">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-primary-container/5 flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined icon-fill">verified</span>
+</div>
+<h3 class="font-label-lg text-primary-container">Autorevole ma Accessibile</h3>
+</div>
+<p class="font-body-sm text-on-surface-variant">Comunichiamo con assoluto rigore medico e precisione scientifica. Usiamo la terminologia medica corretta, ma la spieghiamo in modo che sia facilmente comprensibile da chiunque.</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-primary-container/5 flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined icon-fill">favorite</span>
+</div>
+<h3 class="font-label-lg text-primary-container">Empatico e Rassicurante</h3>
+</div>
+<p class="font-body-sm text-on-surface-variant">Riconosciamo l'ansia clinica dei pazienti e rispondiamo con la massima accoglienza e delicatezza, rassicurando sui protocolli antalgici e sull'ambiente sereno.</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-primary-container/5 flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined icon-fill">visibility</span>
+</div>
+<h3 class="font-label-lg text-primary-container">Trasparente ed Onesto</h3>
+</div>
+<p class="font-body-sm text-on-surface-variant">Non promettiamo miracoli estetici né proponiamo cure superflue. La nostra comunicazione si fonda sull'etica e sulla promozione dell'armonia naturale originaria.</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-primary-container/5 flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-container text-on-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined icon-fill">bolt</span>
+</div>
+<h3 class="font-label-lg text-primary-container">Vitale e Dinamico</h3>
+</div>
+<p class="font-body-sm text-on-surface-variant">La salute è vitalità e gioia di vivere. Comunichiamo con ottimismo parlando del "piacere di sorridere" e del "Vital Glow".</p>
+</div>
+</div>
+</section>
+<!-- Operational Pillars (Core Clusters) -->
+<section class="flex flex-col gap-stack-md">
+<h2 class="font-headline-md text-primary-container border-b border-outline-variant/20 pb-2">Operational Pillars (Core Clusters)</h2>
+<div class="flex flex-col gap-8">
+<!-- Odontoiatria -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-primary-container shadow-sm">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary-container text-3xl">dentistry</span>
+<h3 class="font-headline-md">Odontoiatria</h3>
+</div>
+<div class="space-y-4">
+<div>
+<span class="font-label-sm text-outline uppercase tracking-wider">Leva Psicologica</span>
+<p class="font-body-sm text-on-surface">Superamento della paura del dolore (dentofobia) e desiderio di un sorriso sano per migliorare le relazioni sociali.</p>
+</div>
+<div>
+<span class="font-label-sm text-outline uppercase tracking-wider">Angoli di Contenuto</span>
+<ul class="list-disc list-inside font-body-sm text-on-surface-variant mt-1 space-y-1">
+<li>Tecniche antalgiche e mininvasive</li>
+<li>Prima/Dopo di riabilitazioni estetiche</li>
+<li>Consigli pratici di igiene quotidiana</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Ginecologia -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-secondary-container shadow-sm">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-secondary-container text-3xl">pregnant_woman</span>
+<h3 class="font-headline-md">Ginecologia</h3>
+</div>
+<div class="space-y-4">
+<div>
+<span class="font-label-sm text-outline uppercase tracking-wider">Leva Psicologica</span>
+<p class="font-body-sm text-on-surface">Ricerca di un ambiente sicuro, confidenziale ed empatico per la prevenzione e la cura delle fasi della vita.</p>
+</div>
+<div>
+<span class="font-label-sm text-outline uppercase tracking-wider">Angoli di Contenuto</span>
+<ul class="list-disc list-inside font-body-sm text-on-surface-variant mt-1 space-y-1">
+<li>Prevenzione Oncologica (Pap/HPV Test)</li>
+<li>Variazioni ormonali e benessere femminile</li>
+<li>Umanizzazione del team e ascolto attento</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Medicina Estetica -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-tertiary shadow-sm">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-tertiary text-3xl">face_retouching_natural</span>
+<h3 class="font-headline-md">Medicina Estetica</h3>
+</div>
+<div class="space-y-4">
+<div>
+<span class="font-label-sm text-outline uppercase tracking-wider">Leva Psicologica</span>
+<p class="font-body-sm text-on-surface">Desiderio di freschezza senza stravolgere i lineamenti; paura dell'effetto artificiale.</p>
+</div>
+<div>
+<span class="font-label-sm text-outline uppercase tracking-wider">Angoli di Contenuto</span>
+<ul class="list-disc list-inside font-body-sm text-on-surface-variant mt-1 space-y-1">
+<li>Philosophy of Naturalness: valorizzare l'armonia originaria</li>
+<li>Qualità e sicurezza dei filler top-brand</li>
+<li>Trattamenti anti-aging e biorivitalizzazione "Vital Glow"</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Logo Suite Section -->
+<section class="flex flex-col gap-stack-md">
+<h2 class="font-headline-md text-primary-container border-b border-outline-variant/20 pb-2">Logo Suite</h2>
+<div class="grid grid-cols-1 gap-6">
+<!-- Vertical Variants -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-primary-container p-8 rounded-xl flex flex-col items-center gap-4 text-center">
+<span class="font-label-sm text-white/60 uppercase tracking-widest">Verticale Chiaro</span>
+<img alt="Vertical Light Logo" class="max-h-40 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtXOvusBmsML8uZpVHcT5jL83xgaKv5JwqfFXnjFB-H302qRGBPFfG6kqqT4I__iHG2osP6jG5e3_CZ7w6M2wn7VHXy1atkwrOKLcNWubDaROtbjwn1W0GLDSyzY-47aFEd0Va1iCNPbzWd-mqCD3MjHaQ76zp8O1Rn8TGJBzNFn41-8V1w_9XTFkol81vvDcdmPIVbEmEQxWjagMBWX34XlunzSYwOBCqxwrvE8XxHq-YWPVBaOrPSZmXdrh6qnL1ur3rDMdbCqg"/>
+<p class="text-[10px] text-white/40 font-mono">Uso su sfondi scuri (#000E3F)</p>
+</div>
+<div class="bg-white p-8 rounded-xl border border-outline-variant/20 flex flex-col items-center gap-4 text-center shadow-sm">
+<span class="font-label-sm text-outline uppercase tracking-widest">Verticale Scuro</span>
+<img alt="Vertical Dark Logo" class="max-h-40 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqxlqjc2Tahb3nOLkdWlz7Px9njjEex55WknMrWyFYfEpCPFUclqd5ot8z1uB-iqEES6EmaiiT5a0OYgH7i5maE2AiRRY1_YuPacmsEiKz8H99CgvvLPcWxf77JiU6tOjtoB-B_uv8nJ6SBZqGEWJbhAjwdJW_5yutbgyOM9Oy00RF9oV5BIOWhyxbfx-J66wiYM2BeqAIzf6LGNqOG5zk89m6ODCscZvofi-3VFnaWG_gUkVzJXVsF47oG8Jbe__sgsLy-NbgxG8"/>
+<p class="text-[10px] text-outline/60 font-mono">Uso su sfondi chiari</p>
+</div>
+</div>
+<!-- Horizontal Variants -->
+<div class="grid grid-cols-1 gap-4">
+<div class="bg-primary-container p-8 rounded-xl flex flex-col items-center gap-4 text-center">
+<span class="font-label-sm text-white/60 uppercase tracking-widest">Orizzontale Chiaro</span>
+<img alt="Horizontal Light Logo" class="max-h-20 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrfLyEEWDiOg7nkwgZoSRbS3JTyt4hpjt2vzDuCSeh0RsPl7qqj9TXwT9ruA9xGyRVYH9l1hQAVlMg7-30Jl_-WcIRdsCm4gB2sVOfulPMqJF8j8OyelnBoUdHyh6jNwbzjYUvfPJgYqe3II5GTEH_dzdCjv4AH899ucTxoGdEskRj19AbgsYHGWyc4WjtivND0WpQN9YyqCX5YaapTy0rBI9HZ9qMIXg0mnu_sL8qA1o8Wxgn-8_NatMvo324e1py553ucPuY3B0"/>
+<p class="text-[10px] text-white/40 font-mono">Uso editoriale</p>
+</div>
+<div class="bg-white p-8 rounded-xl border border-outline-variant/20 flex flex-col items-center gap-4 text-center shadow-sm">
+<span class="font-label-sm text-outline uppercase tracking-widest">Orizzontale Scuro</span>
+<img alt="Horizontal Dark Logo" class="max-h-20 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBj-CrQvNeMwlgJNdjoHRK1HWY9dOwCHu-rT3gi9Hn7RL_FSjCyG6Jd54mJ1iS65vPA2NVSHJN-8vlZ1rkDzP7UfGM0xC4dDE5eIQvFEewzZC3RRE4n0ihxBq_XUeWp-dNYxHPLgIwgffnJpKIkzOz2vB8vvuLH-iOtaDBE_fOzL2d5ONVkVz7146UlHTboCbkSwdkhxEk_0T7eZpBmzxtS7menN12gWU0CMxCJSfpfJFSKT9JiNCSUkvhTu9xXF8qDD3o64_HyZps"/>
+<p class="text-[10px] text-outline/60 font-mono">Web / Standard Use</p>
+</div>
+</div>
+<!-- Social Icons Subsection -->
+<div class="mt-4">
+<h3 class="font-headline-sm text-primary-container mb-4 text-center">Icone Social</h3>
+<div class="flex justify-center gap-8 items-center bg-surface-container-low p-6 rounded-xl">
+<div class="flex flex-col items-center gap-2">
+<img alt="Facebook Icon" class="w-12 h-12" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBThH1xYagsFw3c4HDxhreK5dpJRQB_uKzwXcgRujHEa-s9zCO9Zopd_caq1O8Q-XmMKy6JeRLd5OWOKJUFBnOQBd8-Dd57rrHCYMFR5xH7imshsHY6Jq1bwvwIBDGUk_bcK6vqyDXn9aeA0b-XFCJa36ohQLay3MC-2nkWP03xa8Ek4jGYHGMt1fqnz5m95Ggm8pEejciRl5_E4grlLZwKtHgZJvGEBAmiqDx5bgpI3ozcbIoMxStBqCfhSEGav-ftbBEwsv3NbW8"/>
+<span class="font-label-sm text-outline">Facebook</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm overflow-hidden border border-outline-variant/20">
+<img alt="Instagram Avatar" class="w-8 h-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtXOvusBmsML8uZpVHcT5jL83xgaKv5JwqfFXnjFB-H302qRGBPFfG6kqqT4I__iHG2osP6jG5e3_CZ7w6M2wn7VHXy1atkwrOKLcNWubDaROtbjwn1W0GLDSyzY-47aFEd0Va1iCNPbzWd-mqCD3MjHaQ76zp8O1Rn8TGJBzNFn41-8V1w_9XTFkol81vvDcdmPIVbEmEQxWjagMBWX34XlunzSYwOBCqxwrvE8XxHq-YWPVBaOrPSZmXdrh6qnL1ur3rDMdbCqg"/>
+</div>
+<span class="font-label-sm text-outline">Instagram</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Color Palette -->
+<section class="flex flex-col gap-stack-md">
+<h2 class="font-headline-md text-primary-container border-b border-outline-variant/20 pb-2">Color Palette</h2>
+<div class="grid grid-cols-1 gap-4">
+<div class="flex items-center gap-4 bg-surface-container-lowest p-3 rounded-xl shadow-sm border border-outline-variant/10">
+<div class="w-16 h-16 rounded-lg bg-[#000E3F] shrink-0 border border-outline-variant/10 shadow-inner"></div>
+<div class="flex flex-col">
+<span class="font-label-lg text-primary-container">Clinical Royal Navy</span>
+<span class="font-body-sm text-on-surface-variant font-mono">#000E3F</span>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-surface-container-lowest p-3 rounded-xl shadow-sm border border-outline-variant/10">
+<div class="w-16 h-16 rounded-lg bg-[#65DFFC] shrink-0 border border-outline-variant/10 shadow-inner"></div>
+<div class="flex flex-col">
+<span class="font-label-lg text-primary-container">Fresh Clinical Cyan</span>
+<span class="font-body-sm text-on-surface-variant font-mono">#65DFFC</span>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-surface-container-lowest p-3 rounded-xl shadow-sm border border-outline-variant/10">
+<div class="w-16 h-16 rounded-lg bg-[#EF6602] shrink-0 border border-outline-variant/10 shadow-inner"></div>
+<div class="flex flex-col">
+<span class="font-label-lg text-primary-container">Vibrant Coral Orange</span>
+<span class="font-body-sm text-on-surface-variant font-mono">#EF6602</span>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-surface-container-lowest p-3 rounded-xl shadow-sm border border-outline-variant/10">
+<div class="w-16 h-16 rounded-lg bg-[#FF0000] shrink-0 border border-outline-variant/10 shadow-inner"></div>
+<div class="flex flex-col">
+<span class="font-label-lg text-primary-container">Bright Vivid Fire Red</span>
+<span class="font-body-sm text-on-surface-variant font-mono">#FF0000</span>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-surface-container-lowest p-3 rounded-xl shadow-sm border border-outline-variant/10">
+<div class="w-16 h-16 rounded-lg bg-[#F5F9FC] shrink-0 border border-outline-variant/20 shadow-inner"></div>
+<div class="flex flex-col">
+<span class="font-label-lg text-primary-container">Pure Medical Ice White</span>
+<span class="font-body-sm text-on-surface-variant font-mono">#F5F9FC</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Typography -->
+<section class="flex flex-col gap-stack-md">
+<h2 class="font-headline-md text-primary-container border-b border-outline-variant/20 pb-2">Tipografia</h2>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/10 flex flex-col gap-6">
+<div>
+<div class="font-label-sm text-outline tracking-widest uppercase mb-2">Headline Font (Avanguardia)</div>
+<div class="font-headline-lg text-primary-container">Outfit</div>
+<div class="font-headline-md text-on-surface-variant mt-2 font-bold tracking-tight">La tua salute, trattata con delicatezza.</div>
+</div>
+<div class="w-full h-px bg-outline-variant/20"></div>
+<div>
+<div class="font-label-sm text-outline tracking-widest uppercase mb-2">Body Font (Leggibilità)</div>
+<div class="font-body-lg font-bold text-primary-container">Plus Jakarta Sans</div>
+<div class="font-body-md text-on-surface-variant mt-2 leading-relaxed">Offriamo visite ginecologiche ed ecografie in un ambiente protetto e accogliente.</div>
+</div>
+</div>
+</section>
+<!-- Tone of Voice Rules -->
+<section class="flex flex-col gap-stack-md">
+<h2 class="font-headline-md text-primary-container border-b border-outline-variant/20 pb-2">Regole di Scrittura: Do's &amp; Don'ts</h2>
+<div class="overflow-hidden rounded-xl border border-outline-variant/10 bg-surface-container-lowest">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high">
+<th class="p-4 font-label-sm text-outline uppercase">🚫 Cosa Evitare</th>
+<th class="p-4 font-label-sm text-primary-container uppercase">✅ Cosa Utilizzare</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<tr>
+<td class="p-4 font-body-sm text-error italic">"Intervento estrattivo invasivo e doloroso"</td>
+<td class="p-4 font-body-sm font-semibold">"Risoluzione chirurgica con protocolli mininvasivi e antalgici"</td>
+</tr>
+<tr>
+<td class="p-4 font-body-sm text-error italic">"Il paziente deve presentarsi munito di esami"</td>
+<td class="p-4 font-body-sm font-semibold">"Ti invitiamo a portare con te i tuoi esami precedenti"</td>
+</tr>
+<tr>
+<td class="p-4 font-body-sm text-error italic">"Filler labbra gigantesche e perfette"</td>
+<td class="p-4 font-body-sm font-semibold">"Filler labbra personalizzato per valorizzare il tuo volume originario"</td>
+</tr>
+<tr>
+<td class="p-4 font-body-sm text-error italic">"Combatti la carie e la placca schifosa"</td>
+<td class="p-4 font-body-sm font-semibold">"Proteggi il tuo sorriso e mantieni i tuoi denti sani e forti"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Commercial Protocol -->
+<section class="flex flex-col gap-stack-md">
+<h2 class="font-headline-md text-primary-container border-b border-outline-variant/20 pb-2">Commercial Protocol</h2>
+<div class="bg-primary-container p-6 rounded-xl text-on-primary shadow-lg">
+<h3 class="font-label-lg mb-4 text-secondary-container tracking-widest uppercase">Acquisizione &amp; Obiezioni</h3>
+<div class="space-y-6">
+<div>
+<h4 class="font-label-sm opacity-60 mb-2 uppercase">Strategia Chat</h4>
+<p class="font-body-sm">Non vendere preventivi complessi via chat. Qualificare, rassicurare e spostare la conversazione sul canale telefonico per prenotazione visite ad Acireale.</p>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<div class="bg-white/5 p-4 rounded-lg border border-white/10">
+<span class="font-label-sm text-tertiary">Obiezione Prezzo</span>
+<p class="font-body-sm mt-1">"La differenza dipende dalla purezza dei prodotti (top-brand mondiali), dall'esperienza del medico e dal risultato naturale garantito."</p>
+</div>
+<div class="bg-white/5 p-4 rounded-lg border border-white/10">
+<span class="font-label-sm text-tertiary">Obiezione Paura</span>
+<p class="font-body-sm mt-1">"Utilizziamo protocolli a minima invasività. L'igiene viene eseguita con estrema calma, rispettando i tuoi tempi e garantendo un'esperienza indolore."</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Instagram Feed Mockup -->
+<section class="flex flex-col gap-stack-md">
+<h2 class="font-headline-md text-primary-container border-b border-outline-variant/20 pb-2">Visual Style (Instagram Identity)</h2>
+<div class="w-full rounded-2xl overflow-hidden shadow-xl border border-outline-variant/10 relative">
+<img alt="M4 Clinic Instagram Visual Style Mockup" class="w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8zlWd-Gkynh8BuQFKasYGDKyQAfAbuv4cBlo8lWjnZlt_m8yFOpcNz31j-xoKq_3NhGWc0egKfCBH8m7GPGPHaFfSH7LtK2_nQ8ErDHFO1ag48aXXkVkWj4bjahK7KHH6XZIIIm71XnRiSnLuOBOdCps2xhv0LQpEaFNV6fiUsiGTD8IVxto9RKYXPiZiXbQYfilzMaInJjd9bmBvR1lpAiFcyVUOlcYasK_I3lLm4pGm6rRp1miSFmmhEB5u8WBWAE0h8xLZn4Q"/>
+</div>
+</section>
+<!-- Canali Ufficiali Section -->
+<section class="flex flex-col gap-stack-md">
+<h2 class="font-headline-md text-primary-container border-b border-outline-variant/20 pb-2">Canali Ufficiali</h2>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/10 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">language</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-outline uppercase tracking-wider">Sito Web</span>
+<a class="font-headline-md text-primary-container hover:text-secondary transition-colors" href="https://www.m4medicalclinic.it" target="_blank">www.m4medicalclinic.it</a>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary-container">open_in_new</span>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="flex justify-center pt-8">
+<button class="bg-primary-container text-on-primary font-label-lg py-4 px-8 rounded-full shadow-md flex items-center gap-2 hover:bg-[#102E4A] transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]">download</span>
+            Scarica Brand Identity Kit Completo
+        </button>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-surface/80 backdrop-blur-md text-primary font-label-sm docked full-width bottom-0 rounded-t-xl shadow-[0px_-4px_20px_rgba(0,14,63,0.04)] fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 border-none md:hidden">
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined mb-1">auto_awesome</span>
+<span>Identity</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined mb-1">medical_services</span>
+<span>Clusters</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined mb-1">palette</span>
+<span>Suite</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined mb-1">campaign</span>
+<span>Protocol</span>
+</button>
+</nav>
+</body></html>

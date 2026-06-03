@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>095 studio - Manuale Operativo Vendite V3</title>
+    
+    <!-- Google Fonts: Outfit (Headings), Plus Jakarta Sans (Body), JetBrains Mono (Code/Scripts) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+
+    <style>
+        /* Base Variables & Premium Cybernetic Palette */
+        :root {
+            --bg-base: #060813;
+            --bg-surface: #0c0f24;
+            --bg-card: rgba(17, 22, 49, 0.65);
+            --border-color: rgba(0, 242, 254, 0.15);
+            --border-hover: rgba(0, 242, 254, 0.4);
+            
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            
+            --primary: #00f2fe;
+            --primary-glow: rgba(0, 242, 254, 0.35);
+            --secondary: #8f00ff;
+            --secondary-glow: rgba(143, 0, 255, 0.35);
+            --accent: #ff007f;
+            
+            --success: #10b981;
+            --warning: #f59e0b;
+            --font-head: 'Outfit', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            
+            --sidebar-width: 280px;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            display: flex;
+            min-height: 100/vmax;
+        }
+
+        /* Background Decorative Elements */
+        .bg-glow-1 {
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, var(--primary-glow) 0%, rgba(6, 8, 19, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
+            filter: blur(80px);
+        }
+
+        .bg-glow-2 {
+            position: fixed;
+            bottom: -10%;
+            right: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, var(--secondary-glow) 0%, rgba(6, 8, 19, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
+            filter: blur(80px);
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: rgba(8, 10, 26, 0.95);
+            border-right: 1px solid var(--border-color);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.5rem;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .sidebar-brand {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 3rem;
+        }
+
+        .brand-title {
+            font-family: var(--font-head);
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .brand-subtitle {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-top: 0.25rem;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex-grow: 1;
+        }
+
+        .sidebar-item a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.85rem 1rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .sidebar-item a:hover {
+            color: var(--primary);
+            background: rgba(0, 242, 254, 0.05);
+            border-color: rgba(0, 242, 254, 0.1);
+        }
+
+        .sidebar-item.active a {
+            color: var(--bg-base);
+            background: linear-gradient(135deg, var(--primary) 0%, #00b8fe 100%);
+            font-weight: 600;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.35);
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .version-badge {
+            background: rgba(143, 0, 255, 0.2);
+            color: #d8b4fe;
+            border: 1px solid rgba(143, 0, 255, 0.3);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Main Content Wrapper */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex-grow: 1;
+            padding: 3rem;
+            max-width: 1400px;
+            min-height: 100vh;
+            width: calc(100% - var(--sidebar-width));
+        }
+
+        /* Section Container */
+        section {
+            padding-top: 2rem;
+            margin-bottom: 6rem;
+        }
+
+        /* Typography & Custom Headings */
+        .section-header {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-num {
+            font-family: var(--font-mono);
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .section-title {
+            font-family: var(--font-head);
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin-top: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* UI Cards - Glassmorphic styling */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--border-hover);
+            box-shadow: 0 15px 40px rgba(0, 242, 254, 0.05);
+        }
+
+        /* Table Styling */
+        .table-responsive {
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .pricing-table th, .pricing-table td {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .pricing-table th {
+            background: rgba(12, 15, 36, 0.85);
+            font-family: var(--font-head);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            color: var(--primary);
+        }
+
+        .pricing-table tr {
+            transition: background-color 0.2s ease;
+        }
+
+        .pricing-table tr:hover {
+            background-color: rgba(255,255,255,0.02);
+        }
+
+        .pricing-table tr:last-child {
+            background: rgba(0, 242, 254, 0.04);
+            font-weight: 700;
+        }
+
+        .pricing-table tr:last-child td {
+            border-bottom: none;
+            color: var(--primary);
+        }
+
+        .pricing-table tr:last-child td:nth-child(3) {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        .badge-premium {
+            background: linear-gradient(135deg, rgba(0, 242, 254, 0.25) 0%, rgba(143, 0, 255, 0.25) 100%);
+            border: 1px solid var(--primary);
+            color: #fff;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* Interactive Cost Comparison Toggle Widget */
+        .cost-widget {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .cost-card {
+            border-radius: 12px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cost-card.competitor {
+            background: rgba(220, 38, 38, 0.05);
+            border: 1px solid rgba(220, 38, 38, 0.2);
+        }
+
+        .cost-card.studio {
+            background: rgba(0, 242, 254, 0.05);
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.15);
+        }
+
+        .cost-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .cost-title {
+            font-family: var(--font-head);
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .cost-price {
+            font-family: var(--font-head);
+            font-size: 2.2rem;
+            font-weight: 800;
+        }
+
+        .cost-details {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .cost-details li {
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .cost-details li span.material-symbols-outlined {
+            font-size: 1.15rem;
+        }
+
+        .cost-card.competitor li span {
+            color: #ef4444;
+        }
+
+        .cost-card.studio li span {
+            color: var(--primary);
+        }
+
+        /* 4-Phase Funnel Visual Component */
+        .funnel-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        .funnel-step {
+            flex: 1;
+            background: rgba(12, 15, 36, 0.55);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.75rem;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .funnel-step:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(0, 242, 254, 0.15);
+            background: rgba(12, 15, 36, 0.85);
+        }
+
+        .funnel-step-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .funnel-step-num {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            background: rgba(0, 242, 254, 0.1);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 242, 254, 0.2);
+        }
+
+        .funnel-step-icon {
+            color: var(--primary);
+            font-size: 1.75rem !important;
+        }
+
+        .funnel-step-title {
+            font-family: var(--font-head);
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .funnel-step-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .funnel-step-badge {
+            margin-top: 1rem;
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(0, 242, 254, 0.05);
+            padding: 0.15rem 0.5rem;
+            border-radius: 30px;
+            border: 1px solid rgba(0, 242, 254, 0.1);
+        }
+
+        /* Interactive Script Dashboard (WOW FEATURE) */
+        .script-dashboard {
+            margin-top: 2rem;
+        }
+
+        /* Script Customizer Inputs */
+        .customizer-panel {
+            background: rgba(8, 10, 26, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 12px 12px 0 0;
+            padding: 1.5rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-group label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+        }
+
+        .input-group input {
+            background: rgba(6, 8, 19, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.25);
+        }
+
+        /* Custom Tabs */
+        .tab-bar {
+            display: flex;
+            background: rgba(12, 15, 36, 0.9);
+            border-left: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 1rem 1.5rem;
+            color: var(--text-secondary);
+            font-family: var(--font-head);
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom: 2px solid transparent;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tab-btn:hover {
+            color: var(--primary);
+            background: rgba(255,255,255,0.01);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            background: rgba(0, 242, 254, 0.03);
+            border-bottom-color: var(--primary);
+        }
+
+        /* Script Panel Content */
+        .script-content-wrapper {
+            background: rgba(12, 15, 36, 0.95);
+            border: 1px solid var(--border-color);
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            padding: 2.5rem;
+            position: relative;
+        }
+
+        .script-meta {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .target-use {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .script-body {
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+            white-space: pre-wrap;
+            background: rgba(6, 8, 19, 0.6);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.03);
+            max-height: 550px;
+            overflow-y: auto;
+        }
+
+        /* Dynamic variable highlighting in script template */
+        .highlight-var {
+            background: rgba(0, 242, 254, 0.15);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        /* Copy Button */
+        .btn-copy {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border: none;
+            color: var(--bg-base);
+            font-family: var(--font-head);
+            font-weight: 700;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.25);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-copy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 242, 254, 0.4);
+        }
+
+        .btn-copy:active {
+            transform: translateY(0);
+        }
+
+        /* Interactive Objection Simulator (Roleplay) */
+        .objections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .objection-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .objection-card:hover {
+            border-color: var(--border-hover);
+        }
+
+        .objection-header {
+            background: rgba(239, 68, 68, 0.05);
+            border-bottom: 1px solid rgba(239, 68, 68, 0.15);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .objection-icon {
+            color: #ef4444;
+            font-size: 1.5rem !important;
+        }
+
+        .objection-num {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+        }
+
+        .objection-title {
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--text-primary);
+        }
+
+        .objection-body {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .objection-reveal-area {
+            margin-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 1.5rem;
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .objection-solution {
+            font-size: 0.95rem;
+            color: #a7f3d0;
+            background: rgba(16, 185, 129, 0.05);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 1.25rem;
+            border-radius: 8px;
+            line-height: 1.6;
+        }
+
+        .objection-solution strong {
+            color: var(--success);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-head);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-reveal {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-primary);
+            font-family: var(--font-head);
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            align-self: flex-start;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-reveal:hover {
+            background: rgba(0, 242, 254, 0.1);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Anchoring script highlight callout */
+        .anchoring-callout {
+            background: linear-gradient(135deg, rgba(143,0,255,0.08) 0%, rgba(0,242,254,0.08) 100%);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 12px 12px 0;
+            padding: 2rem;
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        .anchoring-tag {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--bg-base);
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            position: absolute;
+            top: -12px;
+            left: 20px;
+        }
+
+        .anchoring-text {
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            white-space: pre-wrap;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 70px;
+                padding: 1.5rem 0.5rem;
+                align-items: center;
+            }
+
+            .sidebar-brand {
+                align-items: center;
+                margin-bottom: 2rem;
+            }
+
+            .brand-title span:not(.material-symbols-outlined) {
+                display: none;
+            }
+
+            .brand-subtitle, .sidebar-item span:not(.material-symbols-outlined), .sidebar-footer {
+                display: none;
+            }
+
+            .sidebar-item a {
+                justify-content: center;
+                padding: 0.85rem;
+            }
+
+            .main-content {
+                margin-left: 70px;
+                width: calc(100% - 70px);
+                padding: 2rem;
+            }
+
+            .funnel-container {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .funnel-step::after {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cost-widget {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .customizer-panel {
+                grid-template-columns: 1fr;
+            }
+
+            .main-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Glowing Graphics -->
+    <div class="bg-glow-1"></div>
+    <div class="bg-glow-2"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-title">
+                <span class="material-symbols-outlined" style="font-size: 2.2rem; color: var(--primary);">center_focus_strong</span>
+                <span>095 studio</span>
+            </div>
+            <div class="brand-subtitle">Ingegneria dei Contenuti</div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="sidebar-item active">
+                <a href="#posizionamento">
+                    <span class="material-symbols-outlined">analytics</span>
+                    <span>Analisi Costi</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="#funnel">
+                    <span class="material-symbols-outlined">filter_alt</span>
+                    <span>Funnel 4 Fasi</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="#scripts">
+                    <span class="material-symbols-outlined">chat_bubble</span>
+                    <span>Script Outreach</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="#chiusura">
+                    <span class="material-symbols-outlined">lock</span>
+                    <span>Protocollo Chiusura</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <span class="version-badge">V3 OFFICIAL</span>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        
+        <!-- Header Banner -->
+        <header style="margin-bottom: 5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 2.5rem;">
+            <p style="font-family: var(--font-mono); color: var(--primary); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;">095 studio • Manuale Strategico Ufficiale</p>
+            <h1 style="font-family: var(--font-head); font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin-top: 0.5rem; background: linear-gradient(135deg, #fff 40%, var(--primary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">MANUALE OPERATIVO VENDITE</h1>
+            <p style="color: var(--text-secondary); font-size: 1.2rem; max-width: 850px; margin-top: 1rem;">
+                Standard strategico della forza vendita per l'offerta Trojan Horse a 600€ e la conversione in abbonamento ricorsivo a 1.200€/mese.
+            </p>
+        </header>
+
+        <!-- SECTION 1: POSIZIONAMENTO DI MERCATO -->
+        <section id="posizionamento">
+            <div class="section-header">
+                <span class="section-num">01 / COSTI E POSIZIONAMENTO</span>
+                <h2 class="section-title">
+                    <span class="material-symbols-outlined" style="color: var(--primary); font-size: 2.5rem;">analytics</span>
+                    Analisi dei Costi e Posizionamento
+                </h2>
+                <p class="section-desc">
+                    Per smantellare qualsiasi obiezione sul prezzo, i venditori devono saper contrapporre i costi frammentati del mercato tradizionale all'efficienza della nostra soluzione AI integrata.
+                </p>
+            </div>
+
+            <div class="card" style="margin-bottom: 2rem;">
+                <div class="table-responsive">
+                    <table class="pricing-table">
+                        <thead>
+                            <tr>
+                                <th>Servizio Singolo</th>
+                                <th>Fornitore Tradizionale</th>
+                                <th>Costo Medio Mensile</th>
+                                <th>Vantaggio Competitivo 095 studio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Produzione Video</strong> <em style="font-size: 0.8rem; color: var(--text-muted);">(4 spot/mese)</em></td>
+                                <td>Videomaker + Montatore</td>
+                                <td>400€ – 800€</td>
+                                <td><span class="badge-premium">Incluso (AI Premium)</span> Zero tempi morti, nessun disturbo in negozio, qualità cinematografica ed emotiva.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Grafica & Caroselli</strong> <em style="font-size: 0.8rem; color: var(--text-muted);">(4/mese)</em></td>
+                                <td>Social Media Manager / Grafico</td>
+                                <td>200€ – 400€</td>
+                                <td><span class="badge-premium">Incluso</span> Caroselli di prodotto ed e-commerce con logiche di <em>Direct Response</em>.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Copywriting & Testi</strong></td>
+                                <td>Copywriter Freelance</td>
+                                <td>150€ – 300€</td>
+                                <td><span class="badge-premium">Incluso</span> Scrittura testi focalizzata sulla conversione psicologica.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gestione Pubblicità (Ads)</strong></td>
+                                <td>Media Buyer / Agenzia</td>
+                                <td>300€ – 500€</td>
+                                <td><span class="badge-premium">Incluso</span> Ottimizzazione tecnica delle campagne Meta/TikTok.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Budget Pubblicitario Vivo</strong></td>
+                                <td>Carta di credito del cliente</td>
+                                <td>200€</td>
+                                <td><span class="badge-premium" style="background: rgba(16, 185, 129, 0.2); border-color: var(--success); color: #a7f3d0;">INCLUSO</span> Pagato interamente da noi nei 1.200€ per forzare risultati immediati.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>TOTALE MERCATO</strong></td>
+                                <td>Fornitori Frammentati</td>
+                                <td>1.250€ – 2.200€</td>
+                                <td><strong>Nostro Pacchetto: 1.200€ Tutto Incluso</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Cost Comparison Interactive Widget -->
+            <div class="cost-widget">
+                <div class="cost-card competitor">
+                    <div>
+                        <div class="cost-card-header">
+                            <span class="cost-title">Fornitori Tradizionali</span>
+                            <span class="material-symbols-outlined" style="color: #ef4444;">error</span>
+                        </div>
+                        <div class="cost-price" style="color: #ef4444;">~1.725€<span style="font-size: 1rem; font-weight: 500;">/mese</span></div>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem; margin-bottom: 1.5rem;">Costi frammentati ed estremamente instabili</p>
+                        <ul class="cost-details">
+                            <li><span class="material-symbols-outlined">cancel</span> Videomaker costosi e lenti in negozio</li>
+                            <li><span class="material-symbols-outlined">cancel</span> Grafici che non capiscono la vendita</li>
+                            <li><span class="material-symbols-outlined">cancel</span> Media buyer da pagare a parte</li>
+                            <li><span class="material-symbols-outlined">cancel</span> Budget ads interamente a vostro carico</li>
+                        </ul>
+                    </div>
+                    <div style="border-top: 1px solid rgba(239, 68, 68, 0.15); padding-top: 1rem; text-align: center; font-size: 0.85rem; color: #fca5a5;">
+                        Margini erosi e stress di coordinamento
+                    </div>
+                </div>
+
+                <div class="cost-card studio">
+                    <div>
+                        <div class="cost-card-header">
+                            <span class="cost-title" style="color: var(--primary);">095 studio Package</span>
+                            <span class="material-symbols-outlined" style="color: var(--primary);">verified</span>
+                        </div>
+                        <div class="cost-price" style="color: var(--primary);">1.200€<span style="font-size: 1rem; font-weight: 500; color: var(--text-secondary);">/mese</span></div>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem; margin-bottom: 1.5rem;">Ingegneria dei contenuti a costo fisso e chiaro</p>
+                        <ul class="cost-details">
+                            <li><span class="material-symbols-outlined">check_circle</span> Spot AI 4K cinematografici ultra-emotivi</li>
+                            <li><span class="material-symbols-outlined">check_circle</span> Caroselli e Copy orientati alla vendita</li>
+                            <li><span class="material-symbols-outlined">check_circle</span> Media Buying professionale incluso</li>
+                            <li><span class="material-symbols-outlined">check_circle</span> <strong>200€/mese di Budget ADS INCLUSI</strong></li>
+                        </ul>
+                    </div>
+                    <div style="border-top: 1px solid rgba(0, 242, 254, 0.15); padding-top: 1rem; text-align: center; font-size: 0.85rem; color: var(--primary); font-weight: 600;">
+                        Tutto delegato, nessun costo aggiuntivo.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: IL FUNNEL IN 4 FASI -->
+        <section id="funnel">
+            <div class="section-header">
+                <span class="section-num">02 / FLUSSO DI CONVERSIONE</span>
+                <h2 class="section-title">
+                    <span class="material-symbols-outlined" style="color: var(--primary); font-size: 2.5rem;">filter_alt</span>
+                    Il Funnel di Vendita in 4 Fasi
+                </h2>
+                <p class="section-desc">
+                    L'efficienza commerciale della nostra rete poggia sul rigido rispetto di questo funnel sequenziale. La chat vende solo l'appuntamento; la videochiamata vende la partnership.
+                </p>
+            </div>
+
+            <div class="funnel-container">
+                <div class="funnel-step" onclick="showFunnelInfo(1)">
+                    <div class="funnel-step-header">
+                        <span class="funnel-step-num">FASE 1</span>
+                        <span class="material-symbols-outlined funnel-step-icon">campaign</span>
+                    </div>
+                    <h3 class="funnel-step-title">Outreach DM</h3>
+                    <p class="funnel-step-desc">Contatto mirato su Instagram, WhatsApp o Email inviando lo script specifico e il portfolio video AI di 095 studio.</p>
+                    <span class="funnel-step-badge">Obiettivo: Generare Curiosità</span>
+                </div>
+
+                <div class="funnel-step" onclick="showFunnelInfo(2)">
+                    <div class="funnel-step-header">
+                        <span class="funnel-step-num">FASE 2</span>
+                        <span class="material-symbols-outlined funnel-step-icon">pending_actions</span>
+                    </div>
+                    <h3 class="funnel-step-title">Follow-Up 48h</h3>
+                    <p class="funnel-step-desc">Trigger di scarsità ed urgenza attivato a 48 ore dalla visualizzazione per sollecitare la prenotazione della chiamata.</p>
+                    <span class="funnel-step-badge">Obiettivo: Fissare la Call</span>
+                </div>
+
+                <div class="funnel-step" onclick="showFunnelInfo(3)">
+                    <div class="funnel-step-header">
+                        <span class="funnel-step-num">FASE 3</span>
+                        <span class="material-symbols-outlined funnel-step-icon">video_chat</span>
+                    </div>
+                    <h3 class="funnel-step-title">Videochiamata</h3>
+                    <p class="funnel-step-desc">Sessione conoscitiva da 15 minuti. Analisi dei problemi di tempo/budget e Price Anchoring strategico.</p>
+                    <span class="funnel-step-badge">Obiettivo: Presentare Offerta</span>
+                </div>
+
+                <div class="funnel-step" onclick="showFunnelInfo(4)">
+                    <div class="funnel-step-header">
+                        <span class="funnel-step-num">FASE 4</span>
+                        <span class="material-symbols-outlined funnel-step-icon">task_alt</span>
+                    </div>
+                    <h3 class="funnel-step-title">Chiusura &amp; Upsell</h3>
+                    <p class="funnel-step-desc">Raccolta dati e incasso (50% acconto per Opzione 1 o prima mensilità anticipata per l'Opzione 2).</p>
+                    <span class="funnel-step-badge">Obiettivo: Incassare e Avviare</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: SCRIPT OUTREACH COPIA-E-INCOLLA -->
+        <section id="scripts">
+            <div class="section-header">
+                <span class="section-num">03 / BUSINESS ENABLEMENT</span>
+                <h2 class="section-title">
+                    <span class="material-symbols-outlined" style="color: var(--primary); font-size: 2.5rem;">chat_bubble</span>
+                    Script di Outreach Copia-e-Incolla
+                </h2>
+                <p class="section-desc">
+                    Personalizza il nome del contatto, il link alla cartella Drive e il giorno della chiamata nei campi sottostanti. Lo script si aggiornerà in tempo reale, pronto per essere copiato ed inviato.
+                </p>
+            </div>
+
+            <div class="script-dashboard">
+                <!-- Interactive Variable Customizer (WOW element) -->
+                <div class="customizer-panel">
+                    <div class="input-group">
+                        <label for="lead-name">Nome Lead / Brand</label>
+                        <input type="text" id="lead-name" placeholder="es. Marco / Boutique Elité" oninput="updateAllScripts()">
+                    </div>
+                    <div class="input-group">
+                        <label for="drive-link">Link Cartella Drive Demo</label>
+                        <input type="text" id="drive-link" placeholder="es. drive.google.com/..." oninput="updateAllScripts()">
+                    </div>
+                    <div class="input-group">
+                        <label for="calendly-link">Link Calendly / Call</label>
+                        <input type="text" id="calendly-link" placeholder="es. calendly.com/095studio/..." oninput="updateAllScripts()">
+                    </div>
+                </div>
+
+                <!-- Custom Script Tabs -->
+                <div class="tab-bar">
+                    <button class="tab-btn active" onclick="switchTab(0)">
+                        <span class="material-symbols-outlined" style="font-size: 1.1rem;">styler</span>
+                        Fashion
+                    </button>
+                    <button class="tab-btn" onclick="switchTab(1)">
+                        <span class="material-symbols-outlined" style="font-size: 1.1rem;">construction</span>
+                        Artigianato
+                    </button>
+                    <button class="tab-btn" onclick="switchTab(2)">
+                        <span class="material-symbols-outlined" style="font-size: 1.1rem;">shopping_bag</span>
+                        E-commerce
+                    </button>
+                    <button class="tab-btn" onclick="switchTab(3)">
+                        <span class="material-symbols-outlined" style="font-size: 1.1rem;">experiment</span>
+                        Profumeria Nicchia
+                    </button>
+                    <button class="tab-btn" onclick="switchTab(4)">
+                        <span class="material-symbols-outlined" style="font-size: 1.1rem;">restore</span>
+                        Follow-Up 48h
+                    </button>
+                </div>
+
+                <!-- Content Area -->
+                <div class="script-content-wrapper">
+                    <div class="script-meta">
+                        <span class="target-use" id="script-target">
+                            <span class="material-symbols-outlined" style="color: var(--primary);">info</span>
+                            Target: Negozi di abbigliamento indipendenti, boutique d'accessori e brand di moda locali.
+                        </span>
+                        <button class="btn-copy" onclick="copyActiveScript()">
+                            <span class="material-symbols-outlined" id="copy-icon">content_copy</span>
+                            <span id="copy-text">Copia Script</span>
+                        </button>
+                    </div>
+                    <div class="script-body" id="script-render-area">Loading...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: PROTOCOLLO DI CHIUSURA -->
+        <section id="chiusura" style="margin-bottom: 10rem;">
+            <div class="section-header">
+                <span class="section-num">04 / PROTOCOLLO DI CHIUSURA</span>
+                <h2 class="section-title">
+                    <span class="material-symbols-outlined" style="color: var(--primary); font-size: 2.5rem;">lock</span>
+                    Protocollo di Chiusura &amp; Gestione Obiezioni
+                </h2>
+                <p class="section-desc">
+                    In videochiamata, la priorità assoluta è l'applicazione del <strong>Price Anchoring</strong>: spingi l'Opzione 2 facendo percepire l'Opzione 1 come svantaggiosa in termini di ROI complessivo.
+                </p>
+            </div>
+
+            <div class="card" style="margin-bottom: 3rem;">
+                <h3 style="font-family: var(--font-head); font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--primary); display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="material-symbols-outlined">anchor</span>
+                    Il Price Anchoring (La Transizione del Commerciale)
+                </h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.95rem;">
+                    Usa questa sequenza logica esatta per portare il cliente a preferire naturalmente l'abbonamento mensile rispetto al test singolo.
+                </p>
+                <div class="anchoring-callout">
+                    <span class="anchoring-tag">Script di Transizione</span>
+                    <div class="anchoring-text" id="anchoring-script">"Caro cliente, l'Opzione 1 le mette a disposizione 3 video singoli a 600€, ovvero 200€ a contenuto.
+
+Con l'Opzione 2 da 1.200€, l'investimento raddoppia ma i vantaggi si moltiplicano per dieci. Ha comunque un quarto video incluso che può durare fino a un intero minuto, 4 caroselli di design per mostrare i suoi prodotti reali, tutta la gestione della pagina e la scrittura dei testi professionali.
+
+Ma il vero punto di svolta è questo: noi prendiamo 200€ di tasca nostra e li paghiamo a Facebook e Instagram per impostare le campagne pubblicitarie sul suo territorio ideale. Di fatto, la gestione completa ed esperta del suo brand le costa appena 400€ in più rispetto ai soli video usa e getta.
+
+Quale delle due soluzioni attiviamo oggi per iniziare?"</div>
+                </div>
+            </div>
+
+            <!-- Interactive Objection Handler Cards -->
+            <div class="section-header" style="margin-top: 4rem; margin-bottom: 1.5rem;">
+                <h3 style="font-family: var(--font-head); font-size: 1.5rem; color: #fff; display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="material-symbols-outlined" style="color: #ef4444;">security</span>
+                    Superamento Obiezioni Critiche (Roleplay Simulator)
+                </h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 0.25rem;">
+                    Allenati a rispondere all'istante a queste tre obiezioni classiche. Clicca per rivelare la controbattuta scientifica dell'agenzia.
+                </p>
+            </div>
+
+            <div class="objections-grid">
+                <!-- Objection 1 -->
+                <div class="objection-card">
+                    <div class="objection-header">
+                        <span class="objection-num">OBIEZIONE 1</span>
+                        <span class="material-symbols-outlined objection-icon">payments</span>
+                        <span class="objection-title">"È troppo caro, non ho questo budget"</span>
+                    </div>
+                    <div class="objection-body">
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">
+                            Il cliente dichiara di non poter sostenere un investimento mensile di 1.200€.
+                        </p>
+                        <button class="btn-reveal" onclick="toggleObjection(this)">
+                            <span class="material-symbols-outlined">visibility</span>
+                            Rivelazione Controbattuta
+                        </button>
+                        <div class="objection-reveal-area">
+                            <div class="objection-solution">
+                                <strong>La Risposta Scientifica:</strong>
+                                "Capisco perfettamente. Pensi però a quanto costa un solo shooting tradizionale: un videomaker e un modello le chiedono facilmente 1.500€ solo per riprendere i file, lasciandole poi l'onere di scrivere i testi e fare le pubblicità. Con 1.200€ da noi ha tutto coperto, incluse le sponsorizzate (200€). Sta comprando un intero reparto marketing al prezzo inferiore di un cameriere part-time."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Objection 2 -->
+                <div class="objection-card">
+                    <div class="objection-header">
+                        <span class="objection-num">OBIEZIONE 2</span>
+                        <span class="material-symbols-outlined objection-icon">smart_toy</span>
+                        <span class="objection-title">"L'AI rischia di far sembrare i prodotti finti"</span>
+                    </div>
+                    <div class="objection-body">
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">
+                            Il cliente teme che la tecnologia generativa svaluti la veridicità fisica del suo stock.
+                        </p>
+                        <button class="btn-reveal" onclick="toggleObjection(this)">
+                            <span class="material-symbols-outlined">visibility</span>
+                            Rivelazione Controbattuta
+                        </button>
+                        <div class="objection-reveal-area">
+                            <div class="objection-solution">
+                                <strong>La Risposta Scientifica:</strong>
+                                "Ha ragione, ed è per questo che per la precisione tecnica del prodotto useremo i 4 caroselli mensili con le foto reali delle vostre collezioni. I 4 video AI, invece, agiscono come veri spot cinematografici emozionali: servono a posizionare lo status del brand e colpire psicologicamente l'utente nei primi secondi per farlo fermare sulla pagina, proprio come fanno i marchi di lusso mondiali."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Objection 3 -->
+                <div class="objection-card">
+                    <div class="objection-header">
+                        <span class="objection-num">OBIEZIONE 3</span>
+                        <span class="material-symbols-outlined objection-icon">smartphone</span>
+                        <span class="objection-title">"Faccio già i video con lo smartphone gratis"</span>
+                    </div>
+                    <div class="objection-body">
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">
+                            Il titolare si affida interamente a contenuti casalinghi e spontanei senza budget.
+                        </p>
+                        <button class="btn-reveal" onclick="toggleObjection(this)">
+                            <span class="material-symbols-outlined">visibility</span>
+                            Rivelazione Controbattuta
+                        </button>
+                        <div class="objection-reveal-area">
+                            <div class="objection-solution">
+                                <strong>La Risposta Scientifica:</strong>
+                                "I video fatti col cellulare sono fantastici per le Stories quotidiane. Ma se vuole attirare clienti disposti a spendere cifre alte senza fare sconti, serve un impatto visivo premium. Se la pagina mostra solo contenuti amatoriali, il pubblico percepirà il negozio come economico. 095 studio serve proprio a elevare istantaneamente quel valore agli occhi del cliente."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JavaScript logic for Tabs, Template Injection and Copy Script -->
+    <script>
+        // Active Script State Management
+        let activeTabIdx = 0;
+
+        // Customizer state defaults
+        const defaultValues = {
+            name: "[Nome Titolare / Brand]",
+            driveLink: "[LINK ALLA CARTELLA DRIVE CON LE DEMO SPECIFICHE]",
+            calendlyLink: "[LINK CALENDLY]"
+        };
+
+        // Text Templates from Sales Manual V3
+        const scriptTemplates = [
+            // SCRIPT 1: Fashion
+            {
+                target: "Target: Negozi di abbigliamento indipendenti, boutique d'accessori e brand di moda locali.",
+                template: `Ciao {NAME}, complimenti per la selezione di capi che proponete sulla vostra pagina.
+
+Parliamoci con estrema franchezza da professionisti: oggi nel settore Fashion, creare contenuti video commerciali che blocchino lo scorrimento dei social ha costi diventati totalmente insostenibili. Tra videomaker, modelle, noleggio attrezzature e agenzie tradizionali, se ne vanno facilmente dai 2.000€ ai 3.000€ per organizzare un singolo shooting professionale. Il rischio concreto è ridursi a fare video amatoriali con lo smartphone che purtroppo finiscono per svalutare l'immagine del prodotto.
+
+Chi Siamo: 095 studio
+Per risolvere questa inefficienza nasce 095 studio, la nostra agenzia specializzata in Ingegneria dei Contenuti Visivi, Posizionamento di Status e Lead Generation.
+
+A differenza delle agenzie tradizionali, noi fondiamo strategie di marketing con le tecnologie visive più avanzate sul mercato. Utilizziamo un protocollo proprietario di Intelligenza Artificiale generativa avanzata per creare video cinematografici ad altissimo impatto emotivo per le vostre collezioni, eliminando il 90% dei costi vivi e i tempi morti delle produzioni tradizionali.
+
+Potete valutare la qualità e il movimento dei tessuti nei nostri rendering visivi direttamente da questo link: 👇
+🔗 {DRIVE}
+
+Per attivare una collaborazione questo mese con 095 studio, abbiamo strutturato due opzioni d’ingresso trasparenti e senza vincoli di lungo termine:
+
+📦 OPZIONE 1: Il Pacchetto Test (Usa e Getta)
+Cosa include: 3 Video Promozionali Premium (durata flessibile da 30 secondi a 1 minuto) generati in AI per i vostri canali.
+Obiettivo: Testare la nostra velocità e l'impatto visivo della nostra tecnologia sulla vostra nuova collezione.
+Investimento: 600€ una tantum.
+
+🚀 OPZIONE 2: Il Pacchetto Crescita Mensile (Tutto Incluso)
+Se volete delegare interamente il marketing a 095 studio, smettere di rincorrere la creazione dei contenuti e generare clienti costanti nella vostra zona, vi forniamo un intero reparto dedicato:
+- Produzione Premium: 4 Video AI cinematografici al mese (1 a settimana, da 30 secondi a 1 minuto) incentrati sullo status del vostro brand.
+- Presentazione Prodotto: 4 Caroselli fotografici avanzati al mese (1 a settimana) per mostrare i vostri prodotti reali in modo impeccabile.
+- Cura Canali Totale: Gestione social completa e Copywriting professionale per testi strategici orientati alla vendita.
+- Generazione Clienti: Strategie di Lead Generation e campagne promozionali studiate su misura per il vostro store.
+- Budget ADS Incluso: 200€ al mese di sponsorizzate Meta/TikTok INCLUSI nel prezzo, interamente pagati e ottimizzati da noi per portarvi clienti mirati in boutique fin da subito.
+Investimento: 1.200€ al mese (Zero costi nascosti, non dovete aggiungere un solo euro per le pubblicità).
+
+Per garantire l'ingegnerizzazione delle textures in 4K, questo mese possiamo accogliere solo altre 2 attività nel vostro settore.
+
+Se l'idea vi incuriosisce, facciamo una breve chiamata di 10 minuti su Zoom per analizzare quale opzione si adatta meglio ai vostri obiettivi attuali. Quale giorno di questa settimana vi tornerebbe più comodo per un rapido punto tecnico?`
+            },
+            // SCRIPT 2: Artigianato
+            {
+                target: "Target: Laboratori di pelletteria, orafi, design d'interni, ceramisti e produttori indipendenti.",
+                template: `Ciao {NAME}, complimenti sinceri per la cura e l'autenticità che mettete nelle vostre creazioni. La vera manifattura rappresenta un valore immenso che oggi merita di essere comunicato al meglio.
+
+Parliamoci con franchezza: spesso le realtà artigianali faticano a trasmettere la reale qualità dei materiali, delle finiture o delle lavorazioni attraverso lo schermo di uno smartphone. D'altra parte, ingaggiare una casa di produzione cinematografica tradizionale per valorizzare il prodotto ha costi di set e luci totalmente insostenibili per un laboratorio indipendente. Il rischio è che un prodotto straordinario venga percepito come comune a causa di foto e video amatoriali.
+
+Chi Siamo: 095 studio
+Per risolvere questo problema nasce 095 studio, la nostra agenzia specializzata in Ingegneria dei Contenuti Visivi e Posizionamento di Status.
+
+Sviluppiamo identità digitali ad alto contrasto e dal look premium. Utilizziamo un protocollo proprietario di Intelligenza Artificiale generativa avanzata capace di esaltare macro-dettagli visivi iper-realistici (gestione millimetrica di luci, textures dei materiali e finiture), posizionando il vostro prodotto come un vero oggetto di lusso ed eliminando i costi vivi dei set tradizionali.
+
+Potete valutare la resa dei materiali nei nostri rendering direttamente da questo link: 👇
+🔗 {DRIVE}
+
+Per attivare una collaborazione questo mese con 095 studio, abbiamo strutturato due opzioni d’ingresso chiare e senza vincoli di lungo termine:
+
+📦 OPZIONE 1: Il Pacchetto Test (Usa e Getta)
+Cosa include: 3 Video Promozionali Premium (durata da 30 secondi a 1 minuto) generati in AI focalizzati sui vostri prodotti di punta.
+Obiettivo: Testare l'impatto visivo di questa tecnologia applicata alla vostra manifattura.
+Investimento: 600€ una tantum.
+
+🚀 OPZIONE 2: Il Pacchetto Crescita Mensile (Tutto Incluso)
+Se volete delegare interamente il marketing a 095 studio per attirare clienti privati e rivenditori disposti a pagare il reale valore del vostro lavoro, vi forniamo un reparto marketing dedicato:
+- Produzione Premium: 4 Video AI cinematografici al mese (1 a settimana, da 30 secondi a 1 minuto) incentrati sul valore del brand.
+- Presentazione Prodotto: 4 Caroselli fotografici avanzati al mese (1 a settimana) per mostrare le vostre creazioni reali sotto una luce impeccabile.
+- Cura Canali Totale: Gestione social completa e Copywriting per testi capaci di raccontare la storia e il valore della vostra lavorazione.
+- Generazione Clienti: Strategie di posizionamento e campagne commerciali studiate su misura.
+- Budget ADS Incluso: 200€ al mese di sponsorizzate Meta/TikTok INCLUSI nel prezzo, interamente gestiti da noi per portarvi contatti mirati ed ordini.
+Investimento: 1.200€ al mese (Non dovete aggiungere un solo euro per le pubblicità).
+
+Questo mese possiamo accogliere solo altre 2 strutture nel vostro settore per garantire la massima cura dei dettagli visivi.
+
+Se l'idea vi incuriosisce, facciamo una breve chiamata di 10 minuti su Zoom per analizzare quale opzione si adatta meglio ai vostri obiettivi attuali. Quale giorno di questa settimana vi tornerebbe più comodo?`
+            },
+            // SCRIPT 3: E-commerce
+            {
+                target: "Target: Brand nativi digitali che vendono tramite il proprio store online (cosmetica, gioielli, oggettistica, abbigliamento D2C).",
+                template: `Ciao {NAME}, analizzando il mercato D2C abbiamo notato la proposta del vostro store.
+
+Parliamoci con estrema chiarezza tra professionisti del digitale: oggi scalare le campagne pubblicitarie (Ads) su Meta e TikTok utilizzando immagini statiche o formati video tradizionali causa esclusivamente un incremento drastico del CPA (Costo di Acquisizione). Produrre continuamente nuovi asset video professionali con attori, agenzie e montatori ha costi mensili fissi che erodono completamente i vostri margini di profitto.
+
+Chi Siamo: 095 studio
+Per risolvere questo blocco di scalabilità nasce 095 studio, la nostra agenzia specializzata in Ingegneria dei Contenuti Visivi e Performance Marketing.
+
+Sviluppiamo video-ads in Intelligenza Artificiale generativa avanzata ad altissimo tasso di ritenzione del pubblico, strutturati specificamente sul principio del Pattern Interrupt visivo nei primi 3 secondi per crollare i costi pubblicitari, aumentare il CTR e aggirare i costi di una produzione video tradizionale.
+
+Potete analizzare la struttura e il ritmo dei nostri video Ads direttamente qui: 👇
+🔗 {DRIVE}
+
+Per avviare un test questo mese con 095 studio, abbiamo strutturato due opzioni senza contratti vincolanti:
+
+📦 OPZIONE 1: Il Pacchetto Test (Usa e Getta)
+Cosa include: 3 Video Ads Creativi (durata da 30 secondi a 1 minuto) in risoluzione 4K ottimizzati per la conversione.
+Obiettivo: Validare l'efficacia dei nostri ganci visivi AI sulle vostre attuali campagne pubblicitarie.
+Investimento: 600€ una tantum.
+
+🚀 OPZIONE 2: Il Pacchetto Crescita Mensile (Tutto Incluso)
+Se volete delegare l'intero flusso di produzione creativa e ottimizzazione delle campagne per scalare il fatturato del vostro e-commerce:
+- Produzione Creativa Costante: 4 Video Ads AI al mese (1 a settimana, da 30 secondi a 1 minuto) sempre focalizzati sui vostri bestseller.
+- Retargeting Visivo: 4 Caroselli fotografici avanzati al mese (1 a settimana) ottimizzati per convertire gli utenti che hanno visitato lo store.
+- Copywriting Scientifico: Scrittura dei testi delle inserzioni e dei post incentrata sugli angoli psicologici d'acquisto.
+- Media Buying Avanzato: Gestione tecnica, analisi e ottimizzazione quotidiana delle vostre campagne pubblicitarie.
+- Budget ADS Incluso: 200€ al mese di budget pubblicitario inclusi nel prezzo per lanciare i primi test di scaling creativi.
+Investimento: 1.200€ al mese (Tutto incluso, nessun costo nascosto).
+
+Avendo una capacità produttiva limitata per l'ingegnerizzazione dei modelli in 4K, questo mese accettiamo solo altri 2 brand di e-commerce.
+
+Facciamo un breve punto tecnico di 10 minuti su Zoom per definire gli script commerciali. Quando avreste uno slot libero questa settimana?`
+            },
+            // SCRIPT 4: Profumeria
+            {
+                target: "Target: Profumerie artistiche, boutique di fragranze e store indipendenti di cosmesi d'alta gamma.",
+                template: `Ciao {NAME}, complimenti per la splendida selezione di marchi artistici che proponete in store, davvero di altissimo livello.
+
+Parliamoci con franchezza da professionisti: oggi per una profumeria di nicchia, creare contenuti che trasmettano l'esclusività delle fragranze ha costi complessi. Inoltre, i marchi di lusso vietano tassativamente la manipolazione o riproduzione non autorizzata dei loro asset commerciali ufficiali. Il rischio è ridursi a fare video amatoriali con lo smartphone che purtroppo non rendono giustizia all'esperienza sensoriale e allo status del vostro punto vendita.
+
+Chi Siamo: 095 studio
+Per risolvere questa inefficienza nasce 095 studio, la nostra agenzia specializzata in Ingegneria dei Contenuti Visivi e Posizionamento di Status.
+
+Noi non manipoliamo i prodotti commerciali dei singoli marchi. Utilizziamo un protocollo proprietario di Intelligenza Artificiale generativa avanzata per tradurre in immagini l'identità olfattiva ed evocativa della vostra boutique, creando un'estetica cinematografica "Luxury-Raw" e noir capace di attirare clienti alto-spendenti, eliminando totalmente i costi vivi di produzione.
+
+Potete valutare l'estetica dei nostri lavori direttamente da questo link: 👇
+🔗 {DRIVE}
+
+Per attivare una collaborazione questo mese con 095 studio, abbiamo strutturato due opzioni d’ingresso trasparenti e senza vincoli:
+
+📦 OPZIONE 1: Il Pacchetto Test (Usa e Getta)
+Cosa include: 3 Video Promozionali d'Atmosfera (durata da 30 secondi a 1 minuto) generati in AI per i vostri canali.
+Obiettivo: Testare la nostra velocità e vedere come l'AI riesce a tradurre visivamente il concetto di lusso del vostro store.
+Investimento: 600€ una tantum.
+
+🚀 OPZIONE 2: Il Pacchetto Crescita Mensile (Tutto Incluso)
+Se volete delegare interamente il marketing a 095 studio, smettere di rincorrere la creazione dei contenuti e generare clienti costanti nella vostra zona:
+- Produzione Premium: 4 Video AI cinematografici al mese (1 a settimana, da 30 secondi a 1 minuto) incentrati sullo status del brand.
+- Presentazione Prodotto: 4 Caroselli fotografici avanzati al mese (1 a settimana) per mostrare l'eleganza delle vostre boccette reali.
+- Cura Canali Totale: Gestione social completa e Copywriting professionale per testi strategici orientati a far nascere il desiderio della fragranza.
+- Generazione Clienti: Strategie di Lead Generation e campagne promozionali mirate nella vostra area geografica.
+- Budget ADS Incluso: 200€ al mese di sponsorizzate Meta/TikTok INCLUSI nel prezzo, gestiti da noi per portarvi clienti mirati fin da subito.
+Investimento: 1.200€ al mese (Zero costi nascosti, non dovete aggiungere un solo euro per le pubblicità).
+
+Questo mese possiamo accogliere solo altre 2 attività nel vostro settore per garantire la massima cura dei dettagli visivi.
+
+Se l'idea vi incuriosisce, facciamo una breve chiamata di 10 minuti su Zoom per analizzare quale opzione si adatta meglio ai vostri obiettivi attuali. Quale giorno vi tornerebbe più comodo?`
+            },
+            // SCRIPT 5: Follow-Up Universale
+            {
+                target: "Target: Qualsiasi contatto che non ha risposto al primo messaggio dopo 48 ore.",
+                template: `Ciao {NAME}, volevo assicurarmi che il link alla nostra cartella di demo specifiche per il tuo settore si aprisse correttamente e che fossi riuscito a valutare la qualità dei rendering visivi di 095 studio.
+
+Ti aggiorno sul fatto che, avendo una capacità produttiva limitata per poter garantire lo sviluppo chirurgico delle textures in 4K, 3 dei 5 slot promozionali previsti per questo mese sono già stati contrattualizzati da altre attività.
+
+Se l'opportunità di testare questo posizionamento visivo d'avanguardia sulla tua attività ti interessa (sia per il test da 600€ che per il pacchetto tutto incluso da 1.200€), ti lascio un link rapido per bloccare 10 minuti di call conoscitiva direttamente sulla mia agenda Zoom: {CALENDLY}`
+            }
+        ];
+
+        // Highlight logic for placeholders
+        function highlightHTML(text) {
+            return text
+                .replace(/{NAME}/g, `<span class="highlight-var" id="var-name-hl"></span>`)
+                .replace(/{DRIVE}/g, `<span class="highlight-var" id="var-drive-hl"></span>`)
+                .replace(/{CALENDLY}/g, `<span class="highlight-var" id="var-calendly-hl"></span>`);
+        }
+
+        // Live script updater
+        function updateActiveScriptContent() {
+            const currentItem = scriptTemplates[activeTabIdx];
+            
+            // Render basic template
+            document.getElementById('script-target').innerHTML = `
+                <span class="material-symbols-outlined" style="color: var(--primary);">info</span>
+                ${currentItem.target}
+            `;
+            
+            // Put raw template text with HTML markup placeholders first
+            const renderArea = document.getElementById('script-render-area');
+            renderArea.innerHTML = highlightHTML(currentItem.template);
+
+            // Fetch customizer inputs
+            const leadName = document.getElementById('lead-name').value.trim() || defaultValues.name;
+            const driveLink = document.getElementById('drive-link').value.trim() || defaultValues.driveLink;
+            const calendlyLink = document.getElementById('calendly-link').value.trim() || defaultValues.calendlyLink;
+
+            // Inject the values safely into the highlighted tags
+            const nameSpan = document.getElementById('var-name-hl');
+            const driveSpan = document.getElementById('var-drive-hl');
+            const calendlySpan = document.getElementById('var-calendly-hl');
+
+            if (nameSpan) nameSpan.innerText = leadName;
+            if (driveSpan) driveSpan.innerText = driveLink;
+            if (calendlySpan) calendlySpan.innerText = calendlyLink;
+        }
+
+        function updateAllScripts() {
+            updateActiveScriptContent();
+        }
+
+        // Tab Switching
+        function switchTab(index) {
+            activeTabIdx = index;
+            
+            // Toggle active classes on tab buttons
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach((tab, idx) => {
+                if (idx === index) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+
+            updateActiveScriptContent();
+            resetCopyButton();
+        }
+
+        // Reset copy button status
+        function resetCopyButton() {
+            const copyIcon = document.getElementById('copy-icon');
+            const copyText = document.getElementById('copy-text');
+            copyIcon.innerText = "content_copy";
+            copyText.innerText = "Copia Script";
+            document.querySelector('.btn-copy').style.background = "linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)";
+        }
+
+        // Copy customized script to clipboard
+        function copyActiveScript() {
+            const currentItem = scriptTemplates[activeTabIdx];
+            
+            // Get current input values
+            const leadName = document.getElementById('lead-name').value.trim() || defaultValues.name;
+            const driveLink = document.getElementById('drive-link').value.trim() || defaultValues.driveLink;
+            const calendlyLink = document.getElementById('calendly-link').value.trim() || defaultValues.calendlyLink;
+
+            // Generate clean copyable plain-text
+            let textToCopy = currentItem.template
+                .replace(/{NAME}/g, leadName)
+                .replace(/{DRIVE}/g, driveLink)
+                .replace(/{CALENDLY}/g, calendlyLink);
+
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                // Success visual animation
+                const copyIcon = document.getElementById('copy-icon');
+                const copyText = document.getElementById('copy-text');
+                
+                copyIcon.innerText = "done";
+                copyText.innerText = "Copiato!";
+                document.querySelector('.btn-copy').style.background = "linear-gradient(135deg, var(--success) 0%, #059669 100%)";
+
+                setTimeout(() => {
+                    resetCopyButton();
+                }, 2000);
+            }).catch(err => {
+                console.error("Errore durante la copia: ", err);
+                alert("Impossibile copiare il testo. Selezionalo manualmente dal box.");
+            });
+        }
+
+        // Toggle Objection answers
+        function toggleObjection(button) {
+            const revealArea = button.nextElementSibling;
+            const isVisible = window.getComputedStyle(revealArea).display !== 'none';
+            
+            if (isVisible) {
+                revealArea.style.display = 'none';
+                button.innerHTML = `<span class="material-symbols-outlined">visibility</span> Rivelazione Controbattuta`;
+            } else {
+                revealArea.style.display = 'block';
+                button.innerHTML = `<span class="material-symbols-outlined">visibility_off</span> Nascondi Risposta`;
+            }
+        }
+
+        // Highlight Active Sidebar Item on Scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navItems = document.querySelectorAll('.sidebar-item');
+            
+            let currentSectionId = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 200)) {
+                    currentSectionId = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                const link = item.querySelector('a').getAttribute('href');
+                if (link === `#${currentSectionId}`) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        });
+
+        // Initialize script updates on load
+        window.addEventListener('DOMContentLoaded', () => {
+            updateActiveScriptContent();
+        });
+    </script>
+</body>
+</html>

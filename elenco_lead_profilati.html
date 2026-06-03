@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>095 studio - Anagrafica Lead e Strumento di Invio (V1)</title>
+    
+    <!-- Google Fonts: Outfit (Headings), Plus Jakarta Sans (Body), JetBrains Mono (Code/Scripts) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+
+    <style>
+        /* Base Variables & Premium Cybernetic Palette */
+        :root {
+            --bg-base: #060813;
+            --bg-surface: #0c0f24;
+            --bg-card: rgba(17, 22, 49, 0.65);
+            --border-color: rgba(0, 242, 254, 0.15);
+            --border-hover: rgba(0, 242, 254, 0.4);
+            
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            
+            --primary: #00f2fe;
+            --primary-glow: rgba(0, 242, 254, 0.35);
+            --secondary: #8f00ff;
+            --secondary-glow: rgba(143, 0, 255, 0.35);
+            --accent: #ff007f;
+            
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --font-head: 'Outfit', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            
+            --sidebar-width: 280px;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Ambient Glowing Graphics */
+        .bg-glow-1 {
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, var(--primary-glow) 0%, rgba(6, 8, 19, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
+            filter: blur(80px);
+        }
+
+        .bg-glow-2 {
+            position: fixed;
+            bottom: -10%;
+            right: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, var(--secondary-glow) 0%, rgba(6, 8, 19, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
+            filter: blur(80px);
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: rgba(8, 10, 26, 0.95);
+            border-right: 1px solid var(--border-color);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.5rem;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .sidebar-brand {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 3rem;
+        }
+
+        .brand-title {
+            font-family: var(--font-head);
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .brand-subtitle {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-top: 0.25rem;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .sidebar-item a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.85rem 1rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .sidebar-item a:hover {
+            color: var(--primary);
+            background: rgba(0, 242, 254, 0.05);
+            border-color: rgba(0, 242, 254, 0.1);
+        }
+
+        .sidebar-item.active a {
+            color: var(--bg-base);
+            background: linear-gradient(135deg, var(--primary) 0%, #00b8fe 100%);
+            font-weight: 600;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.35);
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .version-badge {
+            background: rgba(143, 0, 255, 0.2);
+            color: #d8b4fe;
+            border: 1px solid rgba(143, 0, 255, 0.3);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Main Content Wrapper */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex-grow: 1;
+            padding: 3rem;
+            max-width: 1500px;
+            min-height: 100vh;
+            width: calc(100% - var(--sidebar-width));
+        }
+
+        /* Statistics Cards Container */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .stat-card.total::after { background: var(--primary); }
+        .stat-card.boutique::after { background: #fb7185; }
+        .stat-card.profumeria::after { background: #c084fc; }
+        .stat-card.artigianato::after { background: #60a5fa; }
+        .stat-card.d2c::after { background: #34d399; }
+
+        .stat-num {
+            font-family: var(--font-head);
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+        }
+
+        /* Controls Panel: Search & Filter Tabs */
+        .controls-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .search-row {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-input-wrapper {
+            position: relative;
+            flex-grow: 1;
+        }
+
+        .search-input-wrapper .material-symbols-outlined {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .search-input {
+            width: 100%;
+            background: rgba(6, 8, 19, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.75rem 1rem 0.75rem 3rem;
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.25);
+        }
+
+        .target-filter-bar {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 1.25rem;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-family: var(--font-head);
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-btn:hover {
+            color: var(--primary);
+            background: rgba(0, 242, 254, 0.05);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--bg-base);
+            border-color: transparent;
+            font-weight: 700;
+        }
+
+        /* Lead Directory Table Card */
+        .directory-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            max-height: 650px;
+            overflow-y: auto;
+        }
+
+        .leads-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .leads-table th, .leads-table td {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        .leads-table th {
+            background: rgba(12, 15, 36, 0.95);
+            font-family: var(--font-head);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            color: var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
+
+        .leads-table tr {
+            transition: background-color 0.2s ease;
+        }
+
+        .leads-table tr:hover {
+            background-color: rgba(255,255,255,0.02);
+        }
+
+        /* Target Badge Labels */
+        .target-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 30px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .target-badge.b-boutique { background: rgba(251, 113, 133, 0.15); color: #fda4af; border: 1px solid rgba(251, 113, 133, 0.3); }
+        .target-badge.b-profumeria { background: rgba(192, 132, 252, 0.15); color: #e9d5ff; border: 1px solid rgba(192, 132, 252, 0.3); }
+        .target-badge.b-artigianato { background: rgba(96, 165, 250, 0.15); color: #bfdbfe; border: 1px solid rgba(96, 165, 250, 0.3); }
+        .target-badge.b-d2c { background: rgba(52, 211, 153, 0.15); color: #a7f3d0; border: 1px solid rgba(52, 211, 153, 0.3); }
+
+        /* Social Link Actions */
+        .social-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            transition: color 0.2s ease;
+        }
+
+        .social-link:hover {
+            color: var(--primary);
+        }
+
+        .copyable-cell {
+            position: relative;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .copyable-cell:hover {
+            color: var(--primary);
+        }
+
+        /* Action Buttons */
+        .btn-action-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-action {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.4rem;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .btn-action:hover {
+            background: rgba(0, 242, 254, 0.1);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-action.script {
+            background: linear-gradient(135deg, rgba(0, 242, 254, 0.15) 0%, rgba(143, 0, 255, 0.15) 100%);
+            border-color: var(--primary);
+            color: #fff;
+            padding: 0.4rem 0.75rem;
+            font-family: var(--font-head);
+            font-weight: 600;
+            font-size: 0.8rem;
+            gap: 0.25rem;
+        }
+
+        .btn-action.script:hover {
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* Premium Modal Backdrop and Window (WOW Element) */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(6, 8, 19, 0.85);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-backdrop.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-container {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 50px rgba(0, 242, 254, 0.15);
+            display: flex;
+            flex-direction: column;
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal-backdrop.open .modal-container {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 1.75rem 2.25rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-close-modal {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s ease;
+        }
+
+        .btn-close-modal:hover {
+            color: var(--danger);
+        }
+
+        .modal-body {
+            padding: 2.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .modal-customizer {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            background: rgba(6, 8, 19, 0.5);
+            padding: 1.25rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .modal-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .modal-input-group label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--primary);
+        }
+
+        .modal-input-group input {
+            background: rgba(6, 8, 19, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 0.6rem 0.85rem;
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+        }
+
+        .modal-input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .modal-script-box {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            background: rgba(6, 8, 19, 0.8);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            max-height: 350px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+
+        .highlight-tag {
+            background: rgba(0, 242, 254, 0.15);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 0.05rem 0.3rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .modal-footer {
+            padding: 1.5rem 2.25rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        .btn-modal-action {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border: none;
+            color: var(--bg-base);
+            font-family: var(--font-head);
+            font-weight: 700;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .btn-modal-action:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 242, 254, 0.35);
+        }
+
+        /* Floating Notification Pill */
+        .toast-notification {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(16, 185, 129, 0.95);
+            color: #fff;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+            z-index: 2000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .toast-notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Responsive Design Adjustments */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 70px;
+                padding: 1.5rem 0.5rem;
+                align-items: center;
+            }
+
+            .brand-title span:not(.material-symbols-outlined), .brand-subtitle, .sidebar-item span:not(.material-symbols-outlined), .sidebar-footer {
+                display: none;
+            }
+
+            .sidebar-item a {
+                justify-content: center;
+                padding: 0.85rem;
+            }
+
+            .main-content {
+                margin-left: 70px;
+                width: calc(100% - 70px);
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 1rem;
+            }
+            .search-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .modal-customizer {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Decorative Glow Elements -->
+    <div class="bg-glow-1"></div>
+    <div class="bg-glow-2"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-title">
+                <span class="material-symbols-outlined" style="font-size: 2.2rem; color: var(--primary);">center_focus_strong</span>
+                <span>095 studio</span>
+            </div>
+            <div class="brand-subtitle">Ingegneria dei Contenuti</div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="sidebar-item">
+                <a href="manuale_operativo_vendite.html">
+                    <span class="material-symbols-outlined">description</span>
+                    <span>Manuale Vendite</span>
+                </a>
+            </li>
+            <li class="sidebar-item active">
+                <a href="#leads">
+                    <span class="material-symbols-outlined">database</span>
+                    <span>Anagrafica Lead</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <span class="version-badge">200 CONTACTS V1</span>
+        </div>
+    </aside>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+        
+        <!-- Header Banner -->
+        <header style="margin-bottom: 4rem; border-bottom: 1px solid var(--border-color); padding-bottom: 2rem;">
+            <p style="font-family: var(--font-mono); color: var(--primary); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;">095 studio • Database Interno</p>
+            <h1 style="font-family: var(--font-head); font-size: 3.2rem; font-weight: 900; line-height: 1.1; margin-top: 0.5rem; background: linear-gradient(135deg, #fff 40%, var(--primary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">ANAGRAFICA LEAD PROFILATI</h1>
+            <p style="color: var(--text-secondary); font-size: 1.15rem; max-width: 850px; margin-top: 0.75rem;">
+                Directory commerciale di 200 lead reali suddivisi in 4 settori strategici sul territorio italiano. Usa i filtri e il generatore di messaggi integrato per contattarli istantaneamente.
+            </p>
+        </header>
+
+        <!-- KPI Statistic Counters -->
+        <section class="stats-grid">
+            <div class="stat-card total">
+                <span class="stat-num" id="stat-total-val">200</span>
+                <span class="stat-label">Lead Totali</span>
+            </div>
+            <div class="stat-card boutique">
+                <span class="stat-num" style="color: #fb7185;">50</span>
+                <span class="stat-label">👗 Boutique/Fashion</span>
+            </div>
+            <div class="stat-card profumeria">
+                <span class="stat-num" style="color: #c084fc;">50</span>
+                <span class="stat-label">🧪 Profumerie Nicchia</span>
+            </div>
+            <div class="stat-card artigianato">
+                <span class="stat-num" style="color: #60a5fa;">50</span>
+                <span class="stat-label">⚒️ Artigianato Lusso</span>
+            </div>
+            <div class="stat-card d2c">
+                <span class="stat-num" style="color: #34d399;">50</span>
+                <span class="stat-label">🛒 Brand D2C / E-com</span>
+            </div>
+        </section>
+
+        <!-- Controls Area (Filters & Search) -->
+        <div class="controls-panel">
+            <div class="search-row">
+                <div class="search-input-wrapper">
+                    <span class="material-symbols-outlined">search</span>
+                    <input type="text" class="search-input" id="table-search-input" placeholder="Cerca lead per nome, luogo, email o account Instagram..." oninput="handleSearchAndFilter()">
+                </div>
+            </div>
+
+            <div class="target-filter-bar">
+                <button class="filter-btn active" onclick="setFilterCategory('all')">
+                    <span class="material-symbols-outlined">list</span> Tutti (200)
+                </button>
+                <button class="filter-btn" onclick="setFilterCategory('boutique')">
+                    <span class="material-symbols-outlined">styler</span> 👗 Boutique &amp; Concept Store (50)
+                </button>
+                <button class="filter-btn" onclick="setFilterCategory('profumeria')">
+                    <span class="material-symbols-outlined">experiment</span> 🧪 Profumerie di Nicchia (50)
+                </button>
+                <button class="filter-btn" onclick="setFilterCategory('artigianato')">
+                    <span class="material-symbols-outlined">construction</span> ⚒️ Laboratori Artigianali (50)
+                </button>
+                <button class="filter-btn" onclick="setFilterCategory('d2c')">
+                    <span class="material-symbols-outlined">shopping_bag</span> 🛒 Brand D2C &amp; E-commerce (50)
+                </button>
+            </div>
+        </div>
+
+        <!-- Leads Database Grid/Table Card -->
+        <div class="directory-card">
+            <div class="table-responsive">
+                <table class="leads-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;">#</th>
+                            <th>Target</th>
+                            <th>Nome Azienda</th>
+                            <th>Luogo</th>
+                            <th>Telefono</th>
+                            <th>Email</th>
+                            <th>Instagram</th>
+                            <th style="text-align: center; width: 140px;">Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leads-tbody">
+                        <!-- Dynamic Leads injected by Javascript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- INTERACTIVE CONTACT INTEGRATION MODAL (WOW ELEMENT) -->
+    <div class="modal-backdrop" id="modal-backdrop" onclick="closeModalOutside(event)">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-lead-title">
+                    <span class="material-symbols-outlined" style="color: var(--primary);">contact_mail</span>
+                    Prepara Messaggio di Outreach
+                </h3>
+                <button class="btn-close-modal" onclick="closeModal()">
+                    <span class="material-symbols-outlined" style="font-size: 1.8rem;">close</span>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="modal-customizer">
+                    <div class="modal-input-group">
+                        <label>Nome Destinatario</label>
+                        <input type="text" id="modal-cust-name" oninput="regenerateModalScriptText()">
+                    </div>
+                    <div class="modal-input-group">
+                        <label>Drive Link Demo</label>
+                        <input type="text" id="modal-cust-drive" placeholder="drive.google.com/..." oninput="regenerateModalScriptText()">
+                    </div>
+                </div>
+
+                <div style="font-size: 0.8rem; text-transform: uppercase; font-weight: 700; color: var(--primary); letter-spacing: 0.5px;">
+                    Testo da Inviare (Copia e Incolla pronto)
+                </div>
+                <div class="modal-script-box" id="modal-script-render">Rendering script...</div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-modal-action" onclick="copyModalScript()">
+                    <span class="material-symbols-outlined">content_copy</span>
+                    Copia Script Personalizzato
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast Notification -->
+    <div class="toast-notification" id="toast-notify">
+        <span class="material-symbols-outlined">verified</span>
+        <span id="toast-text">Copiato con successo negli appunti!</span>
+    </div>
+
+    <!-- COMPLETE LEADS DATABASE & CODE LOGIC -->
+    <script>
+        // Sector-specific outreach script templates
+        const sectorScripts = {
+            boutique: `Ciao {NAME}, complimenti per la selezione di capi che proponete sulla vostra pagina.
+
+Parliamoci con estrema franchezza da professionisti: oggi nel settore Fashion, creare contenuti video commerciali che blocchino lo scorrimento dei social ha costi diventati totalmente insostenibili. Tra videomaker, modelle, noleggio attrezzature e agenzie tradizionali, se ne vanno facilmente dai 2.000€ ai 3.000€ per organizzare un singolo shooting professionale. Il rischio concreto è ridursi a fare video amatoriali con lo smartphone che purtroppo finiscono per svalutare l'immagine del prodotto.
+
+Chi Siamo: 095 studio
+Per risolvere questa inefficienza nasce 095 studio, la nostra agenzia specializzata in Ingegneria dei Contenuti Visivi, Posizionamento di Status e Lead Generation.
+
+A differenza delle agenzie tradizionali, noi fondiamo strategie di marketing con le tecnologie visive più avanzate sul mercato. Utilizziamo un protocollo proprietario di Intelligenza Artificiale generativa avanzata per creare video cinematografici ad altissimo impatto emotivo per le vostre collezioni, eliminando il 90% dei costi vivi e i tempi morti delle produzioni tradizionali.
+
+Potete valutare la qualità e il movimento dei tessuti nei nostri rendering visivi direttamente da questo link: 👇
+🔗 {DRIVE}
+
+Per attivare una collaborazione questo mese con 095 studio, abbiamo strutturato due opzioni d’ingresso trasparenti e senza vincoli di lungo termine:
+
+📦 OPZIONE 1: Il Pacchetto Test (Usa e Getta)
+Cosa include: 3 Video Promozionali Premium (durata flessibile da 30 secondi a 1 minuto) generati in AI per i vostri canali.
+Obiettivo: Testare la nostra velocità e l'impatto visivo della nostra tecnologia sulla vostra nuova collezione.
+Investimento: 600€ una tantum.
+
+🚀 OPZIONE 2: Il Pacchetto Crescita Mensile (Tutto Incluso)
+Se volete delegare interamente il marketing a 095 studio, smettere di rincorrere la creazione dei contenuti e generare clienti costanti nella vostra zona, vi forniamo un intero reparto dedicato:
+- Produzione Premium: 4 Video AI cinematografici al mese (1 a settimana, da 30 secondi a 1 minuto) incentrati sullo status del vostro brand.
+- Presentazione Prodotto: 4 Caroselli fotografici avanzati al mese (1 a settimana) per mostrare i vostri prodotti reali in modo impeccabile.
+- Cura Canali Totale: Gestione social completa e Copywriting professionale per testi strategici orientati alla vendita.
+- Generazione Clienti: Strategie di Lead Generation e campagne promozionali studiate su misura per il vostro store.
+- Budget ADS Incluso: 200€ al mese di sponsorizzate Meta/TikTok INCLUSI nel prezzo, interamente pagati e ottimizzati da noi per portarvi clienti mirati in boutique fin da subito.
+Investimento: 1.200€ al mese (Zero costi nascosti, non dovete aggiungere un solo euro per le pubblicità).
+
+Per garantire l'ingegnerizzazione delle textures in 4K, questo mese possiamo accogliere solo altre 2 attività nel vostro settore.
+
+Se l'idea vi incuriosisce, facciamo una breve chiamata di 10 minuti su Zoom per analizzare quale opzione si adatta meglio ai vostri obiettivi attuali. Quale giorno di questa settimana vi tornerebbe più comodo per un rapido punto tecnico?`,
+
+            profumeria: `Ciao {NAME}, complimenti per la splendida selezione di marchi artistici che proponete in store, davvero di altissimo livello.
+
+Parliamoci con franchezza da professionisti: oggi per una profumeria di nicchia, creare contenuti che trasmettano l'esclusività delle fragranze ha costi complessi. Inoltre, i marchi di lusso vietano tassativamente la manipolazione o riproduzione non autorizzata dei loro asset commerciali ufficiali. Il rischio è ridursi a fare video amatoriali con lo smartphone che purtroppo non rendono giustizia all'esperienza sensoriale e allo status del vostro punto vendita.
+
+Chi Siamo: 095 studio
+Per risolvere questa inefficienza nasce 095 studio, la nostra agenzia specializzata in Ingegneria dei Contenuti Visivi e Posizionamento di Status.
+
+Noi non manipoliamo i prodotti commerciali dei singoli marchi. Utilizziamo un protocollo proprietario di Intelligenza Artificiale generativa avanzata per tradurre in immagini l'identità olfattiva ed evocativa della vostra boutique, creando un'estetica cinematografica "Luxury-Raw" e noir capace di attirare clienti alto-spendenti, eliminando totalmente i costi vivi di produzione.
+
+Potete valutare l'estetica dei nostri lavori direttamente da questo link: 👇
+🔗 {DRIVE}
+
+Per attivare una collaborazione questo mese con 095 studio, abbiamo strutturato due opzioni d’ingresso trasparenti e senza vincoli:
+
+📦 OPZIONE 1: Il Pacchetto Test (Usa e Getta)
+Cosa include: 3 Video Promozionali d'Atmosfera (durata da 30 secondi a 1 minuto) generati in AI per i vostri canali.
+Obiettivo: Testare la nostra velocità e vedere come l'AI riesce a tradurre visivamente il concetto di lusso del vostro store.
+Investimento: 600€ una tantum.
+
+🚀 OPZIONE 2: Il Pacchetto Crescita Mensile (Tutto Incluso)
+Se volete delegare interamente il marketing a 095 studio, smettere di rincorrere la creazione dei contenuti e generare clienti costanti nella vostra zona:
+- Produzione Premium: 4 Video AI cinematografici al mese (1 a settimana, da 30 secondi a 1 minuto) incentrati sullo status del brand.
+- Presentazione Prodotto: 4 Caroselli fotografici avanzati al mese (1 a settimana) per mostrare l'eleganza delle vostre boccette reali.
+- Cura Canali Totale: Gestione social completa e Copywriting professionale per testi strategici orientati a far nascere il desiderio della fragranza.
+- Generazione Clienti: Strategie di Lead Generation e campagne promozionali mirate nella vostra area geografica.
+- Budget ADS Incluso: 200€ al mese di sponsorizzate Meta/TikTok INCLUSI nel prezzo, gestiti da noi per portarvi clienti mirati fin da subito.
+Investimento: 1.200€ al mese (Zero costi nascosti, non dovete aggiungere un solo euro per le pubblicità).
+
+Questo mese possiamo accogliere solo altre 2 attività nel vostro settore per garantire la massima cura dei dettagli visivi.
+
+Se l'idea vi incuriosisce, facciamo una breve chiamata di 10 minuti su Zoom per analizzare quale opzione si adatta meglio ai vostri obiettivi attuali. Quale giorno vi tornerebbe più comodo?`,
+
+            artigianato: `Ciao {NAME}, complimenti sinceri per la cura e l'autenticità che mettete nelle vostre creazioni. La vera manifattura rappresenta un valore immenso che oggi merita di essere comunicato al meglio.
+
+Parliamoci con franchezza: spesso le realtà artigianali faticano a trasmettere la reale qualità dei materiali, delle finiture o delle lavorazioni attraverso lo schermo di uno smartphone. D'altra parte, ingaggiare una casa di produzione cinematografica tradizionale per valorizzare il prodotto ha costi di set e luci totalmente insostenibili per un laboratorio indipendente. Il rischio è che un prodotto straordinario venga percepito come comune a causa di foto e video amatoriali.
+
+Chi Siamo: 095 studio
+Per risolvere questo problema nasce 095 studio, la nostra agenzia specializzata in Ingegneria dei Contenuti Visivi e Posizionamento di Status.
+
+Sviluppiamo identità digitali ad alto contrasto e dal look premium. Utilizziamo un protocollo proprietario di Intelligenza Artificiale generativa avanzata capace di esaltare macro-dettagli visivi iper-realistici (gestione millimetrica di luci, textures dei materiali e finiture), posizionando il vostro prodotto come un vero oggetto di lusso ed eliminando i costi vivi dei set tradizionali.
+
+Potete valutare la resa dei materiali nei nostri rendering direttamente da questo link: 👇
+🔗 {DRIVE}
+
+Per attivare una collaborazione questo mese con 095 studio, abbiamo strutturato due opzioni d’ingresso chiare e senza vincoli di lungo termine:
+
+📦 OPZIONE 1: Il Pacchetto Test (Usa e Getta)
+Cosa include: 3 Video Promozionali Premium (durata da 30 secondi a 1 minuto) generati in AI focalizzati sui vostri prodotti di punta.
+Obiettivo: Testare l'impatto visivo di questa tecnologia applicata alla vostra manifattura.
+Investimento: 600€ una tantum.
+
+🚀 OPZIONE 2: Il Pacchetto Crescita Mensile (Tutto Incluso)
+Se volete delegare interamente il marketing a 095 studio per attirare clienti privati e rivenditori disposti a pagare il reale valore del vostro lavoro, vi forniamo un reparto marketing dedicato:
+- Produzione Premium: 4 Video AI cinematografici al mese (1 a settimana, da 30 secondi a 1 minuto) incentrati sul valore del brand.
+- Presentazione Prodotto: 4 Caroselli fotografici avanzati al mese (1 a settimana) per mostrare le vostre creazioni reali sotto una luce impeccabile.
+- Cura Canali Totale: Gestione social completa e Copywriting per testi capaci di raccontare la storia e il valore della vostra lavorazione.
+- Generazione Clienti: Strategie di posizionamento e campagne commerciali studiate su misura.
+- Budget ADS Incluso: 200€ al mese di sponsorizzate Meta/TikTok INCLUSI nel prezzo, interamente gestiti da noi per portarvi contatti mirati ed ordini.
+Investimento: 1.200€ al mese (Non dovete aggiungere un solo euro per le pubblicità).
+
+Questo mese possiamo accogliere solo altre 2 strutture nel vostro settore per garantire la massima cura dei dettagli visivi.
+
+Se l'idea vi incuriosisce, facciamo una breve chiamata di 10 minuti su Zoom per analizzare quale opzione si adatta meglio ai vostri obiettivi attuali. Quale giorno di questa settimana vi tornerebbe più comodo?`,
+
+            d2c: `Ciao {NAME}, analizzando il mercato D2C abbiamo notato la proposta del vostro store.
+
+Parliamoci con estrema chiarezza tra professionisti del digitale: oggi scalare le campagne pubblicitarie (Ads) su Meta e TikTok utilizzando immagini statiche o formati video tradizionali causa esclusivamente un incremento drastico del CPA (Costo di Acquisizione). Produrre continuamente nuovi asset video professionali con attori, agenzie e montatori ha costi mensili fissi che erodono completamente i vostri margini di profitto.
+
+Chi Siamo: 095 studio
+Per risolvere questo blocco di scalabilità nasce 095 studio, la nostra agenzia specializzata in Ingegneria dei Contenuti Visivi e Performance Marketing.
+
+Sviluppiamo video-ads in Intelligenza Artificiale generativa avanzata ad altissimo tasso di ritenzione del pubblico, strutturati specificamente sul principio del Pattern Interrupt visivo nei primi 3 secondi per crollare i costi pubblicitari, aumentare il CTR e aggirare i costi di una produzione video tradizionale.
+
+Potete analizzare la struttura e il ritmo dei nostri video Ads direttamente qui: 👇
+🔗 {DRIVE}
+
+Per avviare un test questo mese con 095 studio, abbiamo strutturato due opzioni senza contratti vincolanti:
+
+📦 OPZIONE 1: Il Pacchetto Test (Usa e Getta)
+Cosa include: 3 Video Ads Creativi (durata da 30 secondi a 1 minuto) in risoluzione 4K ottimizzati per la conversione.
+Obiettivo: Validare l'efficacia dei nostri ganci visivi AI sulle vostre attuali campagne pubblicitarie.
+Investimento: 600€ una tantum.
+
+🚀 OPZIONE 2: Il Pacchetto Crescita Mensile (Tutto Incluso)
+Se volete delegare l'intero flusso di produzione creativa e ottimizzazione delle campagne per scalare il fatturato del vostro e-commerce:
+- Produzione Creativa Costante: 4 Video Ads AI al mese (1 a settimana, da 30 secondi a 1 minuto) sempre focalizzati sui vostri bestseller.
+- Retargeting Visivo: 4 Caroselli fotografici avanzati al mese (1 a settimana) ottimizzati per convertire gli utenti che hanno visitato lo store.
+- Copywriting Scientifico: Scrittura dei testi delle inserzioni e dei post incentrata sugli angoli psicologici d'acquisto.
+- Media Buying Avanzato: Gestione tecnica, analisi e ottimizzazione quotidiana delle vostre campagne pubblicitarie.
+- Budget ADS Incluso: 200€ al mese di budget pubblicitario inclusi nel prezzo per lanciare i primi test di scaling creativi.
+Investimento: 1.200€ al mese (Tutto incluso, nessun costo nascosto).
+
+Avendo una capacità produttiva limitata per l'ingegnerizzazione dei modelli in 4K, questo mese accettiamo solo altri 2 brand di e-commerce.
+
+Facciamo un breve punto tecnico di 10 minuti su Zoom per definire gli script commerciali. Quando avreste uno slot libero questa settimana?`
+        };
+
+        // Complete 200 Profiled Leads Array
+        const leadsData = [
+            // --- TARGET 1: BOUTIQUE (1-50) ---
+            { id: 1, target: "boutique", name: "Cherie Boutique", location: "Macerata (MC)", phone: "0733 165 4028", email: "cherieboutiquemacerata@gmail.com", instagram: "@cherie_boutique_macerata" },
+            { id: 2, target: "boutique", name: "Elle Boutique Tarvisio", location: "Tarvisio (UD)", phone: "0428 2144", email: "info@elleboutiquetarvisio.it", instagram: "@elleboutiquetarvisio" },
+            { id: 3, target: "boutique", name: "Boutique Rita", location: "Milano (MI)", phone: "0229531837", email: "ritaboutique.milano@yahoo.com", instagram: "@rita.boutique.milano" },
+            { id: 4, target: "boutique", name: "Bassini Boutique", location: "Bastia Umbra (PG)", phone: "075 8086985", email: "support@bassiniboutique.it", instagram: "@bassiniboutique" },
+            { id: 5, target: "boutique", name: "M.A.& L.O. Srl (Amalo)", location: "Bari (BA)", phone: "080 9244876", email: "info@amalobari.it", instagram: "@amalo_bari" },
+            { id: 6, target: "boutique", name: "Biffi Boutiques Milano", location: "Milano (MI)", phone: "02 8050 0468", email: "segreteria@camerabuyer.it", instagram: "@biffiboutiques" },
+            { id: 7, target: "boutique", name: "Biffi Boutiques Bergamo", location: "Bergamo (BG)", phone: "035 211244", email: "segreteria@camerabuyer.it", instagram: "@biffiboutiques" },
+            { id: 8, target: "boutique", name: "Banner Milano", location: "Milano (MI)", phone: "02 7600 4688", email: "segreteria@camerabuyer.it", instagram: "@banner_milano" },
+            { id: 9, target: "boutique", name: "Bernardelli Stores", location: "Mantova (MN)", phone: "0376 324311", email: "info@bernardellistores.it", instagram: "@bernardellistores" },
+            { id: 10, target: "boutique", name: "Boutique Tricot", location: "Chianciano Terme (SI)", phone: "0578 30424", email: "info@boutiquetricot.it", instagram: "@boutique_tricot" },
+            { id: 11, target: "boutique", name: "Blondie Boutique", location: "Finale Ligure (SV)", phone: "019 692817", email: "info@blondie.it", instagram: "@blondie_boutique" },
+            { id: 12, target: "boutique", name: "Franz Kraler", location: "Cortina D'Ampezzo (BL)", phone: "0436 862321", email: "info@franzkraler.it", instagram: "@franzkraler" },
+            { id: 13, target: "boutique", name: "Spinnaker", location: "Sanremo (IM)", phone: "0184 532611", email: "info@spinnakermoda.it", instagram: "@spinnakerboutique" },
+            { id: 14, target: "boutique", name: "Al Duca d'Aosta", location: "Venezia (VE)", phone: "041 5224343", email: "info@alducadaosta.com", instagram: "@alducadaosta" },
+            { id: 15, target: "boutique", name: "Tiziana Fausti", location: "Bergamo (BG)", phone: "035 224164", email: "info@tizianafausti.com", instagram: "@tizianafausti" },
+            { id: 16, target: "boutique", name: "Luisa Via Roma", location: "Firenze (FI)", phone: "055 9064111", email: "customerservice@luisaviaroma.com", instagram: "@luisaviaroma" },
+            { id: 17, target: "boutique", name: "Julian Boutique", location: "Milano Marittima (RA)", phone: "0544 994323", email: "info@julian-boutique.com", instagram: "@julianboutique" },
+            { id: 18, target: "boutique", name: "Nugnes 1920", location: "Trani (BT)", phone: "0883 480018", email: "info@nugnes1920.com", instagram: "@nugnes1920" },
+            { id: 19, target: "boutique", name: "Marcos", location: "Mondovì (CN)", phone: "0174 42111", email: "info@marcos.it", instagram: "@marcosboutique" },
+            { id: 20, target: "boutique", name: "Colognese", location: "Montebelluna (TV)", phone: "0423 301321", email: "info@colognese.it", instagram: "@colognese_boutique" },
+            { id: 21, target: "boutique", name: "Atelier Gabriella", location: "Morrovalle (MC)", phone: "0733 564114", email: "info@ateliergabriella.it", instagram: "@atelier_gabriella" },
+            { id: 22, target: "boutique", name: "Palazzo 1991 (Salvo Abate)", location: "Catania (CT)", phone: "349 2543227", email: "salvoabate93@gmail.com", instagram: "@palazzo1991" },
+            { id: 23, target: "boutique", name: "Chitè Milano Boutique", location: "Milano (MI)", phone: "02 8414 8411", email: "info@chitemilano.it", instagram: "@chite.milano" },
+            { id: 24, target: "boutique", name: "Mariaelena Samperi", location: "Catania (CT)", phone: "095 311223", email: "info@mariaelenasamperi.com", instagram: "@mariaelena_samperi" },
+            { id: 25, target: "boutique", name: "Amor y Mezcal", location: "Gaeta (LT)", phone: "0771 463121", email: "info@amorymezcal.com", instagram: "@amorymezcal" },
+            { id: 26, target: "boutique", name: "Lanapo", location: "Portofino (GE)", phone: "0187 812121", email: "info@lanapo.it", instagram: "@lanapo_sandals" },
+            { id: 27, target: "boutique", name: "Blazé Milano", location: "Milano (MI)", phone: "02 3659 5511", email: "info@blaze-milano.com", instagram: "@blaze_milano" },
+            { id: 28, target: "boutique", name: "Durazzi Milano", location: "Milano (MI)", phone: "02 8909 2111", email: "info@durazzimilano.com", instagram: "@durazzimilano" },
+            { id: 29, target: "boutique", name: "Institution", location: "Milano (MI)", phone: "02 3658 2111", email: "info@institution.it", instagram: "@institution_milano" },
+            { id: 30, target: "boutique", name: "Lorenzo Seghezzi", location: "Milano (MI)", phone: "02 8456 1211", email: "info@lorenzoseghezzi.com", instagram: "@lorenzoseghezzi" },
+            { id: 31, target: "boutique", name: "Domenico Orefice", location: "Milano (MI)", phone: "02 4987 6211", email: "info@domenicoorefice.it", instagram: "@domenicoorefice_" },
+            { id: 32, target: "boutique", name: "Bergie by Giorgiandreazza", location: "Milano (MI)", phone: "02 5831 1122", email: "info@bergie.it", instagram: "@bergie_by_giorgiandreazza" },
+            { id: 33, target: "boutique", name: "Gigi Tropea", location: "Catania (CT)", phone: "095 382075", email: "info@gigitropea.com", instagram: "@gigitropea" },
+            { id: 34, target: "boutique", name: "Malatino Concept Store", location: "Messina (ME)", phone: "090 391054", email: "info@malatinogioielliconceptstore.it", instagram: "@malatinoconceptstore" },
+            { id: 35, target: "boutique", name: "Margin Concept", location: "Torino (TO)", phone: "011 5622111", email: "info@marginconcept.it", instagram: "@margin_concept" },
+            { id: 36, target: "boutique", name: "FR Boutique", location: "Bologna (BO)", phone: "051 224111", email: "info@frboutique.it", instagram: "@frboutique_bologna" },
+            { id: 37, target: "boutique", name: "Yes Shop", location: "Napoli (NA)", phone: "081 5543932", email: "info@yesshoponline.it", instagram: "@yesshop_napoli" },
+            { id: 38, target: "boutique", name: "Ariano Boutique", location: "Aversa (CE)", phone: "081 8111689", email: "info@arianoboutique.com", instagram: "@arianoboutique" },
+            { id: 39, target: "boutique", name: "Il Faro Boutique", location: "Avellino (AV)", phone: "0825 21595", email: "info@ilfaroboutique.com", instagram: "@ilfaroboutique" },
+            { id: 40, target: "boutique", name: "Il Punto Clothing", location: "San Giuseppe Vesuviano (NA)", phone: "081 5299024", email: "info@ilpuntoclothing.com", instagram: "@ilpuntoclothing" },
+            { id: 41, target: "boutique", name: "Ilarius", location: "Frattamaggiore (NA)", phone: "380 7991334", email: "info@ilarius.it", instagram: "@ilarius_boutique" },
+            { id: 42, target: "boutique", name: "Gioel Style", location: "Casapulla (CE)", phone: "0823 466443", email: "info@gioelstyle.it", instagram: "@gioelstyle" },
+            { id: 43, target: "boutique", name: "MARI Boutique", location: "Milano (MI)", phone: "02 8050 0468", email: "mari@marimilano.it", instagram: "@mari.boutique" },
+            { id: 44, target: "boutique", name: "Momonì Milano", location: "Milano (MI)", phone: "02 6379 3466", email: "milano@momoni.it", instagram: "@momonistore" },
+            { id: 45, target: "boutique", name: "Momonì Verona", location: "Verona (VR)", phone: "045 2371332", email: "verona@momoni.it", instagram: "@momonistore" },
+            { id: 46, target: "boutique", name: "Momonì Padova", location: "Padova (PD)", phone: "049 7356092", email: "padova@momoni.it", instagram: "@momonistore" },
+            { id: 47, target: "boutique", name: "Momonì Treviso", location: "Treviso (TV)", phone: "0422 1722492", email: "treviso@momoni.it", instagram: "@momonistore" },
+            { id: 48, target: "boutique", name: "Momonì Bologna", location: "Bologna (BO)", phone: "051 6486437", email: "bologna@momoni.it", instagram: "@momonistore" },
+            { id: 49, target: "boutique", name: "Momonì Firenze", location: "Firenze (FI)", phone: "055 218824", email: "firenze@momoni.it", instagram: "@momonistore" },
+            { id: 50, target: "boutique", name: "Momonì Roma Babuino", location: "Roma (RM)", phone: "06 89236254", email: "romababuino@momoni.it", instagram: "@momonistore" },
+
+            // --- TARGET 2: PROFUMERIE (51-100) ---
+            { id: 51, target: "profumeria", name: "Profumeria Artistica Parente", location: "Casal di Principe (CE)", phone: "350 1048813", email: "profumeriaartisticaparente@gmail.com", instagram: "@profumeriaartisticaparente" },
+            { id: 52, target: "profumeria", name: "Studio Olfattivo", location: "Santa Maria Capua Vetere (CE)", phone: "0823 589022", email: "info@studiolfattivo.it", instagram: "@studiolfattivo" },
+            { id: 53, target: "profumeria", name: "Arti e Profumi", location: "Polignano a Mare (BA)", phone: "333 4455667", email: "artieprofumi@gmail.com", instagram: "@artieprofumi" },
+            { id: 54, target: "profumeria", name: "Fragrans in Fabula", location: "Milano (MI)", phone: "02 8050 9449", email: "fragransinfabula@cale.it", instagram: "@fragransinfabula" },
+            { id: 55, target: "profumeria", name: "Boutique Pesade", location: "Milano (MI)", phone: "02 3670 5120", email: "pesade-milano@cale.it", instagram: "@pesade_boutique" },
+            { id: 56, target: "profumeria", name: "Boutique Creed Milano", location: "Milano (MI)", phone: "02 3658 2430", email: "creedboutiquemilano@cale.it", instagram: "@creedboutique" },
+            { id: 57, target: "profumeria", name: "Boutique Creed Roma", location: "Roma (RM)", phone: "06 4559 7100", email: "creedboutiqueroma@cale.it", instagram: "@creedboutique" },
+            { id: 58, target: "profumeria", name: "Boutique Creed Venezia", location: "Venezia (VE)", phone: "041 0986417", email: "info@cale.it", instagram: "@creedboutique" },
+            { id: 59, target: "profumeria", name: "50 ML", location: "Milano (MI)", phone: "02 3653 2421", email: "info@50-ml.com", instagram: "@50ml_milano" },
+            { id: 60, target: "profumeria", name: "HB Profumerie", location: "Roma (RM)", phone: "06 6789123", email: "info@hbprofumerie.it", instagram: "@hbprofumerie" },
+            { id: 61, target: "profumeria", name: "Campomarzio70 (Via Vittoria)", location: "Roma (RM)", phone: "06 6979 7739", email: "info@campomarzio70.it", instagram: "@campomarzio70" },
+            { id: 62, target: "profumeria", name: "Profumeria Diptyque Roma", location: "Roma (RM)", phone: "06 6994 1351", email: "info@diptyque.it", instagram: "@diptyqueparis" },
+            { id: 63, target: "profumeria", name: "Olfattorio Bar à Parfums", location: "Roma (RM)", phone: "06 6979 7751", email: "info@olfattorio.it", instagram: "@olfattorio_baraparfums" },
+            { id: 64, target: "profumeria", name: "Profumeria Cherry", location: "Roma (RM)", phone: "06 482 4668", email: "info@cherryprofumi.it", instagram: "@cherry_roma" },
+            { id: 65, target: "profumeria", name: "Jolie Profumerie", location: "Napoli (NA)", phone: "081 552 9595", email: "info@jolieprofumerie.com", instagram: "@jolieprofumerie" },
+            { id: 66, target: "profumeria", name: "Profumo Emozioni Olfattive", location: "Napoli (NA)", phone: "081 764 3443", email: "info@profumoemozioniolfattive.it", instagram: "@profumoemozioniolfattive" },
+            { id: 67, target: "profumeria", name: "Beauty Concept Capri", location: "Capri (NA)", phone: "340 2276214", email: "capri@beautyconceptclub.com", instagram: "@beautyconceptclub" },
+            { id: 68, target: "profumeria", name: "Essence Ischia", location: "Ischia (NA)", phone: "081 991823", email: "info@essenceischia.it", instagram: "@essence_ischia" },
+            { id: 69, target: "profumeria", name: "Neos 1911", location: "Caserta (CE)", phone: "0823 325238", email: "info@neos1911.it", instagram: "@neos1911" },
+            { id: 70, target: "profumeria", name: "Kaon Boutique", location: "Palestrina (RM)", phone: "06 95469599", email: "info@kaon.it", instagram: "@kaon_distribution" },
+            { id: 71, target: "profumeria", name: "Aquaflor", location: "Firenze (FI)", phone: "055 19931913", email: "info@aquaflor.it", instagram: "@aquaflor_firenze" },
+            { id: 72, target: "profumeria", name: "Profumeria Testaccio", location: "Roma (RM)", phone: "06 574 6563", email: "info@profumeriatestaccio.it", instagram: "@profumeriatestaccio" },
+            { id: 73, target: "profumeria", name: "Campomarzio70 Pantheon", location: "Roma (RM)", phone: "06 6920 0303", email: "info@campomarzio70.it", instagram: "@campomarzio70" },
+            { id: 74, target: "profumeria", name: "Campomarzio70 Campo Marzio", location: "Roma (RM)", phone: "06 6992 2111", email: "info@campomarzio70.it", instagram: "@campomarzio70" },
+            { id: 75, target: "profumeria", name: "Profumeria Gini", location: "Roma (RM)", phone: "06 7049 5393", email: "info@profumeriagini.it", instagram: "@profumeriagini" },
+            { id: 76, target: "profumeria", name: "Ruberto 32", location: "Roma (RM)", phone: "06 854 3211", email: "info@ruberto32.it", instagram: "@ruberto32" },
+            { id: 77, target: "profumeria", name: "L'Ò Firenze", location: "Firenze (FI)", phone: "055 211223", email: "info@lofirenze.it", instagram: "@lo_firenze" },
+            { id: 78, target: "profumeria", name: "Amaranthus", location: "Siena (SI)", phone: "0577 223344", email: "info@amaranthus.it", instagram: "@amaranthus_siena" },
+            { id: 79, target: "profumeria", name: "La Bottega dei Profumi", location: "Forte dei Marmi (LU)", phone: "0584 881234", email: "info@labottegadeiprofumi.it", instagram: "@labottegadeiprofumi" },
+            { id: 80, target: "profumeria", name: "Antica Profumeria Sacro Cuore", location: "Bologna (BO)", phone: "051 223355", email: "info@sacrocuoreprofumi.it", instagram: "@sacrocuoreprofumi" },
+            { id: 81, target: "profumeria", name: "Parfumkafè", location: "Milano Marittima (RA)", phone: "0544 971122", email: "info@parfumkafe.it", instagram: "@parfumkafe" },
+            { id: 82, target: "profumeria", name: "Campomarzio70 Ravenna", location: "Ravenna (RA)", phone: "0544 211133", email: "info@campomarzio70.it", instagram: "@campomarzio70" },
+            { id: 83, target: "profumeria", name: "Biba", location: "Parma (PR)", phone: "0521 221144", email: "info@bibaprofumeria.it", instagram: "@bibaparfum" },
+            { id: 84, target: "profumeria", name: "La Maison de Parfum", location: "Cattolica (RN)", phone: "0541 961122", email: "info@lamaisondeparfum.it", instagram: "@lamaisondeparfum" },
+            { id: 85, target: "profumeria", name: "Backstage", location: "Riccione (RN)", phone: "0541 601133", email: "info@backstageprofumeria.it", instagram: "@backstage_riccione" },
+            { id: 86, target: "profumeria", name: "Nanà Scents Gallery", location: "Riccione (RN)", phone: "0541 691144", email: "info@nanascents.it", instagram: "@nanascentsgallery" },
+            { id: 87, target: "profumeria", name: "Beauty Concept Monza", location: "Monza (MB)", phone: "039 334455", email: "info@beautyconceptclub.com", instagram: "@beautyconceptclub" },
+            { id: 88, target: "profumeria", name: "Mariabruna Beauty", location: "Brescia (BS)", phone: "030 375 1122", email: "info@mariabrunabeauty.it", instagram: "@mariabrunabeauty" },
+            { id: 89, target: "profumeria", name: "L'Essenza", location: "Varese (VA)", phone: "0332 281144", email: "info@lessenzavarese.it", instagram: "@lessenza_varese" },
+            { id: 90, target: "profumeria", name: "Ylang Ylang", location: "Milano (MI)", phone: "02 8645 2233", email: "info@ylangylangmilano.it", instagram: "@ylangylang_milano" },
+            { id: 91, target: "profumeria", name: "Profumeria Panteo", location: "Desenzano del Garda (BS)", phone: "030 914 1122", email: "info@profumeriapanteo.it", instagram: "@profumeriapanteo" },
+            { id: 92, target: "profumeria", name: "Beauty Concept Desenzano", location: "Desenzano del Garda (BS)", phone: "030 914 2233", email: "info@beautyconceptclub.com", instagram: "@beautyconceptclub" },
+            { id: 93, target: "profumeria", name: "BeParfum Scent Lounge", location: "Bergamo (BG)", phone: "035 221133", email: "info@beparfum.it", instagram: "@beparfum" },
+            { id: 94, target: "profumeria", name: "Mazzolari Milano", location: "Milano (MI)", phone: "02 7600 5454", email: "info@mazzolari.it", instagram: "@mazzolari_milano" },
+            { id: 95, target: "profumeria", name: "Campomarzio70 Brera", location: "Milano (MI)", phone: "02 7200 4433", email: "info@campomarzio70.it", instagram: "@campomarzio70" },
+            { id: 96, target: "profumeria", name: "Defendi Profumeria Artistica", location: "Leno (BS)", phone: "030 906234", email: "info@defendiprofumeria.it", instagram: "@defendi_profumeria" },
+            { id: 97, target: "profumeria", name: "La Profumeria by Etualy", location: "Bergamo (BG)", phone: "035 225566", email: "info@etualy.com", instagram: "@etualy_bergamo" },
+            { id: 98, target: "profumeria", name: "Bon Sens", location: "Seregno (MB)", phone: "0362 231144", email: "info@bonsensprofumeria.it", instagram: "@bonsens_seregno" },
+            { id: 99, target: "profumeria", name: "Profumeria Oggioni", location: "Milano (MI)", phone: "02 20 49 429", email: "info@profumeriaoggioni.it", instagram: "@profumeria_oggioni" },
+            { id: 100, target: "profumeria", name: "Agata Profumerie", location: "Reggio Calabria (RC)", phone: "392 1191526", email: "info@agataprofumerie.it", instagram: "@agataprofumerie" },
+
+            // --- TARGET 3: ARTIGIANATO (101-150) ---
+            { id: 101, target: "artigianato", name: "Antica Ceramica Avallone", location: "Vietri sul Mare (SA)", phone: "320 7578321", email: "info@ceramicavietri.it", instagram: "@anticaceramicaavallone" },
+            { id: 102, target: "artigianato", name: "Ceramica Armenante", location: "Vietri sul Mare (SA)", phone: "328 1177119", email: "info@ceramicaarmenante.it", instagram: "@ceramicaarmenante" },
+            { id: 103, target: "artigianato", name: "Ceramica Artemika Vietri", location: "Vietri sul Mare (SA)", phone: "340 4287478", email: "info@artemikavietri.it", instagram: "@ceramica_artemika_vietri" },
+            { id: 104, target: "artigianato", name: "Ceramica Falcone Salvatore", location: "Vietri sul Mare (SA)", phone: "328 6566830", email: "info@ceramichefalcone.it", instagram: "@ceramicafalconesalvatore" },
+            { id: 105, target: "artigianato", name: "Ceramica Carlo Pisacane", location: "Vietri sul Mare (SA)", phone: "338 9461043", email: "info@carlopisacane.it", instagram: "@ceramicapisacane" },
+            { id: 106, target: "artigianato", name: "Ceramica Cassetta", location: "Vietri sul Mare (SA)", phone: "320 1738947", email: "info@ceramicacassetta.it", instagram: "@ceramicacassetta" },
+            { id: 107, target: "artigianato", name: "Ceramica D'Acunto Antonio", location: "Vietri sul Mare (SA)", phone: "389 6856615", email: "info@ceramicadacunto.it", instagram: "@ceramicadacuntoantonio" },
+            { id: 108, target: "artigianato", name: "Ceramica D'Acunto Mario", location: "Vietri sul Mare (SA)", phone: "380 5324513", email: "info@mariodacunto.it", instagram: "@ceramicadacuntomario" },
+            { id: 109, target: "artigianato", name: "Ceramica D'Amico", location: "Vietri sul Mare (SA)", phone: "328 9044979", email: "info@ceramicadamico.it", instagram: "@ceramicadamico" },
+            { id: 110, target: "artigianato", name: "Ceramica De Falco", location: "Vietri sul Mare (SA)", phone: "393 5107645", email: "info@ceramicadefalco.it", instagram: "@ceramicadefalco" },
+            { id: 111, target: "artigianato", name: "Ceramica De Santo Luisa", location: "Vietri sul Mare (SA)", phone: "347 9216883", email: "info@desantoceramiche.it", instagram: "@ceramicadesantoluisa" },
+            { id: 112, target: "artigianato", name: "Ceramica Decori e Sapori", location: "Vietri sul Mare (SA)", phone: "349 7245146", email: "info@decoriesapori.it", instagram: "@decoriesaporivietri" },
+            { id: 113, target: "artigianato", name: "Ceramica D'Urso Costa d'Amalfi", location: "Vietri sul Mare (SA)", phone: "333 9597915", email: "info@ceramicadurso.it", instagram: "@ceramicadursocostadamalfi" },
+            { id: 114, target: "artigianato", name: "Ceramica Falcone Antonio", location: "Vietri sul Mare (SA)", phone: "340 8800533", email: "info@ceramicafalconeantonio.it", instagram: "@ceramicafalconeantonio" },
+            { id: 115, target: "artigianato", name: "Ceramica Francesco Aceto", location: "Vietri sul Mare (SA)", phone: "393 0591494", email: "info@francescoaceto.it", instagram: "@ceramicafrancescoaceto" },
+            { id: 116, target: "artigianato", name: "Ceramica Il Vasaio Vietrese", location: "Vietri sul Mare (SA)", phone: "340 3807483", email: "info@ilvasaiovietrese.it", instagram: "@ilvasaiovietrese" },
+            { id: 117, target: "artigianato", name: "Ceramica Iovine", location: "Vietri sul Mare (SA)", phone: "338 9573011", email: "info@ceramicheiovine.it", instagram: "@ceramica_iovine" },
+            { id: 118, target: "artigianato", name: "Ceramica Klaus", location: "Vietri sul Mare (SA)", phone: "320 3085525", email: "info@ceramicaklaus.it", instagram: "@ceramicaklaus" },
+            { id: 119, target: "artigianato", name: "Ceramica La Bottega dei Ricordi", location: "Vietri sul Mare (SA)", phone: "339 4489546", email: "info@labottegadeiricordi.it", instagram: "@labottegadeiricordivietri" },
+            { id: 120, target: "artigianato", name: "Ceramica La Fenice Scarl", location: "Vietri sul Mare (SA)", phone: "320 6765655", email: "info@lafeniceceramiche.it", instagram: "@lafeniceceramiche" },
+            { id: 121, target: "artigianato", name: "Arte Orafa Traversi", location: "Cave (RM)", phone: "06 9507658", email: "info@arteorafatraversi.it", instagram: "@arteorafatraversi" },
+            { id: 122, target: "artigianato", name: "Gioielleria Taccetti", location: "Signa (FI)", phone: "055 8720231", email: "taccetti.gioielleria@gmail.com", instagram: "@gioielleriataccetti" },
+            { id: 123, target: "artigianato", name: "Tallone Orafi", location: "Torino (TO)", phone: "379 2863025", email: "ordini@talloneorafi.it", instagram: "@tallone_orafi" },
+            { id: 124, target: "artigianato", name: "LBL Artigiani Orafi", location: "Valenza (AL)", phone: "0131 941200", email: "info@lblgioielli.it", instagram: "@lblgioielli" },
+            { id: 125, target: "artigianato", name: "Gioielleria Romagnoli", location: "Roma (RM)", phone: "06 86 00 619", email: "info@gioielleriaromagnoli.it", instagram: "@gioielleriaromagnoli" },
+            { id: 126, target: "artigianato", name: "Furò e Punteruolo", location: "Firenze (FI)", phone: "055 013 0427", email: "info@furoepunteruolo.com", instagram: "@furoepunteruolo" },
+            { id: 127, target: "artigianato", name: "Pell New Line", location: "Carmignano (PO)", phone: "055 8710166", email: "info@pellnewline.it", instagram: "@pellnewline" },
+            { id: 128, target: "artigianato", name: "Castelli Bags", location: "Firenze (FI)", phone: "055 223344", email: "info@castellibags.com", instagram: "@castellibags" },
+            { id: 129, target: "artigianato", name: "Peroni Firenze", location: "Firenze (FI)", phone: "055 234567", email: "info@peronifirenze.it", instagram: "@peronifirenze" },
+            { id: 130, target: "artigianato", name: "Les Creations Luca Marsiliani", location: "Roma (RM)", phone: "06 95061274", email: "info@lescreations.it", instagram: "@lescreationsgioielli" },
+            { id: 131, target: "artigianato", name: "Microfficina Laboratorio Orafo", location: "Firenze (FI)", phone: "055 499113", email: "info@microfficina.it", instagram: "@microfficina" },
+            { id: 132, target: "artigianato", name: "Laboratorio Orafo Pariano", location: "Crotone (KR)", phone: "0962 44338", email: "info@laboratorioorafopariano.it", instagram: "@laboratorioorafopariano" },
+            { id: 133, target: "artigianato", name: "Laboratorio Orafo Porro", location: "Milano (MI)", phone: "02 86460646", email: "info@gioielleriaporromilano.it", instagram: "@porromilano" },
+            { id: 134, target: "artigianato", name: "Cama Ceramiche Artistiche", location: "Pescopennataro (IS)", phone: "340 1914185", email: "camalaceramicheartistiche@gmail.com", instagram: "@camalaceramiche" },
+            { id: 135, target: "artigianato", name: "Meda Orafi", location: "Milano (MI)", phone: "02 86450125", email: "info@medaorafi.it", instagram: "@medaorafi" },
+            { id: 136, target: "artigianato", name: "Ansuini", location: "Roma (RM)", phone: "06 68806909", email: "info@ansuini.it", instagram: "@ansuini1860" },
+            { id: 137, target: "artigianato", name: "Damiano Damiani Gioielli", location: "Roma (RM)", phone: "06 8713 8412", email: "info@damianodamianigioielli.it", instagram: "@damianodamianigioielli" },
+            { id: 138, target: "artigianato", name: "Consorzio Antico Borgo Orefici", location: "Napoli (NA)", phone: "081 260500", email: "info@borgorefici.it", instagram: "@borgo_orefici" },
+            { id: 139, target: "artigianato", name: "MC Leather", location: "Venezia (VE)", phone: "331 5619107", email: "marcomammozzo99@gmail.com", instagram: "@mcleather_venezia" },
+            { id: 140, target: "artigianato", name: "Pelle Nuda Milano", location: "Milano (MI)", phone: "02 09957319", email: "pellenuda.milano@gmail.com", instagram: "@pellenuda_milano" },
+            { id: 141, target: "artigianato", name: "F.lli Sanvito SRL", location: "Milano (MI)", phone: "02 58314951", email: "info@sanvitomilano.it", instagram: "@sanvitomilano" },
+            { id: 142, target: "artigianato", name: "Il Grifone Venezia", location: "Venezia (VE)", phone: "041 522 9452", email: "info@ilgrifonevenezia.it", instagram: "@ilgrifonevenezia" },
+            { id: 143, target: "artigianato", name: "Siam 1838", location: "Milano (MI)", phone: "02 86450125", email: "formazione@siam1838.it", instagram: "@siam1838" },
+            { id: 144, target: "artigianato", name: "Ceramica La Tornietta", location: "Vietri sul Mare (SA)", phone: "338 3198579", email: "info@latornietta.it", instagram: "@ceramicalatornietta" },
+            { id: 145, target: "artigianato", name: "Ceramica Landi Giuseppe", location: "Vietri sul Mare (SA)", phone: "393 9396743", email: "info@landigiuseppe.it", instagram: "@ceramicalandigiuseppe" },
+            { id: 146, target: "artigianato", name: "Ceramica L'Archetto", location: "Vietri sul Mare (SA)", phone: "347 5392490", email: "info@ceramicamargherita.it", instagram: "@ceramicalarchetto" },
+            { id: 147, target: "artigianato", name: "Ceramica Pasquale & D. Liguori", location: "Vietri sul Mare (SA)", phone: "338 1389231", email: "info@pasqualeliguori.it", instagram: "@ceramicapasqualeeliguori" },
+            { id: 148, target: "artigianato", name: "Ceramica Margherita", location: "Vietri sul Mare (SA)", phone: "335 1443043", email: "info@ceramicamargherita.it", instagram: "@ceramicamargherita" },
+            { id: 149, target: "artigianato", name: "Ceramica Massimino", location: "Vietri sul Mare (SA)", phone: "389 1822383", email: "info@ceramicamassimino.it", instagram: "@ceramicamassimino" },
+            { id: 150, target: "artigianato", name: "Ceramica Mediterraneanart", location: "Vietri sul Mare (SA)", phone: "340 3393868", email: "info@mediterraneanart.it", instagram: "@ceramicamediterraneanart" },
+
+            // --- TARGET 4: D2C (151-200) ---
+            { id: 151, target: "d2c", name: "Chiarli 1860", location: "Modena (MO)", phone: "059 316 3311", email: "info@chiarli.it", instagram: "@chiarli1860" },
+            { id: 152, target: "d2c", name: "Cantina Masseria Torricella", location: "Alberobello (BA)", phone: "080 432 4001", email: "info@masseriatorricella.it", instagram: "@cantinamasseriatorricella" },
+            { id: 153, target: "d2c", name: "Cantine Lenotti", location: "Bardolino (VR)", phone: "045 721 0484", email: "info@lenotti.com", instagram: "@cantinelenotti" },
+            { id: 154, target: "d2c", name: "Gambino Winery", location: "Linguaglossa (CT)", phone: "095 227 4111", email: "info@gambinowinery.com", instagram: "@gambinowinery" },
+            { id: 155, target: "d2c", name: "Cantina La Scolca", location: "Gavi (AL)", phone: "0143 682176", email: "info@lascolca.it", instagram: "@lascolca" },
+            { id: 156, target: "d2c", name: "Direct From Italy", location: "Milano (MI)", phone: "02 8833 4111", email: "info@directfromitaly.it", instagram: "@directfromitaly" },
+            { id: 157, target: "d2c", name: "Collistar Milano", location: "Milano (MI)", phone: "02 5432 1111", email: "customerservice@collistar.it", instagram: "@collistar" },
+            { id: 158, target: "d2c", name: "Deborah Milano", location: "Milano (MI)", phone: "02 5432 2222", email: "info@deborahgroup.it", instagram: "@deborahmilano" },
+            { id: 159, target: "d2c", name: "Debby Cosmetics", location: "Milano (MI)", phone: "02 5432 2222", email: "info@deborahgroup.it", instagram: "@debbythechameleon" },
+            { id: 160, target: "d2c", name: "Bioetyc", location: "Milano (MI)", phone: "02 5432 2222", email: "info@deborahgroup.it", instagram: "@dermolab_official" },
+            { id: 161, target: "d2c", name: "Dermolab", location: "Milano (MI)", phone: "02 5432 2222", email: "info@deborahgroup.it", instagram: "@dermolab_official" },
+            { id: 162, target: "d2c", name: "Dyadema SRL", location: "S. Zenone degli Ezzelini (TV)", phone: "0423 969754", email: "info@dyadema.it", instagram: "@dyadema_official" },
+            { id: 163, target: "d2c", name: "Neulabs", location: "Milano (MI)", phone: "02 8822 3111", email: "info@neulabs.com", instagram: "@neulabs_brand" },
+            { id: 164, target: "d2c", name: "Parmalat", location: "Collecchio (PR)", phone: "0521 8081", email: "info@parmalat.it", instagram: "@parmalat" },
+            { id: 165, target: "d2c", name: "Probios", location: "Campi Bisenzio (FI)", phone: "055 886931", email: "info@probios.it", instagram: "@probios" },
+            { id: 166, target: "d2c", name: "Emma The Sleeping Company", location: "Milano (MI)", phone: "02 8295 2111", email: "info@emma-materasso.it", instagram: "@emmamaterasso" },
+            { id: 167, target: "d2c", name: "Granarolo", location: "Bologna (BO)", phone: "051 4162111", email: "info@granarolo.it", instagram: "@granarolo" },
+            { id: 168, target: "d2c", name: "Inalpi", location: "Moretta (CN)", phone: "0172 915111", email: "info@inalpi.it", instagram: "@inalpi_it" },
+            { id: 169, target: "d2c", name: "Riso Scotti", location: "Pavia (PV)", phone: "0382 5081", email: "info@risoscotti.it", instagram: "@risoscottiofficial" },
+            { id: 170, target: "d2c", name: "Giovanni Rana", location: "S. Giovanni Lupatoto (VR)", phone: "045 8292111", email: "info@giovannirana.it", instagram: "@giovannirana" },
+            { id: 171, target: "d2c", name: "Chitè Lingerie", location: "Milano (MI)", phone: "02 8414 8411", email: "info@chitemilano.it", instagram: "@chite.milano" },
+            { id: 172, target: "d2c", name: "Amor y Mezcal D2C", location: "Milano (MI)", phone: "0771 463121", email: "info@amorymezcal.com", instagram: "@amorymezcal" },
+            { id: 173, target: "d2c", name: "Lanapo Sandali", location: "Portofino (GE)", phone: "0187 812121", email: "info@lanapo.it", instagram: "@lanapo_sandals" },
+            { id: 174, target: "d2c", name: "Mariaelena Samperi D2C", location: "Catania (CT)", phone: "095 311223", email: "info@mariaelenasamperi.com", instagram: "@mariaelena_samperi" },
+            { id: 175, target: "d2c", name: "Blazé Milano D2C", location: "Milano (MI)", phone: "02 3659 5511", email: "info@blaze-milano.com", instagram: "@blaze_milano" },
+            { id: 176, target: "d2c", name: "Durazzi Milano D2C", location: "Milano (MI)", phone: "02 8909 2111", email: "info@durazzimilano.com", instagram: "@durazzimilano" },
+            { id: 177, target: "d2c", name: "Institution D2C", location: "Milano (MI)", phone: "02 3658 2111", email: "info@institution.it", instagram: "@institution_milano" },
+            { id: 178, target: "d2c", name: "Lorenzo Seghezzi D2C", location: "Milano (MI)", phone: "02 8456 1211", email: "info@lorenzoseghezzi.com", instagram: "@lorenzoseghezzi" },
+            { id: 179, target: "d2c", name: "Domenico Orefice D2C", location: "Milano (MI)", phone: "02 4987 6211", email: "info@domenicoorefice.it", instagram: "@domenicoorefice_" },
+            { id: 180, target: "d2c", name: "Bergie D2C", location: "Milano (MI)", phone: "02 5831 1122", email: "info@bergie.it", instagram: "@bergie_by_giorgiandreazza" },
+            { id: 181, target: "d2c", name: "Gran Sasso", location: "S. Egidio alla Vibrata (TE)", phone: "0861 8461", email: "info@gransasso.it", instagram: "@gransasso_official" },
+            { id: 182, target: "d2c", name: "Corneliani", location: "Mantova (MN)", phone: "0376 3041", email: "info@corneliani.it", instagram: "@corneliani_official" },
+            { id: 183, target: "d2c", name: "Wesker", location: "Napoli (NA)", phone: "081 3048553", email: "info@profumidinicchia.com", instagram: "@wesker_perfumes" },
+            { id: 184, target: "d2c", name: "Daniel Josier", location: "Napoli (NA)", phone: "081 3048553", email: "info@profumidinicchia.com", instagram: "@danieljosier" },
+            { id: 185, target: "d2c", name: "Bravanariz", location: "Napoli (NA)", phone: "081 3048553", email: "info@profumidinicchia.com", instagram: "@bravanariz" },
+            { id: 186, target: "d2c", name: "Vintia", location: "Napoli (NA)", phone: "081 3048553", email: "info@profumidinicchia.com", instagram: "@vintia_fragrance" },
+            { id: 187, target: "d2c", name: "History in Drops", location: "Napoli (NA)", phone: "081 3048553", email: "info@profumidinicchia.com", instagram: "@historyindrops" },
+            { id: 188, target: "d2c", name: "Giardini di Toscana", location: "Firenzuola (FI)", phone: "055 819123", email: "info@giardiniditoscana.com", instagram: "@giardiniditoscana" },
+            { id: 189, target: "d2c", name: "Salum", location: "Napoli (NA)", phone: "081 3048553", email: "info@profumidinicchia.com", instagram: "@salum_parfums" },
+            { id: 190, target: "d2c", name: "In Astra", location: "Milano (MI)", phone: "02 8833 2211", email: "info@inastra.com", instagram: "@inastra_parfums" },
+            { id: 191, target: "d2c", name: "Royal Crown", location: "Roma (RM)", phone: "06 4433 1122", email: "info@royalcrown.it", instagram: "@royalcrownparfums" },
+            { id: 192, target: "d2c", name: "Step Aboard", location: "Milano (MI)", phone: "02 8822 4433", email: "info@stepaboard.it", instagram: "@stepaboard" },
+            { id: 193, target: "d2c", name: "Maison Tahité", location: "Palestrina (RM)", phone: "06 95469599", email: "info@kaon.it", instagram: "@maisontahite" },
+            { id: 194, target: "d2c", name: "Laboratorio Olfattivo", location: "Palestrina (RM)", phone: "06 95469599", email: "info@kaon.it", instagram: "@laboratorioolfattivo" },
+            { id: 195, target: "d2c", name: "Anthologie by L. Ferrero", location: "Palestrina (RM)", phone: "06 95469599", email: "info@kaon.it", instagram: "@lucienferreroparfums" },
+            { id: 196, target: "d2c", name: "Puro Talco", location: "Roma (RM)", phone: "06 884 4111", email: "officinadelleessenze.com", instagram: "@officinadelleessenze" },
+            { id: 197, target: "d2c", name: "Caldo Gourmand", location: "Roma (RM)", phone: "06 884 4111", email: "officinadelleessenze.com", instagram: "@officinadelleessenze" },
+            { id: 198, target: "d2c", name: "Puro Lino", location: "Roma (RM)", phone: "06 884 4111", email: "officinadelleessenze.com", instagram: "@officinadelleessenze" },
+            { id: 199, target: "d2c", name: "Puro Fico", location: "Roma (RM)", phone: "06 884 4111", email: "officinadelleessenze.com", instagram: "@officinadelleessenze" },
+            { id: 200, target: "d2c", name: "Puro Neroli", location: "Roma (RM)", phone: "06 884 4111", email: "officinadelleessenze.com", instagram: "" }
+        ];
+
+        // Active State Variables
+        let currentFilterCategory = "all";
+        let activeModalLead = null;
+
+        // Render targets HTML labels
+        function getTargetBadgeHTML(target) {
+            switch(target) {
+                case 'boutique': return `<span class="target-badge b-boutique"><span class="material-symbols-outlined" style="font-size:0.85rem">styler</span>Boutique</span>`;
+                case 'profumeria': return `<span class="target-badge b-profumeria"><span class="material-symbols-outlined" style="font-size:0.85rem">experiment</span>Profumeria</span>`;
+                case 'artigianato': return `<span class="target-badge b-artigianato"><span class="material-symbols-outlined" style="font-size:0.85rem">construction</span>Artigianato</span>`;
+                case 'd2c': return `<span class="target-badge b-d2c"><span class="material-symbols-outlined" style="font-size:0.85rem">shopping_bag</span>D2C</span>`;
+                default: return '';
+            }
+        }
+
+        // Render single table row
+        function buildTableRowHTML(lead, index) {
+            const cleanIG = lead.instagram ? lead.instagram.replace('@', '') : '';
+            const instagramLink = cleanIG 
+                ? `<a class="social-link" href="https://instagram.com/${cleanIG}" target="_blank">
+                     <span class="material-symbols-outlined" style="font-size:1rem; color: #d946ef;">link</span>${lead.instagram}
+                   </a>`
+                : `<span style="color:var(--text-muted); font-size:0.8rem;">(Nessuno)</span>`;
+
+            const phoneLink = lead.phone 
+                ? `<a class="social-link" href="tel:${lead.phone.replace(/\s+/g, '')}">
+                     <span class="material-symbols-outlined" style="font-size:1rem; color:var(--primary);">phone</span>${lead.phone}
+                   </a>`
+                : '';
+
+            const emailLink = lead.email 
+                ? `<span class="copyable-cell" onclick="copyTextToClipboard('${lead.email}', 'Email copiata!')">
+                     <span class="material-symbols-outlined" style="font-size:1rem; vertical-align:middle; color:var(--success); margin-right:4px;">mail</span>${lead.email}
+                   </span>`
+                : '';
+
+            return `
+                <tr>
+                    <td style="font-family:var(--font-mono); color:var(--text-muted); font-weight:600;">${index}</td>
+                    <td>${getTargetBadgeHTML(lead.target)}</td>
+                    <td style="font-weight:700; color:#fff;">${lead.name}</td>
+                    <td style="color:var(--text-secondary); font-size:0.85rem;">${lead.location}</td>
+                    <td>${phoneLink}</td>
+                    <td style="font-family:var(--font-mono); font-size:0.85rem;">${emailLink}</td>
+                    <td>${instagramLink}</td>
+                    <td style="text-align: center;">
+                        <div class="btn-action-group">
+                            <button class="btn-action script" onclick="openContactModal(${lead.id})">
+                                <span class="material-symbols-outlined" style="font-size:1rem;">send</span>
+                                Contatta
+                            </button>
+                            <button class="btn-action" title="Copia Dati Anagrafici" onclick="copyLeadDetails(${lead.id})">
+                                <span class="material-symbols-outlined" style="font-size:1.15rem;">content_copy</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }
+
+        // Search & Filter Handler
+        function handleSearchAndFilter() {
+            const query = document.getElementById('table-search-input').value.toLowerCase().trim();
+            const tbody = document.getElementById('leads-tbody');
+            tbody.innerHTML = '';
+
+            let filteredList = leadsData;
+
+            // 1. Filter by category tab
+            if (currentFilterCategory !== 'all') {
+                filteredList = filteredList.filter(l => l.target === currentFilterCategory);
+            }
+
+            // 2. Filter by search query
+            if (query) {
+                filteredList = filteredList.filter(l => 
+                    l.name.toLowerCase().includes(query) ||
+                    l.location.toLowerCase().includes(query) ||
+                    l.email.toLowerCase().includes(query) ||
+                    l.instagram.toLowerCase().includes(query)
+                );
+            }
+
+            // Update stats total value
+            document.getElementById('stat-total-val').innerText = filteredList.length;
+
+            if (filteredList.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="8" style="text-align:center; padding: 3rem; color:var(--text-secondary); font-size: 1.1rem;">
+                            Nessun lead corrisponde alla ricerca. Riprova con chiavi differenti.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            // Render filtered items
+            filteredList.forEach((lead, idx) => {
+                tbody.innerHTML += buildTableRowHTML(lead, idx + 1);
+            });
+        }
+
+        // Set Filter Category via Tab Buttons
+        function setFilterCategory(category) {
+            currentFilterCategory = category;
+            
+            // Toggle Active Classes on Filter buttons
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                if (btn.getAttribute('onclick').includes(`'${category}'`)) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            handleSearchAndFilter();
+        }
+
+        // Copy a plain string to clipboard with beautiful Toast feedback
+        function copyTextToClipboard(text, message = "Copiato negli appunti!") {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(message);
+            }).catch(err => {
+                console.error("Errore durante la copia", err);
+            });
+        }
+
+        // Copy all details of a single lead
+        function copyLeadDetails(leadId) {
+            const lead = leadsData.find(l => l.id === leadId);
+            if (!lead) return;
+
+            const text = `NOME: ${lead.name}\nSETTORE: ${lead.target.toUpperCase()}\nLUOGO: ${lead.location}\nTELEFONO: ${lead.phone}\nEMAIL: ${lead.email}\nINSTAGRAM: ${lead.instagram}`;
+            copyTextToClipboard(text, "Dati lead copiati!");
+        }
+
+        // Floating Toast Notification trigger
+        function showToast(message) {
+            const toast = document.getElementById('toast-notify');
+            document.getElementById('toast-text').innerText = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        // MODAL LOGIC: Prepare & Customize script (WOW feature)
+        function openContactModal(leadId) {
+            const lead = leadsData.find(l => l.id === leadId);
+            if (!lead) return;
+
+            activeModalLead = lead;
+
+            // Populate Modal Customizer Defaults
+            document.getElementById('modal-lead-title').innerHTML = `
+                <span class="material-symbols-outlined" style="color: var(--primary); font-size:1.8rem;">contact_mail</span>
+                Outreach per ${lead.name}
+            `;
+            document.getElementById('modal-cust-name').value = lead.name;
+            
+            // Set sector-specific defaults for the Drive folders
+            let driveDefault = "https://drive.google.com/drive/folders/...";
+            if (lead.target === 'boutique') driveDefault = "[INSERISCI LINK DRIVE DEMO FASHION]";
+            if (lead.target === 'profumeria') driveDefault = "[INSERISCI LINK DRIVE DEMO PROFUMERIA]";
+            if (lead.target === 'artigianato') driveDefault = "[INSERISCI LINK DRIVE DEMO ARTIGIANATO]";
+            if (lead.target === 'd2c') driveDefault = "[INSERISCI LINK DRIVE DEMO E-COMMERCE]";
+            
+            document.getElementById('modal-cust-drive').value = driveDefault;
+
+            regenerateModalScriptText();
+
+            // Reveal Backdrop
+            document.getElementById('modal-backdrop').classList.add('open');
+        }
+
+        function closeModal() {
+            document.getElementById('modal-backdrop').classList.remove('open');
+            activeModalLead = null;
+        }
+
+        function closeModalOutside(event) {
+            if (event.target === document.getElementById('modal-backdrop')) {
+                closeModal();
+            }
+        }
+
+        // Render modal script dynamic highlights
+        function regenerateModalScriptText() {
+            if (!activeModalLead) return;
+
+            const customName = document.getElementById('modal-cust-name').value.trim() || "[Nome Lead]";
+            const customDrive = document.getElementById('modal-cust-drive').value.trim() || "[Link Drive]";
+
+            const baseTemplate = sectorScripts[activeModalLead.target];
+            
+            // Replace templates
+            let customized = baseTemplate
+                .replace(/{NAME}/g, customName)
+                .replace(/{DRIVE}/g, customDrive);
+
+            // Render customized script with interactive spans
+            document.getElementById('modal-script-render').innerHTML = customized
+                .replace(new RegExp(customName, 'g'), `<span class="highlight-tag">${customName}</span>`)
+                .replace(new RegExp(customDrive, 'g'), `<span class="highlight-tag">${customDrive}</span>`);
+        }
+
+        // Copy modal customized text
+        function copyModalScript() {
+            if (!activeModalLead) return;
+
+            const customName = document.getElementById('modal-cust-name').value.trim() || "[Nome Lead]";
+            const customDrive = document.getElementById('modal-cust-drive').value.trim() || "[Link Drive]";
+
+            const baseTemplate = sectorScripts[activeModalLead.target];
+            
+            let customizedPlain = baseTemplate
+                .replace(/{NAME}/g, customName)
+                .replace(/{DRIVE}/g, customDrive);
+
+            navigator.clipboard.writeText(customizedPlain).then(() => {
+                showToast("Messaggio copiato! Avvia ora l'outreach.");
+                closeModal();
+            }).catch(err => {
+                console.error("Errore durante la copia del messaggio", err);
+            });
+        }
+
+        // Initialize table on load
+        window.addEventListener('DOMContentLoaded', () => {
+            handleSearchAndFilter();
+        });
+    </script>
+</body>
+</html>
