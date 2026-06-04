@@ -1,0 +1,33 @@
+/* ==========================================================================
+   EARLIEST — CSS Reset
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: none;
+  border-radius: 0px !important;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-bg);
+  color: var(--color-text-light);
+  font-family: var(--font-body);
+  font-size: 16px;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--color-bg);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Restore default cursor on mobile / touch */
+@media (max-width: 1024px) {
+  * {
+    cursor: auto !important;
+  }
+}

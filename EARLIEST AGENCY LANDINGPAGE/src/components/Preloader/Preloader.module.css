@@ -1,0 +1,65 @@
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--color-bg);
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.8s ease, visibility 0.8s;
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.content { text-align: center; }
+
+.crestWrapper { margin-bottom: 24px; }
+
+.svg {
+  filter: drop-shadow(0 0 15px var(--color-red-glow));
+}
+
+.circlePath {
+  stroke-dasharray: 283;
+  stroke-dashoffset: 283;
+  animation: drawCircle 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.shieldPath {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: drawShield 2s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+}
+
+.letterPath {
+  opacity: 0;
+  animation: fadeInLetter 1s ease 1.5s forwards;
+}
+
+.title {
+  font-family: var(--font-headline);
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: var(--color-text-light);
+  margin-bottom: 8px;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeUpText 1s ease 1.8s forwards;
+}
+
+.tagline {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  color: var(--color-secondary);
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeUpText 1s ease 2s forwards;
+}

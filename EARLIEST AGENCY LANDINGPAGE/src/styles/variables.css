@@ -1,0 +1,29 @@
+/* ==========================================================================
+   EARLIEST — Design Tokens
+   ========================================================================== */
+:root {
+  /* Palette "Urban Aristocracy" */
+  --color-bg: #050505;
+  --color-surface: #0f0000;
+  --color-surface-bright: #201f1f;
+  --color-surface-container: #1c1b1b;
+  --color-primary: #660000;
+  --color-secondary: #ecc097;
+  --color-slate: #5a5a5a;
+  --color-text-light: #e5e2e1;
+  --color-accent-dim: rgba(236, 192, 151, 0.15);
+  --color-red-glow: rgba(102, 0, 0, 0.4);
+
+  /* Typography */
+  --font-headline: 'Syne', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+
+  /* Transitions */
+  --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-fast: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* Layout */
+  --margin-desktop: 64px;
+  --margin-mobile: 16px;
+  --container-max: 1440px;
+}

@@ -1,0 +1,126 @@
+.section { background-color: var(--color-surface); }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.desc {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: rgba(229, 226, 225, 0.8);
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+
+.infoBlock {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.infoRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--color-secondary);
+}
+
+.infoRow span { font-size: 24px; }
+
+.infoVal {
+  font-family: var(--font-headline);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--color-text-light);
+}
+
+.formWrapper {
+  background-color: #050505;
+  border: 1px solid var(--color-accent-dim);
+  padding: 56px 48px;
+  box-shadow: 0 15px 40px rgba(5, 5, 5, 0.7);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.formGroup {
+  position: relative;
+  width: 100%;
+}
+
+.formInput {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-slate);
+  padding: 12px 0;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+.formTextarea { resize: none; }
+
+.formSelect {
+  color: var(--color-slate);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%255a5a5a' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.formSelect:focus {
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%25ecc097' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+}
+
+.formLabel {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--color-slate);
+  pointer-events: none;
+  transition: var(--transition-fast);
+}
+
+.formLine {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background-color: var(--color-secondary);
+  box-shadow: 0 0 5px var(--color-secondary);
+  transition: var(--transition-fast);
+}
+
+.formInput:focus { border-bottom-color: transparent; }
+.formInput:focus ~ .formLine { width: 100%; }
+
+.formInput:focus ~ .formLabel,
+.formInput:not(:placeholder-shown) ~ .formLabel {
+  top: -16px;
+  font-size: 0.7rem;
+  color: var(--color-secondary);
+}
+
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: 1fr; gap: 56px; }
+}
+
+@media (max-width: 768px) {
+  .formWrapper { padding: 36px 20px; }
+}

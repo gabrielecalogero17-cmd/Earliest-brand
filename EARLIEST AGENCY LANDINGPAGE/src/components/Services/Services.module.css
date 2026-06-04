@@ -1,0 +1,145 @@
+.section {
+  background-color: var(--color-surface);
+  border-top: 1px solid rgba(236, 192, 151, 0.05);
+  border-bottom: 1px solid rgba(236, 192, 151, 0.05);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 56px;
+}
+
+.card {
+  background-color: #050505;
+  border: 1px solid var(--color-accent-dim);
+  padding: 48px 40px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 560px;
+  transition: var(--transition-smooth);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.card:hover {
+  border-color: rgba(236, 192, 151, 0.35);
+  box-shadow: 0 15px 40px rgba(5, 5, 5, 0.95);
+  background-color: rgba(15, 0, 0, 0.25);
+}
+
+.scanner {
+  position: absolute;
+  top: -2px; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-secondary), transparent);
+  opacity: 0;
+  transition: var(--transition-smooth);
+}
+
+.card:hover .scanner {
+  opacity: 1;
+  animation: scannerBeamMove 2.5s infinite linear;
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cardNum {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--color-primary);
+}
+
+.cardTitle {
+  font-family: var(--font-headline);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--color-text-light);
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.card:hover .cardTitle {
+  color: var(--color-secondary);
+  text-shadow: 0 0 10px rgba(236, 192, 151, 0.15);
+}
+
+.cardDivider {
+  width: 100%; height: 1px;
+  background-color: rgba(236, 192, 151, 0.1);
+  margin: 24px 0;
+}
+
+.bulletsList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex-grow: 1;
+  margin-bottom: 32px;
+}
+
+.bulletItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.bulletDot {
+  width: 6px; height: 6px;
+  background-color: var(--color-primary);
+  box-shadow: 0 0 8px var(--color-primary);
+  margin-top: 8px;
+  flex-shrink: 0;
+  transition: var(--transition-fast);
+}
+
+.card:hover .bulletDot {
+  background-color: var(--color-secondary);
+  box-shadow: 0 0 10px var(--color-secondary);
+}
+
+.bulletText {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: rgba(229, 226, 225, 0.8);
+  line-height: 1.5;
+  transition: var(--transition-fast);
+}
+
+.card:hover .bulletText {
+  color: var(--color-text-light);
+}
+
+.cardFooter { width: 100%; }
+
+.commissionBtn {
+  border-color: rgba(236, 192, 151, 0.25) !important;
+  color: rgba(229, 226, 225, 0.9) !important;
+}
+
+.commissionBtn:hover {
+  border-color: var(--color-secondary) !important;
+  color: var(--color-secondary) !important;
+}
+
+@media (max-width: 1100px) {
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+}
+
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; gap: 24px; margin-top: 36px; }
+  .card { padding: 36px 28px; min-height: auto; }
+}

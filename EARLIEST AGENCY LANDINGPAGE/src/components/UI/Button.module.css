@@ -1,0 +1,75 @@
+.btn {
+  padding: 16px 36px;
+  font-family: var(--font-headline);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+  border: none;
+  cursor: none;
+}
+
+.primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+  border: 1px solid var(--color-primary);
+  box-shadow: 0 0 15px var(--color-red-glow);
+}
+
+.primary:hover {
+  background-color: transparent;
+  border-color: var(--color-secondary);
+  color: var(--color-secondary);
+  box-shadow: 0 0 20px rgba(236, 192, 151, 0.2);
+}
+
+.ghost {
+  background-color: transparent;
+  color: var(--color-text-light);
+  border: 1px solid var(--color-slate);
+}
+
+.ghost:hover {
+  border-color: var(--color-secondary);
+  color: var(--color-secondary);
+  background-color: rgba(236, 192, 151, 0.02);
+}
+
+.full {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Shimmer */
+.shimmer::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent 45%, rgba(236, 192, 151, 0.3) 50%, transparent 55%);
+  transform: rotate(45deg);
+  transition: 0.8s;
+  opacity: 0;
+}
+
+.shimmer:hover::before {
+  animation: shimmerEffect 1.2s ease-in-out;
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 28px;
+  }
+}

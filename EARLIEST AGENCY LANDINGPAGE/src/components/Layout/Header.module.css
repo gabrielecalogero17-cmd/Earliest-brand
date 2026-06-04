@@ -1,0 +1,127 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: rgba(5, 5, 5, 0.85);
+  border-bottom: 1px solid rgba(236, 192, 151, 0.08);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  transition: var(--transition-smooth);
+}
+
+.scrolled {
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(236, 192, 151, 0.2);
+  background-color: rgba(5, 5, 5, 0.95);
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 20px var(--margin-desktop);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: var(--transition-smooth);
+}
+
+.scrolled .container {
+  padding: 10px var(--margin-desktop);
+}
+
+.logoArea {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.logoImg {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 4px var(--color-red-glow));
+  transition: var(--transition-fast);
+}
+
+.logoArea:hover .logoImg {
+  transform: rotate(10deg) scale(1.05);
+}
+
+.logoText {
+  font-family: var(--font-headline);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--color-text-light);
+  transition: var(--transition-fast);
+}
+
+.logoArea:hover .logoText {
+  color: var(--color-secondary);
+}
+
+.desktopNav {
+  display: flex;
+  gap: 36px;
+}
+
+.navLink {
+  font-family: var(--font-headline);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--color-slate);
+  text-decoration: none;
+  text-transform: uppercase;
+  position: relative;
+  padding: 8px 0;
+  transition: var(--transition-fast);
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--color-secondary);
+  transition: var(--transition-fast);
+}
+
+.navLink:hover { color: var(--color-secondary); }
+.navLink:hover::after { width: 100%; }
+
+.navToggle {
+  display: none;
+  background: none;
+  border: none;
+  flex-direction: column;
+  gap: 6px;
+  padding: 6px;
+}
+
+.hamburgerLine {
+  width: 24px;
+  height: 1px;
+  background-color: var(--color-text-light);
+  transition: var(--transition-fast);
+}
+
+.navToggle:hover .hamburgerLine {
+  background-color: var(--color-secondary);
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 20px var(--margin-mobile);
+  }
+  .scrolled .container {
+    padding: 12px var(--margin-mobile);
+  }
+  .desktopNav { display: none; }
+  .navToggle  { display: flex; }
+}

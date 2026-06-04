@@ -1,0 +1,100 @@
+/* ==========================================================================
+   EARLIEST — Keyframe Animations
+   ========================================================================== */
+
+@keyframes drawCircle {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes drawShield {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes fadeInLetter {
+  to { opacity: 1; }
+}
+
+@keyframes fadeUpText {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scrollIndicatorMove {
+  0%   { top: -20px; }
+  50%  { top: 60px; }
+  100% { top: 60px; }
+}
+
+@keyframes shimmerEffect {
+  0%   { left: -150%; }
+  100% { left: 150%; }
+}
+
+@keyframes scannerBeamMove {
+  0%   { top: -2%; }
+  50%  { top: 102%; }
+  100% { top: 102%; }
+}
+
+@keyframes hologram-scan-sweep {
+  0%   { top: -15px; opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { top: calc(100% + 15px); opacity: 0; }
+}
+
+@keyframes hologram-flicker-advanced {
+  0% {
+    opacity: 0;
+    filter: blur(12px) brightness(1.8) contrast(1.5);
+    text-shadow: -3px -1.5px 0 rgba(255, 0, 0, 0.8), 3px 1.5px 0 rgba(236, 192, 151, 0.8), 0 0 20px rgba(236, 192, 151, 0.8);
+    transform: translateY(35px) skewX(-6deg);
+  }
+  10% {
+    opacity: 0.75;
+    filter: blur(4px) brightness(1.3);
+    text-shadow: 2px 2px 0 rgba(255, 0, 0, 0.7), -2px -2px 0 rgba(236, 192, 151, 0.7), 0 0 10px rgba(236, 192, 151, 0.6);
+    transform: translateY(20px) skewX(5deg);
+  }
+  20% {
+    opacity: 0.15;
+    filter: blur(6px) brightness(0.7);
+    text-shadow: none;
+    transform: translateY(25px) skewX(-4deg);
+  }
+  35% {
+    opacity: 0.9;
+    filter: blur(2px) brightness(1.4);
+    text-shadow: -1.5px 0.5px 0 rgba(255, 0, 0, 0.6), 1.5px -0.5px 0 rgba(236, 192, 151, 0.6), 0 0 12px rgba(236, 192, 151, 0.6);
+    transform: translateY(10px) skewX(2deg);
+  }
+  50% {
+    opacity: 0.4;
+    filter: blur(3px) brightness(0.8);
+    text-shadow: none;
+    transform: translateY(12px) skewX(-2deg);
+  }
+  65% {
+    opacity: 0.95;
+    filter: blur(1px) brightness(1.2);
+    text-shadow: 1px -1px 0 rgba(255, 0, 0, 0.4), -1px 1px 0 rgba(236, 192, 151, 0.4), 0 0 8px rgba(236, 192, 151, 0.4);
+    transform: translateY(4px) skewX(1deg);
+  }
+  80% {
+    opacity: 0.6;
+    filter: blur(2px) brightness(0.9);
+    text-shadow: none;
+    transform: translateY(6px);
+  }
+  90% {
+    opacity: 0.98;
+    filter: blur(0.5px) brightness(1.1);
+    text-shadow: 0.5px -0.5px 0 rgba(255, 0, 0, 0.2), -0.5px 0.5px 0 rgba(236, 192, 151, 0.2), 0 0 6px rgba(236, 192, 151, 0.3);
+    transform: translateY(1px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0) brightness(1);
+    text-shadow: 0 0 4px rgba(236, 192, 151, 0.2);
+    transform: translateY(0) skewX(0);
+  }
+}
