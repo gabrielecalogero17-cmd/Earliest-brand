@@ -1,0 +1,114 @@
+# The Earliest Brand - Listino Prezzi & Pacchetti
+
+Questo documento contiene i dettagli commerciali relativi ai servizi singoli (listino verticale) e alle offerte in abbonamento (bundle mensili) dell'agenzia di comunicazione **The Earliest Brand**.
+
+---
+
+## 1. Servizi Singoli (Listino Verticale)
+
+### 📱 Gestione Social & Presenza Online (Canone Mensile)
+
+#### 🔸 Pack Essential Authority
+* **Prezzo**: €800 – €1.000 / mese *(Budget ADV escluso)*
+* **Target**: Professionisti o attività locali che devono costruire un posizionamento digitale credibile e pulito.
+* **Servizi inclusi al 100%**:
+  * **Analisi Strategica**: Studio del brand, analisi dei competitor diretti e definizione del Tono di Voce (Tone of Voice) ufficiale.
+  * **Restyling Visivo**: Ottimizzazione totale dei profili (Bio strategica con gancio, copertine dei Reel coerenti, organizzazione delle Storie in Evidenza).
+  * **Piano Editoriale (PED)**: Creazione e gestione di 10 contenuti mensili (mix di Reel e Caroselli grafici).
+  * **Social Copywriting**: Scrittura di tutte le didascalie (caption) dei post utilizzando formule di copywriting persuasivo (es. AIDA o PAS) per trattenere l'utente e spingerlo all'azione.
+  * **Video Scripting Base**: Per i Reel inclusi, stesura di script parola per parola comprensivi di: gancio iniziale (hook) nei primi 3 secondi, corpo del discorso fluido e chiamata all'azione finale (CTA).
+  * **Reportistica**: 1 Report analitico mensile per monitorare la crescita organica, la copertura e le interazioni.
+
+#### 🔸 Pack Omnichannel Dominance
+* **Prezzo**: €1.500 – €1.900 / mese *(Budget ADV escluso)*
+* **Target**: Business o figure pubbliche che vogliono saturare i feed della propria nicchia, puntando forte sul Personal Branding e sulla conversione nei DM.
+* **Servizi inclusi al 100%**:
+  * *Tutti i servizi del pack Essential Authority inclusi.*
+  * **Piano Editoriale Avanzato**: Generazione di 18-20 contenuti mensili con focus totale sulla produzione di video brevi (Reel, TikTok, YouTube Shorts).
+  * **Strategia di Personal Branding**: Linee guida per il posizionamento del titolare o del volto aziendale come massima autorità del settore.
+  * **Advanced Video Scripting**: Scrittura di sceneggiature iper-specifiche per ogni singolo video. Gli script includono indicazioni psicologiche per l'intonazione della voce, ganci visivi per bloccare lo scrolling e micro-storie (storytelling) emotivamente impattanti.
+  * **Inbound Copywriting & Management**: Gestione quotidiana dei commenti e monitoraggio dei messaggi in Direct (DM). Risposte scritte con script di vendita pronti a trasformare il follower curioso in un contatto qualificato (lead).
+
+---
+
+### 💻 Sviluppo Web & Funnel Marketing (Prezzo One-Off / A Progetto)
+
+#### 🔸 Pack Performance Landing Page
+* **Prezzo**: €800 una tantum
+* **Target**: Chi ha bisogno di una pagina focalizzata sulla vendita di un singolo prodotto/servizio o sulla generazione di contatti da pubblicità.
+* **Servizi inclusi al 100%**:
+  * **Sviluppo Tecnico**: Creazione di una struttura One-Page ultra-veloce, ottimizzata per smartphone e desktop.
+  * **Direct Response Copywriting**: Scrittura dell'intera pagina da zero. Include l'Headline (titolo d'impatto), le sezioni dei benefici logici ed emotivi, la gestione delle obiezioni, la riprova sociale (recensioni) e l'offerta irresistibile.
+  * **Configurazione Tracciamenti**: Integrazione tecnica avanzata di Pixel Meta, Conversion API e Google Tag per monitorare ogni singola azione dell'utente.
+  * **Integrazione Funnel**: Collegamento a moduli di contatto personalizzati o calendari di prenotazione automatizzati (es. Calendly).
+
+#### 🔸 Pack Custom Corporate Ecosystem
+* **Prezzo**: €2.000 una tantum
+* **Target**: Aziende che vogliono un ecosistema web completo, autorevole e istituzionale, con un limite massimo di 5 sezioni/pagine principali.
+* **Servizi inclusi al 100%**:
+  * **Architettura e UX/UI Design**: Progettazione dell'esperienza utente su misura per riflettere un posizionamento premium.
+  * **Corporate Copywriting**: Scrittura dei testi per tutte le pagine del sito (Home, Chi Siamo, Servizi, Contatti, ecc.). Il copy è strutturato per vendere l'affidabilità aziendale e guidare l'utente verso il punto di contatto.
+  * **Automazioni di Sistema**: Configurazione dei flussi di lavoro automatici (es. email di ringraziamento istantanea post-contatto, consegna automatica di materiali informativi).
+  * **SEO Tecnica d'Ingresso**: Ottimizzazione dei testi, dei titoli e delle immagini per favorire il posizionamento organico su Google.
+
+---
+
+### 📣 Campagne Pubblicitarie & AI Video Production (Canone Mensile)
+
+#### 🔸 Pack Performance Lead Boost
+* **Prezzo**: €700 – €900 / mese *(Budget ADV del cliente escluso)*
+* **Target**: Attività che hanno già un sito web funzionante e vogliono un flusso costante di clienti tramite inserzioni tradizionali.
+* **Servizi inclusi al 100%**:
+  * **Technical Set-up**: Configurazione o bonifica dei Business Manager (Meta Ads e/o Google Ads).
+  * **Targeting & Angoli di Marketing**: Segmentazione chirurgica del pubblico e studio dei trigger psicologici dei potenziali acquirenti.
+  * **ADV Copywriting**: Scrittura di 4 varianti di copy pubblicitari al mese (testi brevi, testi lunghi, formati a elenco) focalizzati sul clic e sulla conversione.
+  * **Asset Creativi Statici**: Sviluppo di grafiche o immagini ottimizzate per le inserzioni.
+  * **Gestione & Ottimizzazione**: Controllo quotidiano delle metriche (CPA, ROAS), allocazione del budget ed eliminazione degli annunci che non performano.
+
+#### 🔸 Pack AI Cinematic Scale
+* **Prezzo**: €1.800 – €2.400 / mese *(Budget ADV del cliente escluso)*
+* **Target**: Brand d'élite o e-commerce che vogliono dominare l'attenzione del mercato con annunci video scioccanti ed emozionali, scalando i risultati grazie all'AI.
+* **Servizi inclusi al 100%**:
+  * *Tutti i servizi di ottimizzazione tecnica del pack Performance Lead Boost inclusi.*
+  * **AI Prompters & Video Generation**: Utilizzo di modelli di Intelligenza Artificiale generativa video di ultima generazione per produrre immagini in movimento e transizioni cinematografiche impossibili o troppo costose da girare dal vivo.
+  * **AI Scriptwriting & Storyboarding**: Scrittura di 6-8 sceneggiature pubblicitarie al mese specifiche per l'Intelligenza Artificiale. Ogni script descrive non solo le parole parlate, ma i dettagli visivi esatti da inserire nei prompt di generazione (angolazioni di camera, stili di luce, atmosfere).
+  * **Voice Cloning & Audio Design**: Utilizzo di cloni vocali iper-realistici o sintesi vocali premium per narrare i video, con montaggio di sound design cinematografico di sottofondo.
+  * **Creative Testing di Massa**: Adattamento degli asset video in formati verticali (Reel/TikTok) e orizzontali (YouTube) per testare continuamente nuovi ganci psicologici.
+
+---
+
+## 2. L'Offerta Unica Mensile (I Bundle in Abbonamento)
+
+> [!NOTE]
+> La sinergia perfetta per i tuoi clienti: presenza organica, conversione sul web e traffico a pagamento. Il budget pubblicitario viene versato direttamente dalla carta del cliente sulle piattaforme.
+
+### 🚀 Tier 1: Growth Engine (L'Acceleratore di Business)
+
+| Voce di Costo | Dettaglio |
+| :--- | :--- |
+| **Fee Agenzia** | €1.600 / mese |
+| **Budget ADV Consigliato** | €200 / mese *(pagato direttamente dal cliente alle piattaforme)* |
+| **Costo Totale Mensile** | **€1.800 / mese** |
+| **Vincolo Contrattuale Minimo** | 6 mesi |
+
+#### Servizi inclusi al 100% ogni mese:
+* **Social**: Pack Essential Authority *(10 contenuti/mese con social copywriting e video script inclusi)*.
+* **Adv**: Pack Performance Lead Boost *(Gestione tecnica e ottimizzazione delle campagne)*.
+* **Web Asset Premium**: Sviluppo iniziale di **1 Performance Landing Page** *(Valore €800)* interamente inclusa nel canone, con monitoraggio mensile dei tassi di conversione (CRO) per assicurarsi che i testi e la struttura continuino a vendere.
+
+---
+
+### 👑 Tier 2: The Earliest Elite (Il Predatore del Mercato)
+
+| Voce di Costo | Dettaglio |
+| :--- | :--- |
+| **Fee Agenzia** | €3.000 / mese |
+| **Budget ADV Consigliato** | €500 / mese *(pagato direttamente dal cliente alle piattaforme)* |
+| **Costo Totale Mensile** | **€3.500 / mese** |
+| **Vincolo Contrattuale Minimo** | 12 mesi |
+
+#### Servizi inclusi al 100% ogni mese:
+* **Social**: Pack Omnichannel Dominance *(18-20 contenuti/mese, strategie di Personal Branding, sceneggiature video avanzate e inbound copywriting nei DM)*.
+* **Adv & Video AI**: Pack AI Cinematic Scale *(Gestione campagne pubblicitarie + 6-8 video ADV generati interamente in AI con sceneggiature dedicate ai modelli generativi e testing continuo dei ganci visivi)*.
+* **Web Asset Premium**: Sviluppo iniziale del **Custom Corporate Ecosystem** *(Valore €2.000)* incluso nel canone. Assistenza tecnica totale, manutenzione mensile e creazione di Landing Page aggiuntive illimitate per gestire promozioni temporanee o lanci specifici.
+* **Customer Care Dedicato**: Reportistica strategica bisettimanale e linea di comunicazione diretta e prioritaria con l'agenzia.
