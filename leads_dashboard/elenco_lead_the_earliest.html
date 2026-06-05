@@ -810,18 +810,10 @@
             </li>
         </ul>
 
-        <!-- Database Selection Switcher -->
-        <div style="margin-top: 2rem; border-top: 1px solid rgba(212, 175, 55, 0.1); padding-top: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
-            <label for="db-selector" style="font-size: 0.65rem; font-weight: 700; text-transform: uppercase; color: var(--primary); letter-spacing: 1.5px;">Database Attivo</label>
-            <select id="db-selector" onchange="switchDatabase(this.value)" style="background: rgba(5, 5, 7, 0.85); border: 1px solid var(--border-color); border-radius: 6px; padding: 0.65rem 0.75rem; color: #fff; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; cursor: pointer; outline: none; width: 100%; transition: border-color 0.2s ease;">
-                <option value="nazionale" selected>🇮🇹 Nazionale (200 Lead)</option>
-                <option value="catania">🌋 Catania &amp; Prov. (200 Lead)</option>
-                <option value="studio095">✨ 095 Studio (200 Lead)</option>
-            </select>
-        </div>
+
 
         <div class="sidebar-footer">
-            <span class="version-badge">400 LEADS ELITE V3</span>
+            <span class="version-badge">600 LEADS ELITE V5</span>
         </div>
     </aside>
 
@@ -876,19 +868,31 @@
 
             <div class="target-filter-bar" id="target-filter-bar">
                 <button class="filter-btn active" id="btn-filter-all" onclick="setFilterCategory('all')">
-                    <span class="material-symbols-outlined">list</span> Tutti (200)
+                    <span class="material-symbols-outlined">list</span> Tutti (600)
                 </button>
                 <button class="filter-btn" id="btn-filter-estetica" onclick="setFilterCategory('estetica')">
-                    <span class="material-symbols-outlined">hotel_class</span> ✨ Medicina Estetica (50)
+                    <span class="material-symbols-outlined">hotel_class</span> ✨ Medicina Estetica (100)
                 </button>
                 <button class="filter-btn" id="btn-filter-realestate" onclick="setFilterCategory('realestate')">
-                    <span class="material-symbols-outlined">castle</span> 🏰 Real Estate Lusso (50)
+                    <span class="material-symbols-outlined">castle</span> 🏰 Real Estate Lusso (100)
                 </button>
                 <button class="filter-btn" id="btn-filter-dentisti" onclick="setFilterCategory('dentisti')">
-                    <span class="material-symbols-outlined">dentistry</span> 🦷 Dentisti &amp; Cliniche (50)
+                    <span class="material-symbols-outlined">dentistry</span> 🦷 Dentisti &amp; Cliniche (100)
                 </button>
                 <button class="filter-btn" id="btn-filter-hotellerie" onclick="setFilterCategory('hotellerie')">
-                    <span class="material-symbols-outlined">domain</span> 🏨 Hotel Lusso &amp; Resort (50)
+                    <span class="material-symbols-outlined">domain</span> 🏨 Hotel Lusso &amp; Resort (100)
+                </button>
+                <button class="filter-btn" id="btn-filter-boutique" onclick="setFilterCategory('boutique')">
+                    <span class="material-symbols-outlined">styler</span> 👗 Boutique (50)
+                </button>
+                <button class="filter-btn" id="btn-filter-profumeria" onclick="setFilterCategory('profumeria')">
+                    <span class="material-symbols-outlined">experiment</span> 🧪 Profumerie (50)
+                </button>
+                <button class="filter-btn" id="btn-filter-artigianato" onclick="setFilterCategory('artigianato')">
+                    <span class="material-symbols-outlined">construction</span> ⚒️ Artigianato (50)
+                </button>
+                <button class="filter-btn" id="btn-filter-d2c" onclick="setFilterCategory('d2c')">
+                    <span class="material-symbols-outlined">shopping_bag</span> 🛒 Brand D2C (50)
                 </button>
             </div>
         </div>
@@ -2348,72 +2352,40 @@ Quando avreste uno slot libero questa settimana per un confronto?`
         ];
 
         // Active database assignment
-        let leadsData = leadsDataNazionale;
+        const leadsData = [...leadsDataNazionale, ...leadsDataCatania, ...leadsData095];
 
-        // Switch active database
-        function switchDatabase(dbValue) {
-            if (dbValue === "catania") {
-                leadsData = leadsDataCatania;
-            } else if (dbValue === "studio095") {
-                leadsData = leadsData095;
-            } else {
-                leadsData = leadsDataNazionale;
-            }
-            
-            // Reset active filter categories
-            currentFilterCategory = "all";
-            
-            // Re-render target filter bar buttons dynamically
-            renderFilterBar(dbValue);
-            
-            // Clear search field
-            document.getElementById("table-search-input").value = "";
-            
-            // Rerender table and KPIs
-            updateDashboardKPIs();
-            renderLeadsTable();
-        }
-
-        // Render target filter bar buttons dynamically based on active database
-        function renderFilterBar(dbValue) {
+        // Render target filter bar buttons dynamically
+        function renderFilterBar() {
             const filterBar = document.getElementById("target-filter-bar");
-            if (dbValue === "studio095") {
-                filterBar.innerHTML = `
-                    <button class="filter-btn active" id="btn-filter-all" onclick="setFilterCategory('all')">
-                        <span class="material-symbols-outlined">list</span> Tutti (200)
-                    </button>
-                    <button class="filter-btn" id="btn-filter-boutique" onclick="setFilterCategory('boutique')">
-                        <span class="material-symbols-outlined">styler</span> 👗 Boutique (50)
-                    </button>
-                    <button class="filter-btn" id="btn-filter-profumeria" onclick="setFilterCategory('profumeria')">
-                        <span class="material-symbols-outlined">experiment</span> 🧪 Profumerie (50)
-                    </button>
-                    <button class="filter-btn" id="btn-filter-artigianato" onclick="setFilterCategory('artigianato')">
-                        <span class="material-symbols-outlined">construction</span> ⚒️ Artigianato (50)
-                    </button>
-                    <button class="filter-btn" id="btn-filter-d2c" onclick="setFilterCategory('d2c')">
-                        <span class="material-symbols-outlined">shopping_bag</span> 🛒 Brand D2C (50)
-                    </button>
-                `;
-            } else {
-                filterBar.innerHTML = `
-                    <button class="filter-btn active" id="btn-filter-all" onclick="setFilterCategory('all')">
-                        <span class="material-symbols-outlined">list</span> Tutti (200)
-                    </button>
-                    <button class="filter-btn" id="btn-filter-estetica" onclick="setFilterCategory('estetica')">
-                        <span class="material-symbols-outlined">hotel_class</span> ✨ Medicina Estetica (50)
-                    </button>
-                    <button class="filter-btn" id="btn-filter-realestate" onclick="setFilterCategory('realestate')">
-                        <span class="material-symbols-outlined">castle</span> 🏰 Real Estate Lusso (50)
-                    </button>
-                    <button class="filter-btn" id="btn-filter-dentisti" onclick="setFilterCategory('dentisti')">
-                        <span class="material-symbols-outlined">dentistry</span> 🦷 Dentisti &amp; Cliniche (50)
-                    </button>
-                    <button class="filter-btn" id="btn-filter-hotellerie" onclick="setFilterCategory('hotellerie')">
-                        <span class="material-symbols-outlined">domain</span> 🏨 Hotel Lusso &amp; Resort (50)
-                    </button>
-                `;
-            }
+            filterBar.innerHTML = `
+                <button class="filter-btn active" id="btn-filter-all" onclick="setFilterCategory('all')">
+                    <span class="material-symbols-outlined">list</span> Tutti (600)
+                </button>
+                <button class="filter-btn" id="btn-filter-estetica" onclick="setFilterCategory('estetica')">
+                    <span class="material-symbols-outlined">hotel_class</span> ✨ Medicina Estetica (100)
+                </button>
+                <button class="filter-btn" id="btn-filter-realestate" onclick="setFilterCategory('realestate')">
+                    <span class="material-symbols-outlined">castle</span> 🏰 Real Estate Lusso (100)
+                </button>
+                <button class="filter-btn" id="btn-filter-dentisti" onclick="setFilterCategory('dentisti')">
+                    <span class="material-symbols-outlined">dentistry</span> 🦷 Dentisti &amp; Cliniche (100)
+                </button>
+                <button class="filter-btn" id="btn-filter-hotellerie" onclick="setFilterCategory('hotellerie')">
+                    <span class="material-symbols-outlined">domain</span> 🏨 Hotel Lusso &amp; Resort (100)
+                </button>
+                <button class="filter-btn" id="btn-filter-boutique" onclick="setFilterCategory('boutique')">
+                    <span class="material-symbols-outlined">styler</span> 👗 Boutique (50)
+                </button>
+                <button class="filter-btn" id="btn-filter-profumeria" onclick="setFilterCategory('profumeria')">
+                    <span class="material-symbols-outlined">experiment</span> 🧪 Profumerie (50)
+                </button>
+                <button class="filter-btn" id="btn-filter-artigianato" onclick="setFilterCategory('artigianato')">
+                    <span class="material-symbols-outlined">construction</span> ⚒️ Artigianato (50)
+                </button>
+                <button class="filter-btn" id="btn-filter-d2c" onclick="setFilterCategory('d2c')">
+                    <span class="material-symbols-outlined">shopping_bag</span> 🛒 Brand D2C (50)
+                </button>
+            `;
         }
 
         // Section toggle navigation
@@ -2492,8 +2464,7 @@ Quando avreste uno slot libero questa settimana per un confronto?`
 
         // Init on Window Load
         window.onload = function() {
-            const initialDb = document.getElementById("db-selector").value;
-            renderFilterBar(initialDb);
+            renderFilterBar();
             loadLocalStorageCRM();
             updateDashboardKPIs();
             renderLeadsTable();
