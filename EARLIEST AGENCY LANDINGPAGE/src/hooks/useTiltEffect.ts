@@ -14,6 +14,7 @@ export function useTiltEffect(
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent) => {
+      if (typeof window !== 'undefined' && window.innerWidth < 1024) return;
       const el = ref.current;
       if (!el) return;
 
@@ -32,6 +33,7 @@ export function useTiltEffect(
   );
 
   const handleMouseLeave = useCallback(() => {
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) return;
     const el = ref.current;
     if (!el) return;
     el.style.transform = `perspective(${perspective}px) rotateX(0deg) rotateY(0deg) scale(1)`;

@@ -148,6 +148,10 @@ export default function Contact() {
               >
                 {btnContent[submitState]}
               </Button>
+
+              <div className={styles.microCopy}>
+                [CRITTOGRAFIA ATTIVA]: I dati inseriti sono protetti. Un nostro Direttore Creativo analizzerà il tuo ecosistema di brand ed emetterà un responso strategico entro 48 ore lavorative.
+              </div>
             </form>
           </div>
         </div>

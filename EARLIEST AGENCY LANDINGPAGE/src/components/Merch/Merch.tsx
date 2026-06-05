@@ -75,9 +75,6 @@ function GarmentModal({
   garment: Garment | null;
   onClose: () => void;
 }) {
-  const [selectedSize, setSelectedSize] = useState('M');
-  const sizes = ['S', 'M', 'L', 'XL'];
-
   useEffect(() => {
     if (garment) {
       document.body.style.overflow = 'hidden';
@@ -96,6 +93,21 @@ function GarmentModal({
   const handleOrder = () => {
     onClose();
     setTimeout(() => {
+      // Auto-select "03. FASHION & MERCHANDISING" in the form dropdown
+      const serviceSelect = document.getElementById('formService') as HTMLSelectElement | null;
+      if (serviceSelect) {
+        serviceSelect.value = 'fashion_merch';
+        serviceSelect.dispatchEvent(new Event('change'));
+      }
+
+      // Pre-populate the brief description textarea with a professional B2B request
+      const messageTextarea = document.getElementById('formMessage') as HTMLTextAreaElement | null;
+      if (messageTextarea) {
+        messageTextarea.value = `Richiesta di accesso all'archivio capi riservato ai partner per il case study: "${garment?.title}". Desideriamo valutare la qualità di manifattura per il nostro brand ed esplorare una collaborazione di Direzione Creativa e Produzione Tessile.`;
+        messageTextarea.dispatchEvent(new Event('change'));
+      }
+
+      // Smooth scroll to the contact form
       document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
     }, 300);
   };
@@ -134,23 +146,8 @@ function GarmentModal({
                 </div>
               </div>
 
-              <div className={styles.sizes}>
-                <span className={styles.sizeLabel}>SELEZIONA TAGLIA:</span>
-                <div className={styles.sizesRow}>
-                  {sizes.map((s) => (
-                    <button
-                      key={s}
-                      className={`${styles.sizeBtn} ${s === selectedSize ? styles.sizeBtnActive : ''} hover-trigger`}
-                      onClick={() => setSelectedSize(s)}
-                    >
-                      {s}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
               <Button variant="primary" full onClick={handleOrder}>
-                <span>ORDINA IL CAPO</span>
+                <span>RICHIEDI ACCESSO ALL'ARCHIVIO CAPI (Riservato ai Partner)</span>
                 <span className="material-symbols-outlined">workspace_premium</span>
               </Button>
 
@@ -300,8 +297,8 @@ export default function Merch() {
         <div className="section-container-fluid">
           <div className="section-container">
             <div className="reveal-fade" style={{ textAlign: 'center' }}>
-              <div className="section-tag text-center">ARCHIVIO CAPI</div>
-              <h2 className="section-title text-center">LA COLLEZIONE SOVRANA</h2>
+              <div className="section-tag text-center">ARCHIVIO PRODUZIONI</div>
+              <h2 className="section-title text-center">Case Study di Manifattura e Direzione Creativa</h2>
               <div className="divider-line mx-auto" />
             </div>
           </div>

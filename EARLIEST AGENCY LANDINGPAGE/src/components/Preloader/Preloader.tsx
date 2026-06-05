@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import styles from './Preloader.module.css';
 
 interface Props {
@@ -6,24 +6,63 @@ interface Props {
 }
 
 export default function Preloader({ onFinished }: Props) {
-  const [hidden, setHidden] = useState(false);
+  const shouldSkip = useMemo(() => {
+    if (typeof window === 'undefined') return false;
+    try {
+      const searchParams = new URLSearchParams(window.location.search);
+      const hasSkip = searchParams.get('skip') === 'true';
+      const hasUtm = searchParams.has('utm_source');
+
+      const lastVisited = localStorage.getItem('earliest_visited');
+      let isRecentVisit = false;
+      if (lastVisited) {
+        const visitTime = parseInt(lastVisited, 10);
+        if (!isNaN(visitTime) && Date.now() - visitTime < 24 * 60 * 60 * 1000) {
+          isRecentVisit = true;
+        }
+      }
+      return hasSkip || hasUtm || isRecentVisit;
+    } catch (e) {
+      return false;
+    }
+  }, []);
+
+  const [hidden, setHidden] = useState(shouldSkip);
 
   useEffect(() => {
+    if (shouldSkip) {
+      onFinished();
+      return;
+    }
+
     const timer = setTimeout(() => {
       setHidden(true);
       onFinished();
+      try {
+        localStorage.setItem('earliest_visited', Date.now().toString());
+      } catch (e) {
+        // Ignore
+      }
     }, 2600);
 
     const fallback = setTimeout(() => {
       setHidden(true);
       onFinished();
+      try {
+        localStorage.setItem('earliest_visited', Date.now().toString());
+      } catch (e) {
+        // Ignore
+      }
     }, 4500);
 
     return () => {
       clearTimeout(timer);
       clearTimeout(fallback);
     };
-  }, [onFinished]);
+  }, [onFinished, shouldSkip]);
+
+  if (shouldSkip) return null;
+
 
   return (
     <div className={`${styles.preloader} ${hidden ? styles.hidden : ''}`}>

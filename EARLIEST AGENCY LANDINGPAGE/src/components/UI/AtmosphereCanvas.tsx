@@ -32,8 +32,11 @@ function createParticle(w: number, h: number, initialY?: number): Particle {
 
 export default function AtmosphereCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
 
   useEffect(() => {
+    if (isMobile) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -100,7 +103,11 @@ export default function AtmosphereCanvas() {
       window.removeEventListener('resize', resize);
       cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [isMobile]);
+
+  if (isMobile) {
+    return <canvas ref={canvasRef} style={{ display: 'none' }} className={styles.canvas} />;
+  }
 
   return <canvas ref={canvasRef} className={styles.canvas} />;
 }

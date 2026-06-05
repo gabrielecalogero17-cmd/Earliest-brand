@@ -1,0 +1,243 @@
+================================================================================
+          DOCUMENTO DI ANALISI E DESCRIZIONE TECNICA — SITO WEB EARLIEST
+================================================================================
+
+Questo documento fornisce una descrizione tecnica dettagliatissima della struttura, 
+dei componenti, dello stack di sviluppo e delle animazioni della landing page di 
+"EARLIEST" (Direzione Creativa & Agenzia di Comunicazione), sviluppata seguendo il
+concetto filosofico ed estetico di "Urban Aristocracy".
+
+--------------------------------------------------------------------------------
+1. ARCHITETTURA DEL PROGETTO E STACK TECNOLOGICO
+--------------------------------------------------------------------------------
+
+Il sito è strutturato come una Single Page Application (SPA) reattiva e performante 
+utilizzando le seguenti tecnologie:
+- Core Framework: React 19.2.6 (con React DOM per il mounting dell'applicazione)
+- Bundler & Tooling: Vite 8.0.12 (configurazione in vite.config.ts)
+- Tipizzazione: TypeScript (configurazioni in tsconfig.json, tsconfig.app.json, tsconfig.node.json)
+- Gestione Metadati (SEO): react-helmet-async 3.0.0
+- Animazioni & Scorrimento: 
+    * Lenis (per scorrimento controllato e ultra fluido)
+    * CSS Custom Animations (per sfarfallio olografico, barre di scansione, particelle)
+    * GSAP (GreenSock Animation Platform) predisposto per animazioni di alto livello
+- Struttura CSS: CSS Modules per un isolamento completo degli stili dei singoli componenti.
+
+--------------------------------------------------------------------------------
+2. STRUTTURA DELLE CARTELLE E DEI FILE
+--------------------------------------------------------------------------------
+
+Il progetto è organizzato come segue:
+
+/EARLIEST AGENCY LANDINGPAGE/
+│
+├── index.html                    # Entry point HTML5 con font e fogli di stile esterni
+├── package.json                  # Script npm e dichiarazione delle dipendenze
+├── vite.config.ts                # File di configurazione per Vite
+├── tsconfig.json                 # Configurazione TypeScript globale
+│
+├── /public/                      # File statici serviti direttamente alla radice
+│   └── /assets/                  # Asset multimediali (immagini, loghi)
+│
+└── /src/                         # Codice sorgente dell'applicazione
+    ├── main.tsx                  # File di avvio che monta App.tsx nel div #root
+    ├── App.tsx                   # Componente radice che ospita layout, sezioni e hooks
+    │
+    ├── /hooks/                   # Hook personalizzati React
+    │   ├── useSmoothScroll.ts    # Inizializza ed elimina l'istanza Lenis per lo scroll
+    │   └── useTiltEffect.ts      # Calcola l'inclinazione 3D 3D-Tilt degli elementi al mouseover
+    │
+    ├── /data/                    # Modelli di dati e array costanti
+    │   ├── services.ts           # Definizione dei servizi e bullet points
+    │   └── garments.ts           # Dati del catalogo d'abbigliamento (prezzi, descrizioni, vestibilità)
+    │
+    ├── /styles/                  # Fogli di stile globali e token di design
+    │   ├── variables.css         # Token di design per tavolozza colori, font e transizioni
+    │   ├── reset.css             # Reset standard CSS per uniformità tra i browser
+    │   ├── animations.css        # Keyframes e definizioni per le animazioni
+    │   └── global.css            # Stili condivisi, layout di sezione e classi reveal
+    │
+    └── /components/              # Componenti React suddivisi per area
+        ├── /Preloader/           # Schermata di caricamento animata (Preloader)
+        ├── /UI/                  # Componenti dell'interfaccia utente atomici (Bottone, Cursore, Canvas)
+        ├── /Layout/              # Elementi strutturali (Header, SideMenu, Footer, ScrollProgress)
+        ├── /Hero/                # Sezione di benvenuto e headline principale
+        ├── /Services/            # Sezione competenze e card dei servizi
+        ├── /Pillars/             # I 4 pilastri dell'agenzia
+        ├── /Voice/               # Sezione identità strategica e tono di voce
+        ├── /Merch/               # Galleria interattiva dei prodotti d'archivio e modal dettagli
+        └── /Contact/             # Modulo contatti avanzato per brief e lead generation
+
+--------------------------------------------------------------------------------
+3. TAVOLOZZA DEI COLORI E SISTEMA DI DESIGN (DESIGN TOKENS)
+--------------------------------------------------------------------------------
+
+Il sistema visivo è definito in `/src/styles/variables.css` ed è costruito 
+per trasmettere forza visiva, minimalismo industriale e araldica d'élite:
+- Sfondo principale (--color-bg): #050505 (Nero puro)
+- Sfondo superfici (--color-surface): #0f0000 (Rosso scuro profondo per atmosfere regali)
+- Sfondo elementi elevati (--color-surface-bright): #201f1f
+- Colore Primario (--color-primary): #660000 (Rosso Imperiale Cupo)
+- Colore Secondario (--color-secondary): #ecc097 (Sabbia Dorata / Champagne Caldo)
+- Grigio di transizione (--color-slate): #5a5a5a
+- Colore testo chiaro (--color-text-light): #e5e2e1
+- Bagliore rosso (--color-red-glow): rgba(102, 0, 0, 0.4)
+- Carattere Intestazioni: 'Syne', sans-serif (Geometrico ed espressivo)
+- Carattere Testo del Corpo: 'Space Grotesk', sans-serif (Monospace tecnologico)
+
+--------------------------------------------------------------------------------
+4. DESCRIZIONE COMPLETA DI OGNI COMPONENTE E SEZIONE
+--------------------------------------------------------------------------------
+
+-------------------------
+A. Preloader (Preloader.tsx)
+-------------------------
+All'avvio della pagina, blocca l'interazione e visualizza un'animazione vettoriale (SVG) 
+della durata di 2,6 secondi (con un fallback di sicurezza a 4,5 secondi):
+- SVG composto da un cerchio esterno dorato che si autodisegna tramite stroke-dashoffset.
+- Uno scudo rosso imperiale araldico interno.
+- La lettera "E" al centro che sfuma gradualmente a opacità 1.
+- In basso compaiono il titolo "EARLIEST" e la tagline "LA NUOVA ÉLITE" tramite un'animazione
+  di sollevamento (fadeUpText).
+
+-------------------------
+B. Atmosphere Canvas (AtmosphereCanvas.tsx)
+-------------------------
+Un canvas HTML5 che occupa l'intero schermo in background (sotto il contenuto, z-index: 1):
+- Genera fino a 65 particelle dorate/sabbia.
+- Le particelle salgono lentamente variando dimensione, opacità e fluttuando orizzontalmente
+  mediante un wobble sinusoidale matematico.
+- Al passaggio del mouse, un calcolo di distanza euclidea rileva la vicinanza del puntatore
+  e applica una forza di repulsione che spinge le particelle lontano dal mouse se si trovano
+  entro un raggio di 180 pixel.
+
+-------------------------
+C. Cursore Personalizzato (CustomCursor.tsx)
+-------------------------
+Rende invisibile il cursore predefinito e gestisce un sistema a due elementi:
+1. Un punto centrale dorato che si allinea perfettamente alle coordinate del mouse.
+2. Un anello esterno (follower) che segue il punto con un ritardo calcolato con una formula
+   di interpolazione lineare (LERP = 0.12) per creare un effetto di trascinamento fluido.
+- Quando il mouse si muove sopra link, pulsanti, elementi con classe ".hover-trigger" o card
+  del catalogo, il cursore si espande e cambia opacità grazie a classi CSS dedicate 
+  attivate da event listener delegati a livello globale.
+
+-------------------------
+D. Barra di Scorrimento (ScrollProgress.tsx)
+-------------------------
+Una sottile barra dorata posizionata in cima alla pagina che mostra graficamente la percentuale
+di scorrimento effettuata dall'utente, calcolando il rapporto tra il valore di window.scrollY
+e l'altezza totale del documento.
+
+-------------------------
+E. Intestazione & Menu Laterale (Header.tsx / SideMenu.tsx)
+-------------------------
+- L'Header contiene il logo (crest imperiale), il titolo testuale "EARLIEST" e la barra di 
+  navigazione orizzontale desktop. Se l'utente scorre oltre i 50px verticali, una classe
+  ".scrolled" sfuma lo sfondo per preservare la leggibilità del contenuto sottostante.
+- Il pulsante hamburger a due linee avvia l'apertura del SideMenu, un pannello laterale a
+  scorrimento che ospita i collegamenti di navigazione principali per visualizzazioni mobile 
+  e tablet. Quando aperto, blocca lo scorrimento della pagina principale agendo 
+  sulla proprietà overflow del body.
+
+-------------------------
+F. Sezione Hero (Hero.tsx)
+-------------------------
+La sezione d'apertura che presenta il posizionamento strategico del brand. Contiene:
+- Un'immagine di sfondo di grande impatto (il modello appoggiato al cofano della vettura).
+- Effetto parallasse applicato all'immagine tramite transform translateY, che si muove al 
+  35% della velocità di scorrimento globale.
+- Titoli strutturati geometricamente ("DIREZIONE CREATIVA").
+- Pulsanti ad azione rapida che portano alle sezioni "Servizi" e "Collezione".
+
+-------------------------
+G. Sezione Servizi (Services.tsx)
+-------------------------
+Mostra le competenze fondamentali dell'agenzia suddivise in tre pilastri strategici:
+1. BRAND & IDENTITY: Focus su logo, linee guida, creazioni di crest e architettura di voce.
+2. STRATEGIA, CONTENUTI & LEAD GENERATION: Sistemi per l'acquisizione clienti d'élite, 
+   produzione fotografica, video e relazioni pubbliche.
+3. FASHION & MERCHANDISING: Disegno di abbigliamento di alto livello, studio dei tagli sartoriali,
+   packaging su misura e cartellini storici.
+- Ciascun servizio è rappresentato da una card interattiva con animazione "scanner beam" e
+  inclinazione 3D dinamica. Al clic su "Commissiona Servizio", il sito sposta l'utente
+  al modulo di contatto pre-compilando il menu a tendina con il servizio corrispondente.
+
+-------------------------
+H. Pilastri (Pillars.tsx)
+-------------------------
+Illustra le quattro fondamenta del valore aziendale:
+1. Supremazia Estetica (rigore di design, geometrie a 90 gradi).
+2. Status Metropolitano (definizione dell'aristocrazia urbana).
+3. Rigore Sartoriale (eccellenza tecnica dei tessuti e della manifattura).
+4. Impatto Reale (lead generation d'élite, assenza di vanity metrics).
+Ogni pilastro è rappresentato da una card geometrica con l'icona araldica corrispondente.
+
+-------------------------
+I. Tono di Voce (Voice.tsx)
+-------------------------
+Delinea le linee guida di scrittura e comunicazione strategica ("La Voce Implacabile"), 
+contraddistinta da uno stile crudo, diretto, geometrico e privo di superfluità retorica:
+- DIRETTO: Poche parole, massimo peso concettuale.
+- IMPLACABILE: Nessuna giustificazione, solo chiarezza e impatto visivo assoluto.
+- GEOMETRICO: Precisione matematica nello spazio e nell'organizzazione.
+- SILENZIOSO: Lusso che si impone per la sola presenza estetica.
+
+-------------------------
+J. Collezione Capi d'Archivio (Merch.tsx)
+-------------------------
+Un sistema interattivo per la presentazione dell'abbigliamento del brand:
+- Carosello Orizzontale Infinito: I prodotti vengono triplicati per simulare un loop continuo.
+  L'utente può trascinare lo slider con il mouse o navigare con la rotella. Un sistema 
+  di inerzia fisica rallenta fluidamente la corsa del trascinamento al rilascio del clic.
+- Capi in catalogo:
+  1. Felpa con Stemma Imperiale (€ 189)
+  2. Hoodie Vanguard di Lusso (€ 220)
+  3. Polo Aristocratica Slim-Fit (€ 125)
+  4. Crewneck con Dettagli Rossi a Contrasto (€ 195)
+  5. Felpa Sovrana con Stemma Posteriore (€ 189)
+  6. Felpa Sovrana con Stemma Anteriore (€ 189)
+- Modal di Dettaglio: Al clic, si apre una finestra modale incentrata sul capo con zoom 
+  dell'immagine, specifiche tecniche sul tessuto (450 GSM), dettagli di vestibilità 
+  e cuciture, selezione della taglia (S, M, L, XL) e pulsante di ordine rapido (che reindirizza
+  alla sezione contatti).
+
+-------------------------
+K. Modulo di Contatto e Accesso (Contact.tsx)
+-------------------------
+Sezione per l'invio delle richieste e l'acquisizione di lead:
+- Campi form con etichette fluttuanti (Floating Labels) che si sollevano all'inserimento
+  del testo o al focus.
+- Bottone di invio a tre stati:
+  * "INVIA RICHIESTA" (Stato idle con animazione luccicante).
+  * "CONNESSIONE AL SATELLITE..." (Stato caricamento disabilitato).
+  * "COMANDO STABILITO" (Stato di successo con bagliore oro).
+- Simulazione di invio asincrono con timer di 2 secondi. Al termine, pulisce il modulo
+  e lancia una notifica toast personalizzata in basso a destra dello schermo con il messaggio
+  "COMANDO RICEVUTO. CANALI DI IDENTITÀ ATTIVATI.".
+
+-------------------------
+L. Piè di Pagina (Footer.tsx)
+-------------------------
+La sezione di chiusura contenente i copyright aziendali, link di navigazione rapidi e 
+richiami all'eredità araldica del marchio.
+
+--------------------------------------------------------------------------------
+5. DETTAGLI SUGLI EFFETTI ANIMATI IN CSS (ANIMATIONS.CSS)
+--------------------------------------------------------------------------------
+
+Il file `/src/styles/animations.css` definisce i keyframes fondamentali delle animazioni:
+- `drawCircle` & `drawShield`: Regolano lo sviluppo dei tracciati SVG del preloader.
+- `fadeInLetter`: Rende visibile la lettera 'E' nel preloader dopo il disegno dei contorni.
+- `fadeUpText`: Sposta gli elementi verso l'alto rendendoli opachi all'avvio o all'intersecamento.
+- `scrollIndicatorMove`: Anima l'indicatore di scorrimento verticale nella sezione Hero.
+- `shimmerEffect`: Muove un riflesso luminoso sui pulsanti primari.
+- `scannerBeamMove` & `hologram-scan-sweep`: Creano rispettivamente le linee di scansione 
+  verticali e l'effetto onda olografica.
+- `hologram-flicker-advanced`: Un keyframe a 10 step che deforma la scala, introduce sfocature,
+  effettua piccole rotazioni (skew) e applica ombre colorate rosso-oro per emulare
+  un'aberrazione cromatica di un'interfaccia olografica che si accende o si distorce.
+
+================================================================================
+                    FINE DEL DOCUMENTO DI ANALISI TECNICA
+================================================================================

@@ -8,7 +8,11 @@ export default function CustomCursor() {
   const followerPos = useRef({ x: 0, y: 0 });
   const LERP = 0.12;
 
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+
   useEffect(() => {
+    if (isMobile) return;
+
     const onMove = (e: MouseEvent) => {
       mouse.current.x = e.clientX;
       mouse.current.y = e.clientY;
@@ -54,7 +58,7 @@ export default function CustomCursor() {
       document.removeEventListener('mouseenter', onEnter);
       cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [isMobile]);
 
   /* Global hover triggers – delegate to document level */
   const addHover = useCallback(() => {
@@ -67,6 +71,8 @@ export default function CustomCursor() {
   }, []);
 
   useEffect(() => {
+    if (isMobile) return;
+
     const selector =
       '.hover-trigger, a, button, input, select, textarea, .garment-card';
 
@@ -83,7 +89,9 @@ export default function CustomCursor() {
       document.removeEventListener('mouseover', onOver);
       document.removeEventListener('mouseout', onOut);
     };
-  }, [addHover, removeHover]);
+  }, [addHover, removeHover, isMobile]);
+
+  if (isMobile) return null;
 
   return (
     <>
