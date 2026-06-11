@@ -1,39 +1,43 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './Preloader.module.css';
 
 interface Props {
   onFinished: () => void;
 }
 
-const pageLoadTime = typeof window !== 'undefined' ? Date.now() : 0;
+const checkShouldSkip = (): boolean => {
+  if (typeof window === 'undefined') return false;
+  try {
+    const searchParams = new URLSearchParams(window.location.search);
+    const hasSkip = searchParams.get('skip') === 'true';
+    const hasUtm = searchParams.has('utm_source');
+
+    const lastVisited = localStorage.getItem('earliest_visited');
+    let isRecentVisit = false;
+    if (lastVisited) {
+      const visitTime = parseInt(lastVisited, 10);
+      if (!isNaN(visitTime) && Date.now() - visitTime < 24 * 60 * 60 * 1000) {
+        isRecentVisit = true;
+      }
+    }
+    return hasSkip || hasUtm || isRecentVisit;
+  } catch {
+    return false;
+  }
+};
 
 export default function Preloader({ onFinished }: Props) {
-  const shouldSkip = useMemo(() => {
-    if (typeof window === 'undefined') return false;
-    try {
-      const searchParams = new URLSearchParams(window.location.search);
-      const hasSkip = searchParams.get('skip') === 'true';
-      const hasUtm = searchParams.has('utm_source');
-
-      const lastVisited = localStorage.getItem('earliest_visited');
-      let isRecentVisit = false;
-      if (lastVisited) {
-        const visitTime = parseInt(lastVisited, 10);
-        if (!isNaN(visitTime) && pageLoadTime - visitTime < 24 * 60 * 60 * 1000) {
-          isRecentVisit = true;
-        }
-      }
-      return hasSkip || hasUtm || isRecentVisit;
-    } catch {
-      return false;
-    }
-  }, []);
-
+  const [shouldSkip] = useState(checkShouldSkip);
   const [hidden, setHidden] = useState(shouldSkip);
 
   useEffect(() => {
     if (shouldSkip) {
       onFinished();
+    }
+  }, [shouldSkip, onFinished]);
+
+  useEffect(() => {
+    if (shouldSkip) {
       return;
     }
 

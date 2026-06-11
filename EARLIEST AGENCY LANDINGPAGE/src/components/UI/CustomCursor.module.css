@@ -5,7 +5,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999;
+  z-index: 999999999;
   pointer-events: none;
   transform: translate(-50%, -50%);
   mix-blend-mode: difference;
@@ -19,7 +19,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9998;
+  z-index: 999999998;
   pointer-events: none;
   transform: translate(-50%, -50%);
   transition: transform 0.08s ease-out, width 0.3s, height 0.3s, border-color 0.3s;
@@ -37,6 +37,17 @@
   height: 56px;
   border-color: var(--color-primary);
   background-color: rgba(102, 0, 0, 0.05);
+}
+
+.cursor.clicking {
+  transform: translate(-50%, -50%) scale(0.6) !important;
+  background-color: var(--color-secondary) !important;
+}
+
+.follower.clicking {
+  transform: translate(-50%, -50%) scale(0.8) !important;
+  border-color: var(--color-secondary) !important;
+  background-color: rgba(236, 192, 151, 0.2) !important;
 }
 
 @media (max-width: 1024px) {

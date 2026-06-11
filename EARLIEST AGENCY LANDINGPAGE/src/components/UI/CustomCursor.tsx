@@ -27,9 +27,20 @@ export default function CustomCursor() {
       if (followerRef.current) followerRef.current.style.opacity = '1';
     };
 
+    const onDown = () => {
+      dotRef.current?.classList.add(styles.clicking);
+      followerRef.current?.classList.add(styles.clicking);
+    };
+    const onUp = () => {
+      dotRef.current?.classList.remove(styles.clicking);
+      followerRef.current?.classList.remove(styles.clicking);
+    };
+
     document.addEventListener('mousemove', onMove);
     document.addEventListener('mouseleave', onLeave);
     document.addEventListener('mouseenter', onEnter);
+    document.addEventListener('mousedown', onDown);
+    document.addEventListener('mouseup', onUp);
 
     let raf: number;
     const animate = () => {
@@ -56,6 +67,8 @@ export default function CustomCursor() {
       document.removeEventListener('mousemove', onMove);
       document.removeEventListener('mouseleave', onLeave);
       document.removeEventListener('mouseenter', onEnter);
+      document.removeEventListener('mousedown', onDown);
+      document.removeEventListener('mouseup', onUp);
       cancelAnimationFrame(raf);
     };
   }, [isMobile]);
@@ -77,10 +90,41 @@ export default function CustomCursor() {
       '.hover-trigger, a, button, input, select, textarea, .garment-card';
 
     const onOver = (e: Event) => {
-      if ((e.target as HTMLElement).closest(selector)) addHover();
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+
+      if (target.closest(selector)) {
+        addHover();
+        return;
+      }
+
+      try {
+        const computedCursor = window.getComputedStyle(target).cursor;
+        if (computedCursor === 'pointer') {
+          addHover();
+        }
+      } catch {
+        // Ignore
+      }
     };
+
     const onOut = (e: Event) => {
-      if ((e.target as HTMLElement).closest(selector)) removeHover();
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+
+      if (target.closest(selector)) {
+        removeHover();
+        return;
+      }
+
+      try {
+        const computedCursor = window.getComputedStyle(target).cursor;
+        if (computedCursor === 'pointer') {
+          removeHover();
+        }
+      } catch {
+        // Ignore
+      }
     };
 
     document.addEventListener('mouseover', onOver);

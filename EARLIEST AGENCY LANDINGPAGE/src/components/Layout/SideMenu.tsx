@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { href: '#services', label: 'SERVIZI' },
   { href: '#method', label: 'IL METODO' },
   { href: '#contact', label: 'CONTATTI' },
+  { href: 'https://www.earliestagency.com/dashboard', label: 'PORTALE' },
 ];
 
 export default function SideMenu({ isOpen, onClose }: Props) {
@@ -38,7 +39,7 @@ export default function SideMenu({ isOpen, onClose }: Props) {
             <a
               key={item.href}
               href={item.href}
-              className={styles.link}
+              className={`${styles.link} ${item.label === 'PORTALE' ? styles.portalLink : ''}`}
               onClick={onClose}
             >
               {item.label}
