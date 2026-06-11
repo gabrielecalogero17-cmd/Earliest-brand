@@ -9,10 +9,8 @@ import Header from './components/Layout/Header';
 import SideMenu from './components/Layout/SideMenu';
 import Hero from './components/Hero/Hero';
 import Services from './components/Services/Services';
-import Pillars from './components/Pillars/Pillars';
-import Voice from './components/Voice/Voice';
+import ServicesDetail from './components/ServicesDetail/ServicesDetail';
 import Contact from './components/Contact/Contact';
-import Merch from './components/Merch/Merch';
 import Footer from './components/Layout/Footer';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
 
@@ -81,10 +79,8 @@ export default function App() {
       <main>
         <Hero />
         <Services />
-        <Pillars />
-        <Voice />
+        <ServicesDetail />
         <Contact />
-        <Merch />
       </main>
 
       <Footer />

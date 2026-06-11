@@ -5,6 +5,8 @@ interface Props {
   onFinished: () => void;
 }
 
+const pageLoadTime = typeof window !== 'undefined' ? Date.now() : 0;
+
 export default function Preloader({ onFinished }: Props) {
   const shouldSkip = useMemo(() => {
     if (typeof window === 'undefined') return false;
@@ -17,12 +19,12 @@ export default function Preloader({ onFinished }: Props) {
       let isRecentVisit = false;
       if (lastVisited) {
         const visitTime = parseInt(lastVisited, 10);
-        if (!isNaN(visitTime) && Date.now() - visitTime < 24 * 60 * 60 * 1000) {
+        if (!isNaN(visitTime) && pageLoadTime - visitTime < 24 * 60 * 60 * 1000) {
           isRecentVisit = true;
         }
       }
       return hasSkip || hasUtm || isRecentVisit;
-    } catch (e) {
+    } catch {
       return false;
     }
   }, []);
@@ -40,7 +42,7 @@ export default function Preloader({ onFinished }: Props) {
       onFinished();
       try {
         localStorage.setItem('earliest_visited', Date.now().toString());
-      } catch (e) {
+      } catch {
         // Ignore
       }
     }, 2600);
@@ -50,7 +52,7 @@ export default function Preloader({ onFinished }: Props) {
       onFinished();
       try {
         localStorage.setItem('earliest_visited', Date.now().toString());
-      } catch (e) {
+      } catch {
         // Ignore
       }
     }, 4500);

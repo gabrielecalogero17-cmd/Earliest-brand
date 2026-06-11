@@ -99,11 +99,11 @@ export default function Contact() {
             <div className={styles.infoBlock}>
               <div className={styles.infoRow}>
                 <span className="material-symbols-outlined">location_on</span>
-                <span className={styles.infoVal}>MILANO | ZONA ARISTOCRATICA</span>
+                <span className={styles.infoVal}>CATANIA | ZONA ARISTOCRATICA</span>
               </div>
               <div className={styles.infoRow}>
                 <span className="material-symbols-outlined">mail</span>
-                <span className={styles.infoVal}>CONTACT@EARLIEST.COM</span>
+                <span className={styles.infoVal}>EarliestAgency@gmail.com</span>
               </div>
             </div>
           </div>

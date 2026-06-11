@@ -17,7 +17,7 @@ export default function Footer() {
             <h5 className={styles.linksTitle}>NAVIGAZIONE</h5>
             <a href="#hero" className={styles.link}>Inizio</a>
             <a href="#services" className={styles.link}>Servizi</a>
-            <a href="#merch" className={styles.link}>Lookbook</a>
+            <a href="#contact" className={styles.link}>Contatti</a>
           </div>
 
           <div>

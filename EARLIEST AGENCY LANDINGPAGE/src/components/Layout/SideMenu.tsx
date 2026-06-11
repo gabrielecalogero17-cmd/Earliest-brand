@@ -8,10 +8,8 @@ interface Props {
 
 const NAV_ITEMS = [
   { href: '#services', label: 'SERVIZI' },
-  { href: '#pillars', label: 'I PILASTRI' },
-  { href: '#voice', label: 'TONO DI VOCE' },
+  { href: '#method', label: 'IL METODO' },
   { href: '#contact', label: 'CONTATTI' },
-  { href: '#merch', label: 'COLLEZIONE' },
 ];
 
 export default function SideMenu({ isOpen, onClose }: Props) {
