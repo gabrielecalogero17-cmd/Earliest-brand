@@ -9,9 +9,9 @@ interface Props {
 const NAV_ITEMS = [
   { href: '#services', label: 'SERVIZI' },
   { href: '#pillars', label: 'I PILASTRI' },
-  { href: '#voice', label: 'TONO DI VOCE' },
   { href: '#contact', label: 'CONTATTI' },
   { href: '#merch', label: 'COLLEZIONE' },
+  { href: 'https://www.earliestagency.com/dashboard', label: 'PORTALE' },
 ];
 
 export default function SideMenu({ isOpen, onClose }: Props) {
@@ -40,7 +40,7 @@ export default function SideMenu({ isOpen, onClose }: Props) {
             <a
               key={item.href}
               href={item.href}
-              className={styles.link}
+              className={`${styles.link} ${item.label === 'PORTALE' ? styles.portalLink : ''}`}
               onClick={onClose}
             >
               {item.label}

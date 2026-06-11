@@ -1,37 +1,43 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './Preloader.module.css';
 
 interface Props {
   onFinished: () => void;
 }
 
-export default function Preloader({ onFinished }: Props) {
-  const shouldSkip = useMemo(() => {
-    if (typeof window === 'undefined') return false;
-    try {
-      const searchParams = new URLSearchParams(window.location.search);
-      const hasSkip = searchParams.get('skip') === 'true';
-      const hasUtm = searchParams.has('utm_source');
+const checkShouldSkip = (): boolean => {
+  if (typeof window === 'undefined') return false;
+  try {
+    const searchParams = new URLSearchParams(window.location.search);
+    const hasSkip = searchParams.get('skip') === 'true';
+    const hasUtm = searchParams.has('utm_source');
 
-      const lastVisited = localStorage.getItem('earliest_visited');
-      let isRecentVisit = false;
-      if (lastVisited) {
-        const visitTime = parseInt(lastVisited, 10);
-        if (!isNaN(visitTime) && Date.now() - visitTime < 24 * 60 * 60 * 1000) {
-          isRecentVisit = true;
-        }
+    const lastVisited = localStorage.getItem('earliest_visited');
+    let isRecentVisit = false;
+    if (lastVisited) {
+      const visitTime = parseInt(lastVisited, 10);
+      if (!isNaN(visitTime) && Date.now() - visitTime < 24 * 60 * 60 * 1000) {
+        isRecentVisit = true;
       }
-      return hasSkip || hasUtm || isRecentVisit;
-    } catch (e) {
-      return false;
     }
-  }, []);
+    return hasSkip || hasUtm || isRecentVisit;
+  } catch {
+    return false;
+  }
+};
 
+export default function Preloader({ onFinished }: Props) {
+  const [shouldSkip] = useState(checkShouldSkip);
   const [hidden, setHidden] = useState(shouldSkip);
 
   useEffect(() => {
     if (shouldSkip) {
       onFinished();
+    }
+  }, [shouldSkip, onFinished]);
+
+  useEffect(() => {
+    if (shouldSkip) {
       return;
     }
 
@@ -40,7 +46,7 @@ export default function Preloader({ onFinished }: Props) {
       onFinished();
       try {
         localStorage.setItem('earliest_visited', Date.now().toString());
-      } catch (e) {
+      } catch {
         // Ignore
       }
     }, 2600);
@@ -50,7 +56,7 @@ export default function Preloader({ onFinished }: Props) {
       onFinished();
       try {
         localStorage.setItem('earliest_visited', Date.now().toString());
-      } catch (e) {
+      } catch {
         // Ignore
       }
     }, 4500);

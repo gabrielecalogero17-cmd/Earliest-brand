@@ -95,6 +95,16 @@
 .navLink:hover { color: var(--color-secondary); }
 .navLink:hover::after { width: 100%; }
 
+.portalLink {
+  color: var(--color-secondary) !important;
+  text-shadow: 0 0 8px rgba(236, 192, 151, 0.25);
+}
+
+.portalLink:hover {
+  color: var(--color-text-light) !important;
+  text-shadow: 0 0 12px var(--color-red-glow);
+}
+
 .navToggle {
   display: none;
   background: none;

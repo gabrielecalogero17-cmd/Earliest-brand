@@ -10,7 +10,6 @@ import SideMenu from './components/Layout/SideMenu';
 import Hero from './components/Hero/Hero';
 import Services from './components/Services/Services';
 import Pillars from './components/Pillars/Pillars';
-import Voice from './components/Voice/Voice';
 import Contact from './components/Contact/Contact';
 import Merch from './components/Merch/Merch';
 import Footer from './components/Layout/Footer';
@@ -82,7 +81,6 @@ export default function App() {
         <Hero />
         <Services />
         <Pillars />
-        <Voice />
         <Contact />
         <Merch />
       </main>

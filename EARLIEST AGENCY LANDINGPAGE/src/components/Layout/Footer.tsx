@@ -18,6 +18,7 @@ export default function Footer() {
             <a href="#hero" className={styles.link}>Inizio</a>
             <a href="#services" className={styles.link}>Servizi</a>
             <a href="#merch" className={styles.link}>Lookbook</a>
+            <a href="https://www.earliestagency.com/dashboard" className={styles.link}>Portale</a>
           </div>
 
           <div>

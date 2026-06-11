@@ -27,9 +27,9 @@ export default function Header({ onMenuToggle }: Props) {
         <nav className={styles.desktopNav}>
           <a href="#services" className={`${styles.navLink} hover-trigger`}>Servizi</a>
           <a href="#pillars" className={`${styles.navLink} hover-trigger`}>Pilastri</a>
-          <a href="#voice" className={`${styles.navLink} hover-trigger`}>Tono di Voce</a>
           <a href="#contact" className={`${styles.navLink} hover-trigger`}>Contatti</a>
           <a href="#merch" className={`${styles.navLink} hover-trigger`}>Collezione</a>
+          <a href="https://www.earliestagency.com/dashboard" className={`${styles.navLink} ${styles.portalLink} hover-trigger`}>Portale</a>
         </nav>
 
         <div>
