@@ -56,7 +56,7 @@ export async function getAvailableSlots(dateStr: string, ignoreBookingId?: strin
     const { data: bookings, error } = await query;
     if (error) throw error;
 
-    const takenTimes = bookings.map((b) => {
+    const takenTimes = (bookings || []).map((b: { booking_date: string }) => {
       const d = new Date(b.booking_date);
       return d.toTimeString().slice(0, 5);
     });
