@@ -34,19 +34,19 @@ export default function Header({ onMenuToggle }: Props) {
 =======
           {/* <a href="#merch" className={`${styles.navLink} hover-trigger`}>Collezione</a> */}
 >>>>>>> Stashed changes
-        </nav>
+        </nav >
 
-        <div>
-          <button
-            className={`${styles.navToggle} hover-trigger`}
-            onClick={onMenuToggle}
-            aria-label="Attiva Menu"
-          >
-            <span className={styles.hamburgerLine} />
-            <span className={styles.hamburgerLine} />
-          </button>
-        </div>
-      </div>
-    </header>
+    <div>
+      <button
+        className={`${styles.navToggle} hover-trigger`}
+        onClick={onMenuToggle}
+        aria-label="Attiva Menu"
+      >
+        <span className={styles.hamburgerLine} />
+        <span className={styles.hamburgerLine} />
+      </button>
+    </div>
+      </div >
+    </header >
   );
 }
