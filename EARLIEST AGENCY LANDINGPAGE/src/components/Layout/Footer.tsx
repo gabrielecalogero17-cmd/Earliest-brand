@@ -17,12 +17,8 @@ export default function Footer() {
             <h5 className={styles.linksTitle}>NAVIGAZIONE</h5>
             <a href="#hero" className={styles.link}>Inizio</a>
             <a href="#services" className={styles.link}>Servizi</a>
-<<<<<<< Updated upstream
             <a href="#merch" className={styles.link}>Lookbook</a>
             <a href="https://www.earliestagency.com/dashboard" className={styles.link}>Portale</a>
-=======
-            {/* <a href="#merch" className={styles.link}>Lookbook</a> */}
->>>>>>> Stashed changes
           </div>
 
           <div>
