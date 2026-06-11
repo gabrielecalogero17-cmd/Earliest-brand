@@ -45,9 +45,9 @@ export default function Hero() {
             <span>SERVIZI</span>
             <span className="material-symbols-outlined">arrow_right_alt</span>
           </Button>
-          <Button variant="ghost" href="#merch">
+          {/* <Button variant="ghost" href="#merch">
             <span>COLLEZIONE CAPI</span>
-          </Button>
+          </Button> */}
         </div>
       </div>
 

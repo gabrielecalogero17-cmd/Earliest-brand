@@ -82,7 +82,7 @@ export default function App() {
         <Services />
         <Pillars />
         <Contact />
-        <Merch />
+        {/* <Merch /> */}
       </main>
 
       <Footer />
