@@ -83,6 +83,10 @@ export default function App() {
         <ServicesDetail />
         <Packages />
         <Contact />
+<<<<<<< HEAD
+=======
+        {/* <Merch /> */}
+>>>>>>> 4324741902eb36e05e25faf927c410ee72da01bf
       </main>
 
       <Footer />

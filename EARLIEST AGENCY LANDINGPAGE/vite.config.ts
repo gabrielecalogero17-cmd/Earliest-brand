@@ -6,6 +6,9 @@ export default defineConfig({
   plugins: [react()],
   // Static build for Aruba.it Windows hosting (uploaded via FTP)
   base: './',
+  server: {
+    host: true,
+  },
   build: {
     outDir: 'dist',
     assetsDir: 'assets',

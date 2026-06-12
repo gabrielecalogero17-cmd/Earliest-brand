@@ -46,9 +46,15 @@ export default function Hero() {
             <span>SERVIZI DI COMANDO</span>
             <span className="material-symbols-outlined">arrow_right_alt</span>
           </Button>
+<<<<<<< HEAD
           <Button variant="ghost" href="#packages">
             <span>PACCHETTI &amp; ABBONAMENTI</span>
           </Button>
+=======
+          {/* <Button variant="ghost" href="#merch">
+            <span>COLLEZIONE CAPI</span>
+          </Button> */}
+>>>>>>> 4324741902eb36e05e25faf927c410ee72da01bf
         </div>
       </div>
 

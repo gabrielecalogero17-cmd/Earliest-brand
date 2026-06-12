@@ -10,7 +10,15 @@ const NAV_ITEMS = [
   { href: '#services', label: 'SERVIZI' },
   { href: '#packages', label: 'PACCHETTI' },
   { href: '#contact', label: 'CONTATTI' },
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+  { href: '#merch', label: 'COLLEZIONE' },
+>>>>>>> 4324741902eb36e05e25faf927c410ee72da01bf
   { href: 'https://www.earliestagency.com/dashboard', label: 'PORTALE' },
+=======
+  // { href: '#merch', label: 'COLLEZIONE' },
+>>>>>>> Stashed changes
 ];
 
 export default function SideMenu({ isOpen, onClose }: Props) {
