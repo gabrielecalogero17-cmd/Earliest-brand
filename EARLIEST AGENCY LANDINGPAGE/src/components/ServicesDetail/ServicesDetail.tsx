@@ -68,7 +68,7 @@ export default function ServicesDetail() {
                 <div className={styles.headerColumn}>
                   <span className={styles.num}>{d.num}</span>
                   <h3 className={styles.title}>{d.title}</h3>
-                  <span className={`${styles.subtitle} hologram-text`}>{d.subtitle}</span>
+                  <span className={styles.subtitle}>{d.subtitle}</span>
                 </div>
                 
                 <div className={styles.contentColumn}>

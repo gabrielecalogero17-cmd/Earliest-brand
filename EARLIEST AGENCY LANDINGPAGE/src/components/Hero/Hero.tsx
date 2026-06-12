@@ -19,7 +19,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className={`${styles.hero} hologram-trigger`} id="hero">
+    <section className={styles.hero} id="hero">
       <div className={styles.bgWrapper}>
         <div className={styles.overlay} />
         <img
@@ -31,22 +31,23 @@ export default function Hero() {
       </div>
 
       <div className={styles.content}>
-        <div className={`${styles.badge} reveal-fade`}>FONDATO NEL 1923</div>
+        <div className={`${styles.badge} reveal-fade`}>DIREZIONE CREATIVA &amp; COMUNICAZIONE D'ÉLITE</div>
         <h1 className={`${styles.title} reveal-fade`}>
-          <span className={styles.titleLine}>DIREZIONE</span>
-          <span className={`${styles.titleLine} ${styles.titleAccent}`}>CREATIVA</span>
+          <span className={styles.titleLine}>L'IDENTITÀ È UN</span>
+          <span className={`${styles.titleLine} ${styles.titleAccent}`}>TERRITORIO OSTILE</span>
         </h1>
-        <p className={`${styles.subtitle} reveal-fade hologram-text`}>
-          L'identità è un territorio ostile. Noi lo dominiamo. Progettiamo il futuro della
-          nuova élite attraverso il rigore visivo e l'avanguardia metropolitana.
+        <p className={`${styles.subtitle} reveal-fade`}>
+          Noi lo dominiamo. Progettiamo il futuro della nuova élite attraverso il rigore visivo, 
+          l'ingegneria della lead generation e la produzione cinematografica in Intelligenza Artificiale. 
+          Generiamo conversioni matematiche per posizionare il tuo brand al vertice.
         </p>
         <div className={`${styles.actions} reveal-fade`}>
           <Button variant="primary" href="#services">
-            <span>SERVIZI</span>
+            <span>SERVIZI DI COMANDO</span>
             <span className="material-symbols-outlined">arrow_right_alt</span>
           </Button>
-          <Button variant="ghost" href="#contact">
-            <span>CONTATTI</span>
+          <Button variant="ghost" href="#packages">
+            <span>PACCHETTI &amp; ABBONAMENTI</span>
           </Button>
         </div>
       </div>

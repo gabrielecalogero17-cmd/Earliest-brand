@@ -228,18 +228,18 @@ export default function Contact() {
   };
 
   return (
-    <section className={`${styles.section} hologram-trigger`} id="contact">
+    <section className={styles.section} id="contact">
       <div className="section-container">
         <div className={styles.grid}>
           <div className="reveal-slide-left">
             <div className="section-tag">CONTATTI</div>
             <h2 className="section-title">ACCESSO</h2>
             <div className="divider-line" />
-            <p className={`${styles.desc} hologram-text`}>
+            <p className={styles.desc}>
               Selezioniamo esclusivamente brand d'élite, artisti visionari ed entità pronte a
               definire la propria supremazia sul mercato globale.
             </p>
-            <p className={`${styles.desc} hologram-text`}>
+            <p className={styles.desc}>
               La nostra capacità produttiva è limitata. Accediamo solo a progetti ad alto valore.
             </p>
 
@@ -345,9 +345,27 @@ export default function Contact() {
                     onChange={handleChange}
                     className={`${styles.formInput} ${styles.formSelect} hover-trigger`}
                   >
-                    <option value="brand_identity">01. BRAND &amp; IDENTITY</option>
-                    <option value="strategy_lead_gen">02. STRATEGIA, CONTENUTI &amp; LEAD GENERATION</option>
-                    <option value="fashion_merch">03. FASHION &amp; MERCHANDISING</option>
+                    <optgroup label="Sinergie Mensili (Bundle)">
+                      <option value="bundle_growth_engine">Tier 1: Growth Engine (€1.600/mese)</option>
+                      <option value="bundle_earliest_elite">Tier 2: The Earliest Elite (€3.000/mese)</option>
+                    </optgroup>
+                    <optgroup label="Social &amp; Personal Branding">
+                      <option value="pack_essential_authority">Essential Authority (€800 - €1.000/mese)</option>
+                      <option value="pack_omnichannel_dominance">Omnichannel Dominance (€1.500 - €1.900/mese)</option>
+                    </optgroup>
+                    <optgroup label="Sviluppo Web &amp; Funnel">
+                      <option value="pack_performance_landing">Performance Landing Page (€800 una tantum)</option>
+                      <option value="pack_corporate_ecosystem">Custom Corporate Ecosystem (€2.000 una tantum)</option>
+                    </optgroup>
+                    <optgroup label="Campagne Pubblicitarie &amp; AI">
+                      <option value="pack_lead_boost">Performance Lead Boost (€700 - €900/mese)</option>
+                      <option value="pack_ai_cinematic">AI Cinematic Scale (€1.800 - €2.400/mese)</option>
+                    </optgroup>
+                    <optgroup label="Servizi Singoli di Direzione Creativa">
+                      <option value="brand_identity">01. BRAND &amp; IDENTITY</option>
+                      <option value="strategy_lead_gen">02. STRATEGIA, CONTENUTI &amp; LEAD GENERATION</option>
+                      <option value="fashion_merch">03. FASHION &amp; MERCHANDISING</option>
+                    </optgroup>
                   </select>
                   <span className={styles.formLine} />
                 </div>

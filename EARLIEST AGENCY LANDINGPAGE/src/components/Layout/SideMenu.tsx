@@ -8,7 +8,7 @@ interface Props {
 
 const NAV_ITEMS = [
   { href: '#services', label: 'SERVIZI' },
-  { href: '#method', label: 'IL METODO' },
+  { href: '#packages', label: 'PACCHETTI' },
   { href: '#contact', label: 'CONTATTI' },
   { href: 'https://www.earliestagency.com/dashboard', label: 'PORTALE' },
 ];

@@ -5,6 +5,15 @@
   padding-bottom: 80px;
 }
 
+.introText {
+  font-family: var(--font-body);
+  color: #a0a0a0;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: -10px auto 48px auto;
+  line-height: 1.6;
+}
+
 .sliderWrapper {
   width: 100%;
   overflow: hidden;

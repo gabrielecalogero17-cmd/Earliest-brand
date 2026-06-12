@@ -10,6 +10,7 @@ import SideMenu from './components/Layout/SideMenu';
 import Hero from './components/Hero/Hero';
 import Services from './components/Services/Services';
 import ServicesDetail from './components/ServicesDetail/ServicesDetail';
+import Packages from './components/Packages/Packages';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Layout/Footer';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
@@ -80,6 +81,7 @@ export default function App() {
         <Hero />
         <Services />
         <ServicesDetail />
+        <Packages />
         <Contact />
       </main>
 

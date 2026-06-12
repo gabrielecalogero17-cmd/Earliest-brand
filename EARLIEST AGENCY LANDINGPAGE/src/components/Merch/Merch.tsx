@@ -55,7 +55,7 @@ function GarmentCard({
       <div className={styles.imgHolder}>
         <img src={garment.img} alt={garment.title} className={styles.img} loading="lazy" />
         <div className={styles.imgOverlay}>
-          <span className={styles.viewBtn}>DETTAGLI DI COMANDO</span>
+          <span className={styles.viewBtn}>ANALIZZA CASE STUDY</span>
         </div>
       </div>
       <div className={styles.info}>
@@ -101,9 +101,9 @@ function GarmentModal({
       }
 
       // Pre-populate the brief description textarea with a professional B2B request
-      const messageTextarea = document.getElementById('formMessage') as HTMLTextAreaElement | null;
+      const messageTextarea = document.getElementById('formNotes') as HTMLTextAreaElement | null;
       if (messageTextarea) {
-        messageTextarea.value = `Richiesta di accesso all'archivio capi riservato ai partner per il case study: "${garment?.title}". Desideriamo valutare la qualità di manifattura per il nostro brand ed esplorare una collaborazione di Direzione Creativa e Produzione Tessile.`;
+        messageTextarea.value = `Richiesta di consultazione e campionatura per il progetto di merchandising: "${garment?.title}". Desideriamo valutare lo sviluppo di una linea di abbigliamento analoga per la nostra azienda.`;
         messageTextarea.dispatchEvent(new Event('change'));
       }
 
@@ -147,12 +147,12 @@ function GarmentModal({
               </div>
 
               <Button variant="primary" full onClick={handleOrder}>
-                <span>RICHIEDI ACCESSO ALL'ARCHIVIO CAPI (Riservato ai Partner)</span>
-                <span className="material-symbols-outlined">workspace_premium</span>
+                <span>RICHIEDI SVILUPPO MERCHANDISING ANALOGO</span>
+                <span className="material-symbols-outlined">bolt</span>
               </Button>
 
               <div className={styles.disclaimer}>
-                *EDIZIONE LIMITATA D'ARCHIVIO. OGNI CAPO INCARNA UNA PRESENZA SOVRANA.
+                *STUDIO DI CASO DI MANIFATTURA. OGNI CAPO ESTENDE L'IDENTITÀ SUL MERCATO.
               </div>
             </div>
           </div>
@@ -297,9 +297,12 @@ export default function Merch() {
         <div className="section-container-fluid">
           <div className="section-container">
             <div className="reveal-fade" style={{ textAlign: 'center' }}>
-              <div className="section-tag text-center">ARCHIVIO PRODUZIONI</div>
-              <h2 className="section-title text-center">Case Study di Manifattura e Direzione Creativa</h2>
+              <div className="section-tag text-center">STUDI DI CASO TANGIBILI</div>
+              <h2 className="section-title text-center">L'ARCHIVIO SARTORIALE</h2>
               <div className="divider-line mx-auto" />
+              <p className={styles.introText}>
+                Un estratto delle capsule di abbigliamento d'archivio che progettiamo e produciamo per estendere la presenza fisica e lo status dei brand che curiamo.
+              </p>
             </div>
           </div>
 
@@ -313,7 +316,7 @@ export default function Merch() {
 
           <div className={`${styles.sliderHint} text-center reveal-fade`}>
             <span className="material-symbols-outlined">drag_indicator</span>
-            <span className={styles.hintText}>TRASCINA O SCORRI PER SCOPRIRE LA COLLEZIONE</span>
+            <span className={styles.hintText}>TRASCINA O SCORRI PER ESPLORARE IL MERCHANDISING D'ARCHIVIO</span>
           </div>
         </div>
       </section>

@@ -26,7 +26,7 @@ export default function Header({ onMenuToggle }: Props) {
 
         <nav className={styles.desktopNav}>
           <a href="#services" className={`${styles.navLink} hover-trigger`}>Servizi</a>
-          <a href="#method" className={`${styles.navLink} hover-trigger`}>Metodo</a>
+          <a href="#packages" className={`${styles.navLink} hover-trigger`}>Pacchetti</a>
           <a href="#contact" className={`${styles.navLink} hover-trigger`}>Contatti</a>
           <a href="https://www.earliestagency.com/dashboard" className={`${styles.navLink} ${styles.portalLink} hover-trigger`}>Portale</a>
         </nav>

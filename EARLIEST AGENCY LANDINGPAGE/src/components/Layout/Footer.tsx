@@ -17,8 +17,8 @@ export default function Footer() {
             <h5 className={styles.linksTitle}>NAVIGAZIONE</h5>
             <a href="#hero" className={styles.link}>Inizio</a>
             <a href="#services" className={styles.link}>Servizi</a>
+            <a href="#packages" className={styles.link}>Pacchetti</a>
             <a href="#contact" className={styles.link}>Contatti</a>
-            <a href="https://www.earliestagency.com/dashboard" className={styles.link}>Portale</a>
           </div>
 
           <div>
@@ -31,7 +31,7 @@ export default function Footer() {
           <div>
             <h5 className={styles.linksTitle}>RADAR SOVRANO</h5>
             <p className={styles.newsletterDesc}>
-              Ricevi aggiornamenti sulle release d'archivio limitate ed esclusive.
+              Ricevi aggiornamenti sulle analisi strategiche e release dell'agenzia.
             </p>
             <div className={styles.newsletterForm}>
               <input type="email" placeholder="LA TUA EMAIL..." className={styles.newsletterInput} />
@@ -44,7 +44,7 @@ export default function Footer() {
 
         <div className={styles.bottom}>
           <div className={styles.copy}>
-            © 2026 EARLIEST CLOTHING CO. &amp; DIREZIONE CREATIVA. TUTTI I DIRITTI RISERVATI.
+            © 2026 EARLIEST | DIREZIONE CREATIVA &amp; AGENZIA DI COMUNICAZIONE. TUTTI I DIRITTI RISERVATI.
           </div>
           <div className={styles.meta}>
             L'HERITAGE INCONTRA L'AVANGUARDIA. EST. 1923.
