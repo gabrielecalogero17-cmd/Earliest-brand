@@ -28,6 +28,7 @@ export default function Header({ onMenuToggle }: Props) {
           <a href="#services" className={`${styles.navLink} hover-trigger`}>Servizi</a>
           <a href="#packages" className={`${styles.navLink} hover-trigger`}>Pacchetti</a>
           <a href="#contact" className={`${styles.navLink} hover-trigger`}>Contatti</a>
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 =======
 <<<<<<< Updated upstream
@@ -35,8 +36,10 @@ export default function Header({ onMenuToggle }: Props) {
 >>>>>>> 4324741902eb36e05e25faf927c410ee72da01bf
           <a href="https://www.earliestagency.com/dashboard" className={`${styles.navLink} ${styles.portalLink} hover-trigger`}>Portale</a>
 =======
-          {/* <a href="#merch" className={`${styles.navLink} hover-trigger`}>Collezione</a> */}
+=======
 >>>>>>> Stashed changes
+          {/* <a href="#merch" className={`${styles.navLink} hover-trigger`}>Collezione</a> */}
+          <a href="https://www.earliestagency.com/dashboard" className={`${styles.navLink} ${styles.portalLink} hover-trigger`}>Portale</a>
         </nav >
 
     <div>

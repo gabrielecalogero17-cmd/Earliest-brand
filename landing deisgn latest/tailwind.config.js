@@ -1,0 +1,72 @@
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+          "surface-container-low": "#0F0000",
+          "on-tertiary-fixed-variant": "#114d5b",
+          "primary-container": "#660000",
+          "on-primary-fixed": "#40000b",
+          "surface-container": "#0F0000",
+          "on-error-container": "#ffdad6",
+          "on-secondary-fixed": "#1c1b1b",
+          "tertiary-container": "#004451",
+          "error-container": "#93000a",
+          "on-surface": "#e5e2e1",
+          "tertiary-fixed": "#b6ebfb",
+          "background": "#050505",
+          "surface": "#050505",
+          "on-primary-fixed-variant": "#8e0f28",
+          "inverse-on-surface": "#313030",
+          "surface-container-highest": "#353534",
+          "primary-fixed-dim": "#ffb3b5",
+          "on-background": "#e5e2e1",
+          "surface-container-high": "#1C0000",
+          "on-secondary": "#313030",
+          "surface-container-lowest": "#0e0e0e",
+          "on-secondary-container": "#b7b5b4",
+          "on-tertiary-container": "#7cb0c0",
+          "on-error": "#690005",
+          "on-tertiary-fixed": "#001f26",
+          "on-primary": "#ffffff",
+          "inverse-surface": "#e5e2e1",
+          "outline": "#a78a8a",
+          "on-tertiary": "#003640",
+          "on-surface-variant": "#e0bfbf",
+          "error": "#ffb4ab",
+          "secondary": "#c8c6c5",
+          "surface-tint": "#ffb3b5",
+          "secondary-fixed-dim": "#c8c6c5",
+          "tertiary-fixed-dim": "#9acfde",
+          "surface-dim": "#131313",
+          "surface-bright": "#3a3939",
+          "on-secondary-fixed-variant": "#474746",
+          "secondary-fixed": "#e5e2e1",
+          "inverse-primary": "#af2b3e",
+          "tertiary": "#9acfde",
+          "outline-variant": "#584141",
+          "on-primary-container": "#ff828a",
+          "primary-fixed": "#ffdada",
+          "primary": "#ECC097",
+          "surface-variant": "#353534"
+      },
+      "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+      },
+      "fontFamily": {
+          "headline": ["Syne", "sans-serif"],
+          "display": ["Syne", "sans-serif"],
+          "body": ["Space Grotesk", "sans-serif"],
+          "label": ["Space Grotesk", "sans-serif"]
+      }
+    }
+  },
+  plugins: [],
+}
